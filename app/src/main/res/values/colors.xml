@@ -7,4 +7,7 @@
     <color name="lightGreen">#B2DFDB</color>
     <color name="turquoise">#00C1A4</color>
     <color name="mintGreen">#DFF7E2</color>
+
+<!--    categories-->
+    <color name="purple">#9D00FF</color>
 </resources>
