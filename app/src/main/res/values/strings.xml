@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Flourish</string>
+    <string-array name="currencies">
+        <item>Pick a currency</item>
+        <item>USD - US Dollar</item>
+        <item>EUR - Euro</item>
+        <item>ZAR - South African Rand</item>
+        <item>GBP - British Pound</item>
+        <item>PKR - Pakistani Rupee</item>
+        <item>AUD - Australian Dollar</item>
+    </string-array>
+</resources>
