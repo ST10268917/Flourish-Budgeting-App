@@ -5,11 +5,14 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.aj.flourish.database.dao.CategoryDao
+import com.aj.flourish.database.dao.ExpenseDao
 import com.aj.flourish.database.entities.Category
+import com.aj.flourish.database.entities.Expense
 
 @Database(
-    entities = [Category::class],
-    version = 1
+    entities = [Category::class, Expense::class],
+    version = 1,
+
 )
 abstract class AppDatabase : RoomDatabase() {
 

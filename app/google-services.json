@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "31195828387",
-    "project_id": "firebasics-b756d",
-    "storage_bucket": "firebasics-b756d.firebasestorage.app"
+    "project_number": "818301357029",
+    "project_id": "flourish-cbe2f",
+    "storage_bucket": "flourish-cbe2f.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:31195828387:android:758f92e3add27bb4ceef16",
+        "mobilesdk_app_id": "1:818301357029:android:a6b926250567a23c9c3d0c",
         "android_client_info": {
           "package_name": "com.aj.flourish"
         }
@@ -15,64 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDWgUUFwlqus13xGk_fbuKAb1xKkM5Crzc"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:31195828387:android:58262ffbe33e32feceef16",
-        "android_client_info": {
-          "package_name": "com.aj.flourishauth"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDWgUUFwlqus13xGk_fbuKAb1xKkM5Crzc"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:31195828387:android:86a8db45b0f66ce0ceef16",
-        "android_client_info": {
-          "package_name": "com.aj.quizgame"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDWgUUFwlqus13xGk_fbuKAb1xKkM5Crzc"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:31195828387:android:b98fe34d048a4800ceef16",
-        "android_client_info": {
-          "package_name": "com.aj.registerlogin"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDWgUUFwlqus13xGk_fbuKAb1xKkM5Crzc"
+          "current_key": "AIzaSyDtW8A3N2W10QDERApBNY09LrRHC-Z_55k"
         }
       ],
       "services": {
