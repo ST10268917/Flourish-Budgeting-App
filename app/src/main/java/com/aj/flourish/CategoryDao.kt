@@ -1,7 +1,6 @@
-package com.aj.flourish.database.dao
+package com.aj.flourish
 
 import androidx.room.*
-import com.aj.flourish.database.entities.Category
 
 @Dao
 interface CategoryDao {

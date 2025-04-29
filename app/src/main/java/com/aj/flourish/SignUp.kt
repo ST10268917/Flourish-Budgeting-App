@@ -78,7 +78,6 @@ class SignUp : AppCompatActivity() {
             override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
                 val view = super.getDropDownView(position, convertView, parent)
                 val textView = view as TextView
-                // Gray out the hint
                 textView.setTextColor(if (position == 0) Color.GRAY else Color.BLACK)
                 return view
             }
@@ -114,10 +113,7 @@ class SignUp : AppCompatActivity() {
                     // User registered successfully
                     Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show()
 
-                    // Optional: Save additional user info to Firebase Database if needed
-
-                    // Navigate to Login or MainActivity
-                    startActivity(Intent(this, LoginActivity::class.java))
+                    startActivity(Intent(this, Dashboard::class.java))
                     finish()
                 } else {
                     // If sign up fails

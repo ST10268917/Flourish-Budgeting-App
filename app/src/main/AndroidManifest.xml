@@ -13,12 +13,18 @@
         android:theme="@style/Theme.Flourish"
         tools:targetApi="31">
         <activity
+            android:name=".CategoryDetail"
+            android:exported="false" />
+        <activity
+            android:name=".Dashboard"
+            android:exported="false" />
+        <activity
             android:name=".CreateCategory"
             android:exported="false" />
         <activity
             android:name=".SignUp"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".LoginActivity"
             android:exported="false" />

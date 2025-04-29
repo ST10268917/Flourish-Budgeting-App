@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- Title -->
     <TextView
         android:id="@+id/categoryTitle"
         android:layout_width="wrap_content"
@@ -28,50 +30,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Background Card -->
+    <!-- CardView -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardLogin"
+        android:id="@+id/cardCategories"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         app:cardCornerRadius="20dp"
         app:cardBackgroundColor="@color/darkGreen"
         app:cardElevation="8dp"
         app:layout_constraintTop_toBottomOf="@id/categoryTitle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp">
 
-        <ScrollView
+        <!-- Nested FrameLayout inside the Card -->
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="24dp">
+            android:layout_height="match_parent">
 
-            <LinearLayout
-                android:orientation="vertical"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewCategories"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="8dp"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnAddCategory"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
+                android:contentDescription="Add Category"
+                android:src="@android:drawable/ic_input_add"
+                app:backgroundTint="@color/turquoise"
+                app:fabSize="normal"
+                app:tint="@android:color/white"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="24dp"/>
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal" >
-
-
-
-
-
-
-                </LinearLayout>
-
-
-
-
-
-            </LinearLayout>
-        </ScrollView>
+        </FrameLayout>
 
     </androidx.cardview.widget.CardView>
 
