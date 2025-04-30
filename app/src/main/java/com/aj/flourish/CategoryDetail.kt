@@ -20,6 +20,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
+import java.io.FileOutputStream
 import java.util.Calendar
 
 class CategoryDetail : AppCompatActivity() {
@@ -61,6 +63,7 @@ class CategoryDetail : AppCompatActivity() {
         if (categoryImageUri != null) {
             imageView.setImageURI(Uri.parse(categoryImageUri))
         }
+        loadExpensesFromDb()
     }
     private fun showAddExpenseDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_expense, null)
@@ -104,49 +107,79 @@ class CategoryDetail : AppCompatActivity() {
             val amountText = etAmount.text.toString().trim()
             val descriptionText = etDescription.text.toString().trim()
 
-            if (dateText.isNotEmpty() && amountText.isNotEmpty()) {
-                val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
-                val categoryId = intent.getIntExtra("categoryId", -1)
+            if (dateText.isEmpty()) {
+                etDate.error = "Date is required"
+                return@setOnClickListener
+            }
 
-                val expense = Expense(
-                    userId = userId,
-                    categoryId = categoryId,
-                    description = descriptionText,
-                    amount = amountText.toDouble(),
-                    date = System.currentTimeMillis(),
-                    receiptUri = selectedReceiptUri?.toString()
-                )
+            if (amountText.isEmpty()) {
+                etAmount.error = "Amount is required"
+                return@setOnClickListener
+            }
 
-                CoroutineScope(Dispatchers.IO).launch {
-                    expenseDao.insertExpense(expense)
+            val amount = amountText.toDoubleOrNull()
+            if (amount == null || amount <= 0) {
+                etAmount.error = "Enter a valid amount"
+                return@setOnClickListener
+            }
 
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(this@CategoryDetail, "Expense saved!", Toast.LENGTH_SHORT).show()
-                        dialog.dismiss()
-                        loadExpensesFromDb()
-                    }
+            if (descriptionText.isEmpty()) {
+                etDescription.error = "Description is required"
+                return@setOnClickListener
+            }
+
+            val selectedDateMillis = try {
+                val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+                val date = sdf.parse(dateText)
+                date?.time ?: System.currentTimeMillis()
+            } catch (e: Exception) {
+                System.currentTimeMillis()
+            }
+
+            val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+            val categoryId = intent.getIntExtra("categoryId", -1)
+            Log.d("CategoryDetail", "categoryId passed: $categoryId")
+
+            val expense = Expense(
+                userId = userId,
+                categoryId = categoryId,
+                description = descriptionText,
+                amount = amount,
+                date = selectedDateMillis,
+                receiptUri = selectedReceiptUri?.toString()
+            )
+
+            CoroutineScope(Dispatchers.IO).launch {
+                expenseDao.insertExpense(expense)
+                withContext(Dispatchers.Main) {
+                    dialog.dismiss()
+                    loadExpensesFromDb()
+                    Toast.makeText(this@CategoryDetail, "Expense saved!", Toast.LENGTH_SHORT).show()
                 }
-
-            } else {
-                Toast.makeText(this, "Please fill in required fields", Toast.LENGTH_SHORT).show()
             }
         }
-
         dialog.show()
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode == RESULT_OK) {
-            when (requestCode) {
-                PICK_RECEIPT_IMAGE_REQUEST -> {
-                    selectedReceiptUri = data?.data
-                    receiptImageView?.setImageURI(selectedReceiptUri)
+            if (requestCode == PICK_RECEIPT_IMAGE_REQUEST) {
+                val originalUri = data?.data
+                if (originalUri != null) {
+                    val copiedUri = copyImageToInternalStorage(originalUri)
+                    if (copiedUri != null) {
+                        selectedReceiptUri = copiedUri
+                        receiptImageView?.setImageURI(selectedReceiptUri)
+                    } else {
+                        Toast.makeText(this, "Failed to copy image", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
-
     }
+
     fun showExpenseDetailDialog(expense: Expense) {
         val dialogView = layoutInflater.inflate(R.layout.dialog_expense_detail, null)
 
@@ -155,8 +188,8 @@ class CategoryDetail : AppCompatActivity() {
         val textViewDescription = dialogView.findViewById<TextView>(R.id.textViewDetailDescription)
         val imageViewReceipt = dialogView.findViewById<ImageView>(R.id.imageViewDetailReceipt)
 
-        textViewDate.text = "Date: ${expense.date}"
-        textViewAmount.text = "Amount: ${expense.amount}"
+        textViewDate.text = "Date: ${formatDate(expense.date)}"
+        textViewAmount.text = "${UserSettings.currencySymbol} ${expense.amount}0"
         textViewDescription.text = "Description: ${expense.description}"
 
         Log.d("ExpenseDetail", "Receipt URI: ${expense.receiptUri}")
@@ -176,6 +209,11 @@ class CategoryDetail : AppCompatActivity() {
 
     }
 
+    private fun formatDate(timestamp: Long): String {
+        val sdf = java.text.SimpleDateFormat("dd MMM yyyy", java.util.Locale.getDefault())
+        return sdf.format(java.util.Date(timestamp))
+    }
+
     private fun loadExpensesFromDb() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val categoryId = intent.getIntExtra("categoryId", -1)
@@ -190,6 +228,26 @@ class CategoryDetail : AppCompatActivity() {
             }
         }
     }
+
+    private fun copyImageToInternalStorage(uri: Uri): Uri? {
+        return try {
+            val inputStream = contentResolver.openInputStream(uri)
+            val fileName = "image_${System.currentTimeMillis()}.jpg"
+            val file = File(filesDir, fileName)
+            val outputStream = FileOutputStream(file)
+
+            inputStream?.copyTo(outputStream)
+
+            outputStream.close()
+            inputStream?.close()
+
+            Uri.fromFile(file)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
 
 
 }

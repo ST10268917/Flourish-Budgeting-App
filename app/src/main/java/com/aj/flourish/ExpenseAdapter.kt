@@ -24,7 +24,7 @@ class ExpenseAdapter(private val expenses: List<Expense>) : RecyclerView.Adapter
     override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
         val expense = expenses[position]
         holder.textViewDate.text = formatDate(expense.date)
-        holder.textViewAmount.text = "Amount: ${expense.amount}"
+        holder.textViewAmount.text = "${UserSettings.currencySymbol} ${expense.amount}0"
         holder.textViewDescription.text = expense.description
 
         holder.itemView.setOnClickListener {

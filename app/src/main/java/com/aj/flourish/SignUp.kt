@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SignUp : AppCompatActivity() {
     private lateinit var username: EditText
@@ -112,6 +113,24 @@ class SignUp : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // User registered successfully
                     Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show()
+
+                    val userId = auth.currentUser?.uid
+                    val userMap = hashMapOf(
+                        "username" to usernameText,
+                        "email" to emailText,
+                        "mobile" to mobileText,
+                        "currency" to selectedCurrency
+                    )
+
+                    FirebaseFirestore.getInstance().collection("users")
+                        .document(userId!!)
+                        .set(userMap)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Currency saved!", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this, "Failed to save currency: ${e.message}", Toast.LENGTH_LONG).show()
+                        }
 
                     startActivity(Intent(this, Dashboard::class.java))
                     finish()

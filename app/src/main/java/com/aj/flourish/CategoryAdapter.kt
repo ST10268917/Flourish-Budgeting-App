@@ -31,6 +31,7 @@ class CategoryAdapter(private val categories: List<Category>) : RecyclerView.Ada
             val context = holder.itemView.context
             val intent = Intent(context, CategoryDetail::class.java)
             intent.putExtra("categoryName", category.name)
+            intent.putExtra("categoryId", category.id)
             intent.putExtra("categoryImageUri", category.imageUri.toString())
             context.startActivity(intent)
         }

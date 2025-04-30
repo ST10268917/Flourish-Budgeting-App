@@ -6,7 +6,5 @@
         <item>EUR - Euro</item>
         <item>ZAR - South African Rand</item>
         <item>GBP - British Pound</item>
-        <item>PKR - Pakistani Rupee</item>
-        <item>AUD - Australian Dollar</item>
     </string-array>
 </resources>
