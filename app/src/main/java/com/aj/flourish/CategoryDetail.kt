@@ -45,38 +45,48 @@ import java.util.Locale
 
 
     class CategoryDetail : AppCompatActivity() {
+        // Adapter for the list of expenses
         private lateinit var expenseAdapter: ExpenseAdapter
         private val expenseList = mutableListOf<Expense>()
+
+        // Holds selected receipt image URI and ImageView
         private var selectedReceiptUri: Uri? = null
         private var receiptImageView: ImageView? = null
+
+        // Stores path of photo taken via camera
         private var currentPhotoPath: String? = null
 
+        // Room database instance and DAO for accessing expenses
         private lateinit var database: AppDatabase
         private lateinit var expenseDao: ExpenseDao
 
-        // Camera Permissions
-
+        // Permission and result launchers for camera and gallery
         private lateinit var cameraPermissionLauncher: ActivityResultLauncher<String>
         private lateinit var storagePermissionLauncher: ActivityResultLauncher<String>
         private lateinit var cameraImageLauncher: ActivityResultLauncher<Intent>
         private lateinit var galleryImageLauncher: ActivityResultLauncher<Intent>
         private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
 
+        // Intents for taking or picking an image
         private val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         private val pickImageIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_category_detail)
+
+            // Initialize Room database and DAO
             database = AppDatabase.getInstance(this)
             expenseDao = database.expenseDao()
+
+            // Setup RecyclerView for showing expense list
             val recyclerViewExpenses = findViewById<RecyclerView>(R.id.recyclerViewExpenses)
             recyclerViewExpenses.layoutManager = LinearLayoutManager(this)
 
             expenseAdapter = ExpenseAdapter(expenseList)
             recyclerViewExpenses.adapter = expenseAdapter
 
-            // Initialize the permission launchers
+            // Register permission and activity result handlers
             cameraPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
                 if (isGranted) {
                     dispatchTakePictureIntent()
@@ -92,8 +102,9 @@ import java.util.Locale
                     Toast.makeText(this, "Storage permission denied", Toast.LENGTH_SHORT).show()
                 }
             }
-
+            // Result handler for camera capture
             cameraImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                Log.d("CameraResult", "Result Code: ${result.resultCode}") // Add this line
                 if (result.resultCode == Activity.RESULT_OK) {
                     currentPhotoPath?.let { path ->
                         val file = File(path)
@@ -108,7 +119,7 @@ import java.util.Locale
                     }
                 }
             }
-
+        // Result handler for gallery selection
             galleryImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     val selectedImageUri: Uri? = result.data?.data
@@ -124,7 +135,7 @@ import java.util.Locale
                     }
                 }
             }
-
+            // Launcher for requesting multiple permissions
             permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
                 val allGranted = permissions.values.all { it }
                 if (allGranted) {
@@ -133,7 +144,7 @@ import java.util.Locale
                     Toast.makeText(this, "Permissions denied", Toast.LENGTH_SHORT).show()
                 }
             }
-
+            // Launch appropriate permissions depending on Android version
             val permissionList = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 arrayOf(
                     Manifest.permission.CAMERA,
@@ -147,11 +158,12 @@ import java.util.Locale
             }
             permissionLauncher.launch(permissionList)
 
+            // Button to add new expense
             val btnAddExpense = findViewById<Button>(R.id.btnAddExpense)
             btnAddExpense.setOnClickListener {
                 showAddExpenseDialog()
             }
-
+            // Set category image and name from intent
             val imageView = findViewById<ImageView>(R.id.imageViewCategoryDetail)
             val textView = findViewById<TextView>(R.id.textViewCategoryNameDetail)
 
@@ -164,14 +176,19 @@ import java.util.Locale
             if (categoryImageUri != null) {
                 imageView.setImageURI(Uri.parse(categoryImageUri))
             }
-            loadExpensesFromDb()
+            loadExpensesFromDb()// Load expenses for this category
         }
+
+        /**
+         * Shows dialog to add a new expense with fields and buttons for receipt image
+         */
 
         private fun showAddExpenseDialog() {
             val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_expense, null)
             val imageViewReceipt = dialogView.findViewById<ImageView>(R.id.ivExpenseReceipt)
             receiptImageView = imageViewReceipt
 
+            // Input fields
             val etDate = dialogView.findViewById<EditText>(R.id.etExpenseDate)
             val etAmount = dialogView.findViewById<EditText>(R.id.etExpenseAmount)
             val etDescription = dialogView.findViewById<EditText>(R.id.etExpenseDescription)
@@ -183,6 +200,8 @@ import java.util.Locale
                 .setView(dialogView)
                 .create()
 
+
+           // Camera button click listener
             btnTakePhoto.setOnClickListener {
                 if (ContextCompat.checkSelfPermission(
                         this,
@@ -206,6 +225,7 @@ import java.util.Locale
                 }
             }
 
+             // Gallery button click listener
             btnChooseGallery.setOnClickListener {
                 if (ContextCompat.checkSelfPermission(
                         this,
@@ -229,7 +249,7 @@ import java.util.Locale
                 }
             }
 
-            // Date Picker for date field
+            // Show date picker when clicking on the date field
             etDate.setOnClickListener {
                 val calendar = Calendar.getInstance()
                 val year = calendar.get(Calendar.YEAR)
@@ -246,12 +266,13 @@ import java.util.Locale
                 )
                 datePickerDialog.show()
             }
-
+            // Save button click listener
             btnSave.setOnClickListener {
                 val dateText = etDate.text.toString().trim()
                 val amountText = etAmount.text.toString().trim()
                 val descriptionText = etDescription.text.toString().trim()
 
+                // Validate user input
                 if (dateText.isEmpty()) {
                     etDate.error = "Date is required"
                     return@setOnClickListener
@@ -272,7 +293,7 @@ import java.util.Locale
                     etDescription.error = "Description is required"
                     return@setOnClickListener
                 }
-
+                // Parse date string to milliseconds
                 val selectedDateMillis = try {
                     val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                     val date = sdf.parse(dateText)
@@ -280,13 +301,14 @@ import java.util.Locale
                 } catch (e: Exception) {
                     System.currentTimeMillis()
                 }
-
+                // Get user ID and category ID
                 val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
                 val categoryId = intent.getIntExtra("categoryId", -1)
                 Log.d("CategoryDetail", "categoryId passed: $categoryId")
 
                 val receiptToSave = selectedReceiptUri?.toString()
 
+                // Create and insert expense record
                 val expense = Expense(
                     userId = userId,
                     categoryId = categoryId,
@@ -307,7 +329,20 @@ import java.util.Locale
             }
             dialog.show()
         }
-
+        /**
+         * Helper function to show permission rationale dialog
+         */
+        private fun showPermissionExplanation(title: String, message: String, onPositive: () -> Unit) {
+            AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK") { _, _ -> onPositive() }
+                .setNegativeButton("Cancel", null)
+                .show()
+        }
+        /**
+         * Creates a temporary file to store the camera image
+         */
         @Throws(IOException::class)
         private fun createImageFile(): File {
             val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
@@ -320,7 +355,9 @@ import java.util.Locale
                 currentPhotoPath = absolutePath
             }
         }
-
+        /**
+         * Launch camera intent to take a picture
+         */
         private fun dispatchTakePictureIntent() {
             val photoFile: File? = try {
                 createImageFile()
@@ -339,7 +376,9 @@ import java.util.Locale
                 cameraImageLauncher.launch(takePictureIntent)
             }
         }
-
+        /**
+         * Launch gallery intent to select a picture
+         */
         private fun openGallery() {
             galleryImageLauncher.launch(pickImageIntent)
         }

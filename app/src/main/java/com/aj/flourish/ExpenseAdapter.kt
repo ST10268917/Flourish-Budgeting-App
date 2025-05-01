@@ -11,24 +11,26 @@ import com.bumptech.glide.Glide
 import java.text.SimpleDateFormat
 import java.util.*
 
+// Adapter for displaying a list of Expense items in a RecyclerView
 class ExpenseAdapter(private val expenses: List<Expense>) : RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder>() {
 
+    // ViewHolder holds references to the UI elements for each expense item
     class ExpenseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textViewDate: TextView = itemView.findViewById(R.id.textViewExpenseDate)
-        val textViewAmount: TextView = itemView.findViewById(R.id.textViewExpenseAmount)
-        val textViewDescription: TextView = itemView.findViewById(R.id.textViewExpenseDescription)
-        val receiptImageView: ImageView = itemView.findViewById(R.id.receiptImageView)
+        val textViewDate: TextView = itemView.findViewById(R.id.textViewExpenseDate) // Displays the date of the expense
+        val textViewAmount: TextView = itemView.findViewById(R.id.textViewExpenseAmount)  // Displays the amount spent
+        val textViewDescription: TextView = itemView.findViewById(R.id.textViewExpenseDescription) // Displays a description of the expense
+        val receiptImageView: ImageView = itemView.findViewById(R.id.receiptImageView) // Displays the optional receipt image
     }
-
+    // Inflate the layout for each item and create the ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpenseViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_expense, parent, false)
         return ExpenseViewHolder(view)
     }
-
+    // Binds each expense item to the UI elements in the ViewHolder
     override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
         val expense = expenses[position]
         holder.textViewDate.text = formatDate(expense.date)
-        holder.textViewAmount.text = "${UserSettings.currencySymbol} ${expense.amount}0"
+        holder.textViewAmount.text = "${UserSettings.currencySymbol} ${expense.amount}0" // Format and set the amount using a currency symbol from user settings
         holder.textViewDescription.text = expense.description
 
         holder.itemView.setOnClickListener {
@@ -63,8 +65,10 @@ class ExpenseAdapter(private val expenses: List<Expense>) : RecyclerView.Adapter
 
 
 
+    // Returns the total number of expense items
     override fun getItemCount(): Int = expenses.size
 
+    // Helper function to convert a timestamp into a readable date format
     private fun formatDate(timestamp: Long): String {
         val sdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
         return sdf.format(Date(timestamp))

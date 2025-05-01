@@ -21,6 +21,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 
 class CreateCategory : AppCompatActivity() {
     private lateinit var database: AppDatabase
@@ -28,6 +30,7 @@ class CreateCategory : AppCompatActivity() {
     private val categoryList = mutableListOf<Category>()
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var backButton: ImageView
+    private lateinit var imagePickerLauncher: ActivityResultLauncher<Intent>
 
     private var imageViewInDialog: ImageView? = null
 
@@ -56,6 +59,7 @@ class CreateCategory : AppCompatActivity() {
         // Setup adapter
         categoryAdapter = CategoryAdapter(categoryList)
         recyclerView.adapter = categoryAdapter
+
 
         // Add Category Button Click
         fabAddCategory.setOnClickListener {
