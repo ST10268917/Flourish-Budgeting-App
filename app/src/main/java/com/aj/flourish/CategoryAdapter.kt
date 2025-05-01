@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class CategoryAdapter(private val categories: List<Category>) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
@@ -24,16 +25,41 @@ class CategoryAdapter(private val categories: List<Category>) : RecyclerView.Ada
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val category = categories[position]
         holder.textViewCategoryName.text = category.name
-        holder.imageViewCategory.setImageURI(Uri.parse(category.imageUri))
 
-        // Item click listener
+        // 🛡 Error handling for image URI
+        try {
+            val uri = Uri.parse(category.imageUri)
+            if (uri != null && category.imageUri.isNotBlank()) {
+                holder.imageViewCategory.setImageURI(uri)
+            } else {
+                holder.imageViewCategory.setImageResource(R.drawable.ic_receipt_placeholder) // fallback image
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            holder.imageViewCategory.setImageResource(R.drawable.ic_error) // fallback on error
+        }
+
+        // 🚦 Null safety and user-friendly navigation
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
-            val intent = Intent(context, CategoryDetail::class.java)
-            intent.putExtra("categoryName", category.name)
-            intent.putExtra("categoryId", category.id)
-            intent.putExtra("categoryImageUri", category.imageUri.toString())
-            context.startActivity(intent)
+
+            if (category.name.isNullOrBlank()) {
+                Toast.makeText(context, "Category name is missing!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val intent = Intent(context, CategoryDetail::class.java).apply {
+                putExtra("categoryName", category.name)
+                putExtra("categoryId", category.id)
+                putExtra("categoryImageUri", category.imageUri ?: "")
+            }
+
+            try {
+                context.startActivity(intent)
+            } catch (e: Exception) {
+                Toast.makeText(context, "Failed to open category details.", Toast.LENGTH_SHORT).show()
+                e.printStackTrace()
+            }
         }
     }
 
