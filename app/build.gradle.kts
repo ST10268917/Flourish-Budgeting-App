@@ -56,4 +56,14 @@ dependencies {
     ksp("androidx.room:room-compiler:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
+
+    //Camera
+    implementation("androidx.activity:activity-ktx:1.9.0")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    ksp("com.github.bumptech.glide:ksp:4.16.0")
+
+    // For image loading
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
 }

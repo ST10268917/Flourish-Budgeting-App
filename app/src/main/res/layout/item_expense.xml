@@ -32,4 +32,13 @@
         android:text="Description"
         android:textSize="14sp"/>
 
+    <!-- Add this ImageView for receipts -->
+    <ImageView
+        android:id="@+id/receiptImageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        android:contentDescription="Expense receipt"/>
 </LinearLayout>
