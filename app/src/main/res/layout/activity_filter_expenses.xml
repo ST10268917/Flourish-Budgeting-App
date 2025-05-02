@@ -1,0 +1,35 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/etStartDate"
+        android:hint="Start Date"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:focusable="false" />
+
+    <EditText
+        android:id="@+id/etEndDate"
+        android:hint="End Date"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:focusable="false"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btnFilter"
+        android:text="Filter Expenses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewFilteredExpenses"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:contentDescription="List of filtered expenses"/>
+</LinearLayout>

@@ -23,6 +23,9 @@
         android:theme="@style/Theme.Flourish"
         tools:targetApi="31">
         <activity
+            android:name=".FilterExpensesActivity"
+            android:exported="false" />
+        <activity
             android:name=".BudgetActivity"
             android:exported="false" />
         <activity

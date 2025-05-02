@@ -17,5 +17,8 @@ interface ExpenseDao {
     // Deletes the specified expense from the database
     @Delete
     suspend fun deleteExpense(expense: Expense)
+    @Query("SELECT * FROM expenses WHERE userId = :userId AND date BETWEEN :startDate AND :endDate ORDER BY date DESC")
+    suspend fun getExpensesBetweenDates(userId: String, startDate: Long, endDate: Long): List<Expense>
+
 
 }

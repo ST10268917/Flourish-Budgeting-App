@@ -83,7 +83,10 @@ import java.util.Locale
             val recyclerViewExpenses = findViewById<RecyclerView>(R.id.recyclerViewExpenses)
             recyclerViewExpenses.layoutManager = LinearLayoutManager(this)
 
-            expenseAdapter = ExpenseAdapter(expenseList)
+            expenseAdapter = ExpenseAdapter(expenseList) { expense ->
+                showExpenseDetailDialog(expense)
+            }
+
             recyclerViewExpenses.adapter = expenseAdapter
 
             // Register permission and activity result handlers

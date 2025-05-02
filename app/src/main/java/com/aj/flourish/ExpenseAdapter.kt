@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 // Adapter for displaying a list of Expense items in a RecyclerView
-class ExpenseAdapter(private val expenses: List<Expense>) : RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder>() {
+class ExpenseAdapter(private val expenses: List<Expense>, private val onItemClick: (Expense) -> Unit) : RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder>() {
 
     // ViewHolder holds references to the UI elements for each expense item
     class ExpenseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -30,22 +30,16 @@ class ExpenseAdapter(private val expenses: List<Expense>) : RecyclerView.Adapter
     override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
         val expense = expenses[position]
         holder.textViewDate.text = formatDate(expense.date)
-        holder.textViewAmount.text = "${UserSettings.currencySymbol} ${expense.amount}0" // Format and set the amount using a currency symbol from user settings
+        holder.textViewAmount.text = "${UserSettings.currencySymbol} ${"%.2f".format(expense.amount)}"
         holder.textViewDescription.text = expense.description
 
-        holder.itemView.setOnClickListener {
-            val context = holder.itemView.context
-            if (context is CategoryDetail) {
-                context.showExpenseDetailDialog(expense)
-            }
-        }
-        // Handle the receipt image
+        // Receipt image handling
         if (!expense.receiptUri.isNullOrEmpty()) {
             try {
                 Glide.with(holder.itemView.context)
                     .load(expense.receiptUri)
-                    .placeholder(R.drawable.ic_receipt_placeholder) // Add a placeholder drawable
-                    .error(R.drawable.ic_error) // Add an error drawable
+                    .placeholder(R.drawable.ic_receipt_placeholder)
+                    .error(R.drawable.ic_error)
                     .into(holder.receiptImageView)
                 holder.receiptImageView.visibility = View.VISIBLE
             } catch (e: Exception) {
@@ -55,11 +49,10 @@ class ExpenseAdapter(private val expenses: List<Expense>) : RecyclerView.Adapter
         } else {
             holder.receiptImageView.visibility = View.GONE
         }
+
+        // Use provided click listener
         holder.itemView.setOnClickListener {
-            val context = holder.itemView.context
-            if (context is CategoryDetail) {
-                context.showExpenseDetailDialog(expense)
-            }
+            onItemClick(expense)
         }
     }
 

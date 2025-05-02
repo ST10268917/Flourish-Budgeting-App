@@ -22,8 +22,9 @@ class BudgetAdapter(private val budgets: List<Budget>) : RecyclerView.Adapter<Bu
         val budget = budgets[position]
         val monthName = DateFormatSymbols().months[budget.month - 1]
         holder.monthYear.text = "$monthName ${budget.year}"
-        holder.minMax.text = "Min: ${UserSettings.currency}${budget.minAmount} | Max: ${UserSettings.currency}${budget.maxAmount}"
+        holder.minMax.text = "Min: ${UserSettings.currencySymbol} ${String.format("%.2f", budget.minAmount)} | Max: ${UserSettings.currencySymbol} ${String.format("%.2f", budget.maxAmount)}"
     }
+
 
     override fun getItemCount(): Int = budgets.size
 }
