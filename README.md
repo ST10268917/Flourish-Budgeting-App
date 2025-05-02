@@ -23,6 +23,21 @@ Flourish is an intelligent and user-friendly Android budgeting app designed to s
 
 *7*> Images
 
+![image](https://github.com/user-attachments/assets/a4f8a877-9054-434c-9515-ec8b11f291e9)
+
+Login
+
+![image](https://github.com/user-attachments/assets/c3b84a54-504c-44b1-a712-fdea355a8e54)
+
+Registration 
+
+![image](https://github.com/user-attachments/assets/9d815e19-c229-4e72-be57-207e3e1ee4aa)
+
+
+
+
+
+
 *8*>	Demo video  
 
 *9*> Technology stack  
