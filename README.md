@@ -165,7 +165,7 @@ Flourish empowers students and young professionals to take control of their fina
 ### Flourish UI Screenshots
 
 ## Demo Video
-
+https://youtu.be/wzVz7D5z9O0
 
 
 > Tools and languages used.
