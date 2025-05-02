@@ -200,6 +200,17 @@ In Progress
    Images
   
 Screenshots of UI screens including:
+![image](https://github.com/user-attachments/assets/10e7bd1f-2de0-45fd-98d6-886ab1b300d9)
+
+Login 
+
+![image](https://github.com/user-attachments/assets/26e5eef7-d85d-4e72-bb0d-50340865fc11)
+
+Registration
+
+![image](https://github.com/user-attachments/assets/f4a6a2f8-fb9d-4ec6-bedb-bee3d268b246)
+
+
 
 
 Demo video link
