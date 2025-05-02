@@ -1,4 +1,4 @@
-## 🌱 Flourish
+## Flourish
 **Grow Your Finances, Secure Your Future**
 
 ![image](https://github.com/user-attachments/assets/5897f43f-7708-4a38-9930-c6c3c1198aa2)
