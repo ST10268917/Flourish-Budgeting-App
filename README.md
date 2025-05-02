@@ -8,18 +8,18 @@ Slogan : Grow Your Finances, Secure Your Future
 Flourish is an intelligent and user-friendly Android budgeting app designed to simplify money management. It offers instant financial insights, customizable savings targets, and tools to improve your financial knowledge all in a single, convenient platform. ( OpenAI, 2025) Developed using Kotlin and Firebase .Flourish blends the best features of leading apps like YNAB and TimelyBills into a gamified, engaging experience that makes handling your finances both effortless and enjoyable. ( OpenAI, 2025).
 
 📑 Contents Overview
-•	Introduction 
-•	Functional requirements 
-•	Setup guide/instructions 
-•	Implementation and Prototype Execution
-•	System Capabilities and Role Definitions
-•	Roadmap
-•	Images
-•	Demo video  
-•	Technology stack  
-•	Coding activities
-•	Get started
-•	Contributing 
+1> Introduction 
+2>  Functional requirements 
+3> 	Setup guide/instructions 
+4> 	Implementation and Prototype Execution
+5>	System Capabilities and Role Definitions
+6>	Roadmap
+7>	Images
+8>	Demo video  
+9> Technology stack  
+10>	Coding activities
+11> 	Get started
+12>	Contributing 
 
 
 Introduction
