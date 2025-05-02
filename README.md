@@ -3,7 +3,7 @@
 
 **Grow Your Finances, Secure Your Future**
 
-Flourish is an intelligent and user-friendly Android budgeting app designed to simplify money management. It offers instant financial insights, customizable savings targets, and tools to improve your financial knowledge—all in a single, convenient platform. Developed using Kotlin and Firebase, Flourish blends the best features of apps like YNAB and TimelyBills into a gamified, engaging experience that makes handling your finances both effortless and enjoyable (OpenAI, 2025).
+Flourish is an intelligent and user-friendly Android budgeting app designed to simplify money management. It offers instant financial insights, customizable savings targets, and tools to improve your financial knowledge—all in a single, convenient platform. Developed using Kotlin and Firebase, Flourish blends the best features of apps like YNAB and TimelyBills into a gamified, engaging experience that makes handling your finances both effortless and enjoyable (OpenAI, 2025). 
 
 ## Table of Contents
 
