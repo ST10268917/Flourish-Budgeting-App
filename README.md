@@ -191,31 +191,37 @@ Flourish empowers students and young professionals to take control of their fina
 
 **Category Transactions:**
 
-![Category Details Placeholder](placeholder_category_details.png)
+![image](https://github.com/user-attachments/assets/aebdecdc-7748-44da-893b-539b4d293e49)
+
 
 -A detailed view of all expenses recorded within a specific category.
 
 **Adding a New Expense:**
 
-![Add Expense Placeholder](placeholder_add_expense.png)
+![image](https://github.com/user-attachments/assets/6d25962e-01a9-4e71-a3ff-620d8f673ed7)
+
 
 -Users can input details of their spending, with optional receipt capture via camera or gallery.
 
 **Viewing Expense Details:**
 
-![View/Edit Expense Placeholder](placeholder_view_expense.png)
+![image](https://github.com/user-attachments/assets/de4c0c80-c8c5-464b-a1bf-f55b7664e9d1)
+
 
 -Tapping on an expense allows users to see all associated information, including any attached receipt.
 
 **Setting Monthly Budgets:**
 
-![Set Budget Placeholder](placeholder_set_budget.png)
+![image](https://github.com/user-attachments/assets/4b2dc3a1-3e80-4874-91f1-77fe7f996975)
+![image](https://github.com/user-attachments/assets/75c034d1-5328-4960-b8fe-b745ac6875b7)
+
 
 -Users can define maximum and minimum spending limits for each month.
 
 **Filtering Spending by Date:**
 
-![Filter Category Spending Placeholder](placeholder_filter_spending.png)
+![image](https://github.com/user-attachments/assets/3c8965e7-f255-4d7b-aaf7-8f92713302e6)
+
 
 -Users can analyze their spending within specific date ranges.
 
