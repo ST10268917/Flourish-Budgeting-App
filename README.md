@@ -37,37 +37,13 @@ Developed using Kotlin and Firebase, Flourish blends the best features of apps l
    ```bash
    git clone https://github.com/ST10268917/Flourish-Budgeting-App/
 
- 
-*1*> Introduction 
-
-*2*> Functional requirements 
-
-*3*> Setup guide/instructions 
-
-*4*> Implementation and Prototype Execution
-
-*5*> System Capabilities and Role Definitions
-
-*6*> Roadmap
-
-*7*> Images
-
-![image](https://github.com/user-attachments/assets/a4f8a877-9054-434c-9515-ec8b11f291e9)
-
-Login
-
-![image](https://github.com/user-attachments/assets/c3b84a54-504c-44b1-a712-fdea355a8e54)
-
-Registration 
-
-![image](https://github.com/user-attachments/assets/9d815e19-c229-4e72-be57-207e3e1ee4aa)
+## Demo Video
 
 
 
 
 
 
-*8*>	Demo video  
 
 *9*> Technology stack  
 
