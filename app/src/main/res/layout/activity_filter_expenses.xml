@@ -1,35 +1,80 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="24dp"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/teal"
+    android:textAlignment="center"
+    android:textDirection="anyRtl">
 
-    <EditText
-        android:id="@+id/etStartDate"
-        android:hint="Start Date"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:focusable="false"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        app:cardBackgroundColor="@color/darkGreen"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="12dp">
 
-    <EditText
-        android:id="@+id/etEndDate"
-        android:hint="End Date"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:focusable="false"
-        android:layout_marginBottom="16dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="531dp"
+            android:foregroundTint="@color/white"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-    <Button
-        android:id="@+id/btnFilter"
-        android:text="Filter Expenses"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/etStartDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/edit_text_background"
+                android:hint="Start Date"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textColor="@color/black"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewFilteredExpenses"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:contentDescription="List of filtered expenses"/>
-</LinearLayout>
+            <EditText
+                android:id="@+id/etEndDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/edit_text_background"
+                android:hint="End Date"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textColor="@color/black" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewFilteredExpenses"
+                android:layout_width="364dp"
+                android:layout_height="299dp"
+                android:layout_weight="1"
+                android:contentDescription="List of filtered expenses" />
+
+            <Button
+                android:id="@+id/btnFilter"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="@color/turquoise"
+                android:padding="12dp"
+                android:text="Filter Expenses"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvFilterExpenses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="40dp"
+        android:text="Filter Expenses "
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
+
+</FrameLayout>
