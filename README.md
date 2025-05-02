@@ -9,7 +9,9 @@ Flourish is an intelligent and user-friendly Android budgeting app designed to s
 
  Contents Overview
 *1*  Introduction 
-2>  Functional requirements 
+
+*2* Functional requirements 
+
 3> 	Setup guide/instructions 
 4> 	Implementation and Prototype Execution
 5>	System Capabilities and Role Definitions
