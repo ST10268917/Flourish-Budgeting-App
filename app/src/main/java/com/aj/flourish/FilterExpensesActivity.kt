@@ -2,6 +2,7 @@ package com.aj.flourish
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
@@ -25,6 +26,9 @@ import java.util.Locale
 class FilterExpensesActivity : AppCompatActivity() {
     private lateinit var expenseDao: ExpenseDao
     private lateinit var expenseAdapter: ExpenseAdapter
+    private lateinit var backButton: ImageView
+
+
 
     private lateinit var recyclerView: RecyclerView
     private val expenseList = mutableListOf<Expense>()
@@ -48,6 +52,11 @@ class FilterExpensesActivity : AppCompatActivity() {
             showExpenseDetailDialog(expense)
         }
         recyclerView.adapter = expenseAdapter
+        backButton = findViewById(R.id.ivBack)
+        backButton.setOnClickListener {
+            val intent = Intent(this, Dashboard::class.java)
+            startActivity(intent)
+        }
 
         startDateField.setOnClickListener { showDatePicker(true) }
         endDateField.setOnClickListener { showDatePicker(false) }

@@ -1,12 +1,14 @@
 package com.aj.flourish
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import android.widget.Button
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +23,7 @@ class CategorySpendingActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: CategorySpendingAdapter
     private val spendingList = mutableListOf<CategorySpending>()
+    private lateinit var backButton: ImageView
 
     private lateinit var etStartDate: EditText
     private lateinit var etEndDate: EditText
@@ -41,6 +44,11 @@ class CategorySpendingActivity : AppCompatActivity() {
         etStartDate = findViewById(R.id.etStartDate)
         etEndDate = findViewById(R.id.etEndDate)
         tvFilterInfo = findViewById(R.id.tvFilterInfo)
+        backButton = findViewById(R.id.ivBack)
+        backButton.setOnClickListener {
+            val intent = Intent(this, Dashboard::class.java)
+            startActivity(intent)
+        }
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = CategorySpendingAdapter(spendingList)

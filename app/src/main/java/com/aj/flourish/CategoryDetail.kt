@@ -46,6 +46,7 @@ class CategoryDetail : AppCompatActivity() {
     private var currentPhotoPath: String? = null
     private lateinit var database: AppDatabase
     private lateinit var expenseDao: ExpenseDao
+    private lateinit var backButton: ImageView
 
     private lateinit var cameraPermissionLauncher: ActivityResultLauncher<String>
     private lateinit var storagePermissionLauncher: ActivityResultLauncher<String>
@@ -61,6 +62,7 @@ class CategoryDetail : AppCompatActivity() {
 
         database = AppDatabase.getInstance(this)
         expenseDao = database.expenseDao()
+        backButton = findViewById(R.id.ivBack)
 
         val recyclerViewExpenses = findViewById<RecyclerView>(R.id.recyclerViewExpenses)
         recyclerViewExpenses.layoutManager = LinearLayoutManager(this)
@@ -84,6 +86,11 @@ class CategoryDetail : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Storage permission denied", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        backButton.setOnClickListener {
+            val intent = Intent(this, CreateCategory::class.java)
+            startActivity(intent)
         }
 
         cameraImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

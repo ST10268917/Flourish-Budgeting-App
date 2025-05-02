@@ -1,7 +1,9 @@
 package com.aj.flourish
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -22,6 +24,7 @@ class BudgetActivity : AppCompatActivity() {
     private lateinit var budgetDao: BudgetDao
     private lateinit var adapter: BudgetAdapter
     private val budgetList = mutableListOf<Budget>()
+    private lateinit var backButton: ImageView
 
     private lateinit var tvCurrentYear: TextView
     private lateinit var btnPrevYear: TextView
@@ -45,6 +48,7 @@ class BudgetActivity : AppCompatActivity() {
         adapter = BudgetAdapter(budgetList) { budget ->
             showAddBudgetDialog(budget)
         }
+        backButton = findViewById(R.id.ivBack)
 
         recyclerView.adapter = adapter
 
@@ -54,6 +58,11 @@ class BudgetActivity : AppCompatActivity() {
             currentYear--
             tvCurrentYear.text = currentYear.toString()
             loadBudgets()
+        }
+
+        backButton.setOnClickListener {
+            val intent = Intent(this, Dashboard::class.java)
+            startActivity(intent)
         }
 
         btnNextYear.setOnClickListener {

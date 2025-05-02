@@ -7,10 +7,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -21,64 +20,69 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
 
 class CreateCategory : AppCompatActivity() {
+
     private lateinit var database: AppDatabase
     private lateinit var categoryDao: CategoryDao
     private val categoryList = mutableListOf<Category>()
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var backButton: ImageView
-    private lateinit var imagePickerLauncher: ActivityResultLauncher<Intent>
-
-    private var imageViewInDialog: ImageView? = null
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var fabAddCategory: FloatingActionButton
 
-    private val PICK_IMAGE_REQUEST = 1
+    private lateinit var imagePickerLauncher: ActivityResultLauncher<Intent>
+    private var imageViewInDialog: ImageView? = null
     private var selectedImageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        database = AppDatabase.getInstance(this)
-        categoryDao = database.categoryDao()
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_category)
 
-        // Link views
+        database = AppDatabase.getInstance(this)
+        categoryDao = database.categoryDao()
+
         recyclerView = findViewById(R.id.recyclerViewCategories)
         fabAddCategory = findViewById(R.id.btnAddCategory)
         backButton = findViewById(R.id.ivBack)
 
-        // Setup RecyclerView
-        recyclerView.layoutManager = GridLayoutManager(this, 4) // 4 items per row
+        recyclerView.layoutManager = GridLayoutManager(this, 4)
         recyclerView.setHasFixedSize(true)
 
-        // Setup adapter
         categoryAdapter = CategoryAdapter(categoryList)
         recyclerView.adapter = categoryAdapter
 
+        imagePickerLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val originalUri = result.data?.data
+                if (originalUri != null) {
+                    val copiedUri = copyImageToInternalStorage(originalUri)
+                    if (copiedUri != null) {
+                        selectedImageUri = copiedUri
+                        imageViewInDialog?.setImageURI(copiedUri)
+                    } else {
+                        Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
 
-        // Add Category Button Click
         fabAddCategory.setOnClickListener {
             showAddCategoryDialog()
         }
 
         backButton.setOnClickListener {
-            val intent = Intent(this, Dashboard::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, Dashboard::class.java))
         }
+
         loadCategoriesFromDb()
     }
 
     private fun loadCategoriesFromDb() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
-
         CoroutineScope(Dispatchers.IO).launch {
             val categoriesFromDb = categoryDao.getCategoriesForUser(userId)
-
             withContext(Dispatchers.Main) {
                 categoryList.clear()
                 categoryList.addAll(categoriesFromDb)
@@ -89,7 +93,6 @@ class CreateCategory : AppCompatActivity() {
 
     private fun showAddCategoryDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_category, null)
-
         val editTextName = dialogView.findViewById<EditText>(R.id.etCategoryName)
         val imageView = dialogView.findViewById<ImageView>(R.id.ivCategoryImage)
         imageViewInDialog = imageView
@@ -100,29 +103,28 @@ class CreateCategory : AppCompatActivity() {
             .create()
 
         imageView.setOnClickListener {
-            // Pick image from gallery
-            val intent = Intent(Intent.ACTION_PICK)
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
             intent.type = "image/*"
-            startActivityForResult(intent, PICK_IMAGE_REQUEST)
+            imagePickerLauncher.launch(intent)
         }
 
         btnSave.setOnClickListener {
             val name = editTextName.text.toString().trim()
-
             if (name.isNotEmpty()) {
                 val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
                 val category = Category(
                     name = name,
-                    imageUri = selectedImageUri?.toString() ?: "", // Store empty if no image
+                    imageUri = selectedImageUri?.toString() ?: "",
                     userId = userId
                 )
+
                 CoroutineScope(Dispatchers.IO).launch {
                     categoryDao.insertCategory(category)
-
                     withContext(Dispatchers.Main) {
                         loadCategoriesFromDb()
                         dialog.dismiss()
-                        selectedImageUri = null // Reset after saving
+                        selectedImageUri = null
                     }
                 }
             } else {
@@ -133,43 +135,22 @@ class CreateCategory : AppCompatActivity() {
         dialog.show()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
-            val originalUri = data?.data
-
-            if (originalUri != null) {
-                val copiedUri = copyImageToInternalStorage(originalUri)
-
-                if (copiedUri != null) {
-                    selectedImageUri = copiedUri
-                    imageViewInDialog?.setImageURI(selectedImageUri)
-                } else {
-                    Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
     private fun copyImageToInternalStorage(uri: Uri): Uri? {
         return try {
-            val inputStream = contentResolver.openInputStream(uri)
-            val fileName = "image_${System.currentTimeMillis()}.jpg"
+            val inputStream = contentResolver.openInputStream(uri) ?: return null
+            val fileName = "category_${System.currentTimeMillis()}.jpg"
             val file = File(filesDir, fileName)
             val outputStream = FileOutputStream(file)
 
-            inputStream?.copyTo(outputStream)
+            inputStream.copyTo(outputStream)
 
             outputStream.close()
-            inputStream?.close()
+            inputStream.close()
 
-            Uri.fromFile(file)
+            FileProvider.getUriForFile(this, "${packageName}.fileprovider", file)
         } catch (e: Exception) {
             e.printStackTrace()
             null
         }
     }
-
 }
-
