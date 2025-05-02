@@ -177,7 +177,8 @@ Flourish empowers students and young professionals to take control of their fina
 
 **Personalized Dashboard:**
 
-![image](https://github.com/user-attachments/assets/9c207eb4-e2af-438c-9907-161b1b63abaf)
+![Screenshot 2025-05-02 230930 (1)](https://github.com/user-attachments/assets/469b3e9f-6150-44bd-910c-92f63ae04bf6)  
+
 
 
 -A central overview of the user's current financial status and recent activity.
