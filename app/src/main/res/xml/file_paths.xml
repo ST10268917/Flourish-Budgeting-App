@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <external-files-path
-        name="my_images"
-        path="Pictures/" />
-    <cache-path
-        name="my_cache"
-        path="/" />
+    <!-- Allow internal filesDir access -->
+    <files-path name="internal_files" path="." />
+
+    <!-- Keep external files path if needed in future -->
+    <external-files-path name="images" path="Pictures" />
 </paths>
