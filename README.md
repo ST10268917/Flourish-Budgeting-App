@@ -231,6 +231,7 @@ Follow Installation and Setup and Building and Running the Prototype to begin us
 
 Contributing
 We welcome your ideas and fixes:
+
 *1*>	Fork the repo
 
 *2*>	Create a new branch
@@ -245,7 +246,11 @@ We welcome your ideas and fixes:
 
 Reference Lists : 
 Draw.io, 2023. draw.io. [online] Available at: <https://app.diagrams.net/> [Accessed 2 April 2025]. 
+
+
 Figma, 2025. Figma. [online] Available at: <https://www.figma.com/>[Accessed 2 April 2025].
+
+
 OpenAI. 2024. Chat-GPT (Version 4). [Large language model]. Available at: https://chat.openai.com [Accessed: 2 April  2025]. 
 
 
