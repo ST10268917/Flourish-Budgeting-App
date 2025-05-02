@@ -49,147 +49,170 @@ Functionality Requirements
 (Figma,2024)
 
  Financial Dashboard
-•	View total balance across accounts
-•	Monthly budget overview
-•	Upcoming bills & recent transactions
+ 
+* View total balance across accounts
+* Monthly budget overview
+* Upcoming bills & recent transactions
 (Figma,2024)
 
  Income & Expense Tracking
-•	Manual transaction logging with category, method, date, and notes.
-•	Optional photo attachment (e.g. receipts)
+ 
+* 	Manual transaction logging with category, method, date, and notes.
+* Optional photo attachment (e.g. receipts)
 (Figma,2024)
 
 Budgeting Tools
-•	Set category-specific monthly budgets
-•	Visual indicators (progress bars, pie charts)
-•	Budget overspend alerts
+
+* 	Set category-specific monthly budgets
+* Visual indicators (progress bars, pie charts)
+* 	Budget overspend alerts
 (Figma,2024)
 
 
 Notifications
-•	Reminders for bills, overdue payments, and budget updates
+
+* 	Reminders for bills, overdue payments, and budget updates
 (Figma,2024)
 
 Multi-Currency Support
-•	Select default currency
-•	Real-time exchange rates
-•	Multi-currency transaction recording
+
+* Select default currency
+* Real-time exchange rates
+* Multi-currency transaction recording
 (Figma,2024)
 
 Financial Literacy Hub
-•	Videos, podcasts, and articles
-•	Categorized by media type and difficulty level
+
+	* Videos, podcasts, and articles
+* Categorized by media type and difficulty level
 (Figma,2024)
 
  Built-in Calculator
-•	For complex calculations prior to logging transactions.
+ 
+* 	For complex calculations prior to logging transactions.
 (Figma,2024)
 
  Reports & Statements
-•	Downloadable PDF statements
-•	Graphical insights
-•	Custom date range
+ 
+* 	Downloadable PDF statements
+* 	Graphical insights
+*  Custom date range
 (Figma,2024)
 
  Multiple Accounts
-•	Separate transaction history, budgets, and currencies per account.
+ 
+* Separate transaction history, budgets, and currencies per account.
 (Figma,2024)
 
 Currency Exchange Page
-•	Real-time exchange rate display and conversions
+
+* 	Real-time exchange rate display and conversions
 (Figma,2024)
 
 Gamification(Implemented only in PART 3) 
-•	Achievement badges
-•	Daily streaks
-•	Budgeting leaderboards (optional)
+
+* Achievement badges
+* Daily streaks
+* Budgeting leaderboards (optional)
 (Figma,2024)
 
 
 Setup Instructions
+
 Tools Required:
-•	Android Studio (latest version)
-•	Firebase
-•	Kotlin SDK
-•	Emulator or Android device
+
+* 	Android Studio (latest version)
+* 	Firebase
+* 	Kotlin SDK
+*  Emulator or Android device
 ( OpenAI, 2025).
 
 
  Installation and Setup
   
-1>	Clone the repository
-2>	Open it in Android Studio
-3>	Sync Gradle and resolve dependencies
-4>	Connect your Firebase project
-5>	Update google-services.json
-6>	Run the app on emulator/device
+*1*> Clone the repository
+*2*>	Open it in Android Studio
+*3*>	Sync Gradle and resolve dependencies
+*4*>	Connect your Firebase project
+*5*>	Update google-services.json
+*6*>	Run the app on emulator/device
 ( OpenAI, 2025)
 
 
  Building and Running the Prototype
  
-•	Open the project in Android Studio
-•	Sync Gradle and connect Firebase
-•	Run the app using Shift + F10 or the play button
+* Open the project in Android Studio
+*	Sync Gradle and connect Firebase
+* Run the app using Shift + F10 or the play button
 ( OpenAI, 2025)
 
 
  System Functionalities and User Roles
 User 
-•	Register/login
-•	Add expenses/income
-•	Create/manage budgets
-•	Set savings goals
-•	Access financial content
-•	Earn badges
+*	Register/login
+* Add expenses/income
+* 	Create/manage budgets
+* Set savings goals
+*	Access financial content
+*	Earn badges
 ( OpenAI, 2025)
 
  Admin (optional future feature)
-•	Manage flagged content/resources
-•	Monitor user activities for QA
+ 
+*	Manage flagged content/resources
+* Monitor user activities for QA
 ( OpenAI, 2025)
 
 Roadmap
+
  Completed Dashboard, authentication, and navigation
-•	Expense/income logging
-•	Budget and category management
-•	Financial literacy hub
-•	Savings goals and gamification
+ 
+	Expense/income logging
+ 
+* Budget and category management
+* Financial literacy hub
+*  Savings goals and gamification
 ( OpenAI, 2025).
 
 In Progress
-•	Advanced analytics dashboard
-•	Enhanced PDF report generation
+
+* 	Advanced analytics dashboard
+* 	Enhanced PDF report generation
 ( OpenAI, 2025).
 
+
  Planned
-•	Integration with bank APIs
-•	Chatbot for financial advice
-•	Voice-based entry
+ 
+* 	Integration with bank APIs
+* Chatbot for financial advice
+* Voice-based entry
 ( OpenAI, 2025).
 
    Images
+  
 Screenshots of UI screens including:
 
 
 Demo video link
+
 LINK : 
+
 Tap to watch the Flourish prototype in action
 
 Technology Stack
 
-•	 Frontend: Kotlin, Android Studio
-•	Backend: Firebase 
-•	 Design: Figma
-•	 Others: Glide, MPAndroidChart, Google APIs
-•	( OpenAI, 2025).
+* Frontend: Kotlin, Android Studio
+* 	Backend: Firebase 
+* Design: Figma
+*  Others: Glide, MPAndroidChart, Google APIs
+* 	( OpenAI, 2025).
 
 
  Coding Activity
  
-•	Version-controlled via GitHub
-•	Sprint-based commits aligning with development timeline
-•	Unit and UI testing planned during Testing phase.
+* Version-controlled via GitHub
+* Sprint-based commits aligning with development timeline
+* Unit and UI testing planned during Testing phase.
 ( OpenAI, 2025).
 
  Get Started
@@ -199,11 +222,11 @@ Follow Installation and Setup and Building and Running the Prototype to begin us
 
 Contributing
 We welcome your ideas and fixes:
-1>	Fork the repo
-2>	Create a new branch
-3>	Make your changes
-4>	Push to your fork
-5>	Submit a Pull Request
+*1*>	Fork the repo
+*2*>	Create a new branch
+*3*>	Make your changes
+*4*>	Push to your fork
+*5*>	Submit a Pull Request
 ( OpenAI, 2025).
 
 Reference Lists : 
