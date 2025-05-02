@@ -131,10 +131,15 @@ Tools Required:
  Installation and Setup
   
 *1*>  Clone the repository
+
 *2*>	Open it in Android Studio
+
 *3*>	Sync Gradle and resolve dependencies
+
 *4*>	Connect your Firebase project
+
 *5*>	Update google-services.json
+
 *6*>	Run the app on emulator/device
 
 ( OpenAI, 2025)
@@ -150,25 +155,28 @@ Tools Required:
 
  System Functionalities and User Roles
 User 
-*	Register/login
+
+* Register/login
 * Add expenses/income
-* 	Create/manage budgets
+* Create/manage budgets
 * Set savings goals
-*	Access financial content
-*	Earn badges
+ * Access financial content
+  Earn badges
 ( OpenAI, 2025)
 
  Admin (optional future feature)
  
-*	Manage flagged content/resources
+* Manage flagged content/resources
 * Monitor user activities for QA
 ( OpenAI, 2025)
 
 Roadmap
 
- Completed Dashboard, authentication, and navigation
+Completed Dashboard, authentication, and navigation
  
-	Expense/income logging
+
+Expense/income logging
+
  
 * Budget and category management
 * Financial literacy hub
@@ -224,10 +232,15 @@ Follow Installation and Setup and Building and Running the Prototype to begin us
 Contributing
 We welcome your ideas and fixes:
 *1*>	Fork the repo
+
 *2*>	Create a new branch
+
 *3*>	Make your changes
+
 *4*>	Push to your fork
+
 *5*>	Submit a Pull Request
+
 ( OpenAI, 2025).
 
 Reference Lists : 
