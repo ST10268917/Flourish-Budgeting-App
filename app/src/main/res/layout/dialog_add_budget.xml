@@ -1,34 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="16dp"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
 
-    <EditText
-        android:id="@+id/etYear"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="Year (e.g. 2025)"
-        android:inputType="number" />
-
-    <EditText
-        android:id="@+id/etMonth"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="Month (1-12)"
-        android:inputType="number" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Minimum Amount"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"/>
 
     <EditText
         android:id="@+id/etMin"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="Min Amount"
-        android:inputType="numberDecimal" />
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="e.g. 100.00"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Maximum Amount"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"/>
 
     <EditText
         android:id="@+id/etMax"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="Max Amount"
-        android:inputType="numberDecimal" />
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="e.g. 500.00"/>
+
 </LinearLayout>

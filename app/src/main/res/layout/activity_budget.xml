@@ -5,18 +5,44 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Heading -->
-    <TextView
-        android:id="@+id/tvHeading"
-        android:layout_width="wrap_content"
+    <!-- Year Navigation -->
+    <LinearLayout
+        android:id="@+id/layoutYearNav"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Monthly Budgets"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"/>
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp">
 
-    <!-- RecyclerView to show budget list -->
+        <TextView
+            android:id="@+id/btnPrevYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="←"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:padding="16dp" />
+
+        <TextView
+            android:id="@+id/tvCurrentYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2025"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:padding="16dp" />
+
+        <TextView
+            android:id="@+id/btnNextYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="→"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:padding="16dp" />
+    </LinearLayout>
+
+    <!-- RecyclerView for Jan–Dec budget list -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewBudgets"
         android:layout_width="match_parent"
@@ -25,7 +51,7 @@
         android:clipToPadding="false"
         android:paddingBottom="80dp"/>
 
-    <!-- Floating Action Button -->
+    <!-- Optional FAB (can be removed if you only allow edit per row) -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAddBudget"
         android:layout_width="wrap_content"
