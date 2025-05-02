@@ -21,7 +21,7 @@ steps:
 run: echo "date_today=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 # Set Repository Name As Env Variable
 - name: Set repository name as env variable
-run: echo "repository_name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
+  run: echo "repository_name=$(echo '${GITHUB_REPOSITORY}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
 - name: Set Up JDK
 uses: actions/setup-java@v3
 with:
