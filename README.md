@@ -7,7 +7,7 @@ Slogan : Grow Your Finances, Secure Your Future
 
 Flourish is an intelligent and user-friendly Android budgeting app designed to simplify money management. It offers instant financial insights, customizable savings targets, and tools to improve your financial knowledge all in a single, convenient platform. ( OpenAI, 2025) Developed using Kotlin and Firebase .Flourish blends the best features of leading apps like YNAB and TimelyBills into a gamified, engaging experience that makes handling your finances both effortless and enjoyable. ( OpenAI, 2025).
 
-📑 Contents Overview
+ Contents Overview
 1> Introduction 
 2>  Functional requirements 
 3> 	Setup guide/instructions 
@@ -30,7 +30,6 @@ Functionality Requirements
 
  User Registration & Authentication
 •	Email sign-up and login
-•	Facebook and Google login integration
 •	Secure password encryption & two-factor authentication
 •	Password reset functionality
 (Figma,2024)
@@ -96,12 +95,14 @@ Gamification(Implemented only in PART 3)
 Setup Instructions
 Tools Required:
 •	Android Studio (latest version)
-•	Firebase (Firestore, Auth, Storage)
+•	Firebase
 •	Kotlin SDK
 •	Emulator or Android device
 ( OpenAI, 2025).
 
-  Installation and Setup
+
+ Installation and Setup
+  
 1>	Clone the repository
 2>	Open it in Android Studio
 3>	Sync Gradle and resolve dependencies
@@ -110,7 +111,9 @@ Tools Required:
 6>	Run the app on emulator/device
 ( OpenAI, 2025)
 
+
  Building and Running the Prototype
+ 
 •	Open the project in Android Studio
 •	Sync Gradle and connect Firebase
 •	Run the app using Shift + F10 or the play button
@@ -160,20 +163,23 @@ LINK :
 Tap to watch the Flourish prototype in action
 
 Technology Stack
-•	  Frontend: Kotlin, Android Studio
-•	Backend: Firebase Auth, Firestore, Firebase Storage
+
+•	 Frontend: Kotlin, Android Studio
+•	Backend: Firebase 
 •	 Design: Figma
 •	 Others: Glide, MPAndroidChart, Google APIs
 •	( OpenAI, 2025).
 
 
  Coding Activity
+ 
 •	Version-controlled via GitHub
 •	Sprint-based commits aligning with development timeline
 •	Unit and UI testing planned during Testing phase.
 ( OpenAI, 2025).
 
  Get Started
+ 
 Follow Installation and Setup and Building and Running the Prototype to begin using Flourish on your Android device.
 ( OpenAI, 2025).
 
