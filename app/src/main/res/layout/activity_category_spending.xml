@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Spending Per Category"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/etStartDate"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Start Date" />
+
+    <EditText
+        android:id="@+id/etEndDate"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="End Date"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/btnFilterCategorySpending"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Load Spending" />
+
+    <TextView
+        android:id="@+id/tvFilterInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Showing all-time spending"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCategorySpending"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>

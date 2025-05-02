@@ -15,5 +15,8 @@ interface CategoryDao {
     // Deletes a specific category from the database
     @Delete
     suspend fun deleteCategory(category: Category)
+    @Query("SELECT * FROM categories WHERE id = :id LIMIT 1")
+    suspend fun getCategoryById(id: Int): Category?
+
 
 }

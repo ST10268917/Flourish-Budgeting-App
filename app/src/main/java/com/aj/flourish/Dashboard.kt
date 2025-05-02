@@ -15,6 +15,7 @@ class Dashboard : AppCompatActivity() {
     private lateinit var categoryBtn: Button
     private lateinit var budgetBtn: Button
     private lateinit var allExpensesBtn: Button
+    private lateinit var categoriesBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +36,7 @@ class Dashboard : AppCompatActivity() {
         categoryBtn = findViewById(R.id.categoryBtn)
         budgetBtn = findViewById(R.id.budgetBtn)
         allExpensesBtn = findViewById(R.id.allExpensesBtn)
+        categoriesBtn = findViewById(R.id.categoriesBtn)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -53,6 +55,10 @@ class Dashboard : AppCompatActivity() {
 
         allExpensesBtn.setOnClickListener {
             startActivity(Intent(this, FilterExpensesActivity::class.java))
+            finish()
+        }
+        categoriesBtn.setOnClickListener {
+            startActivity(Intent(this, CategorySpendingActivity::class.java))
             finish()
         }
 
