@@ -132,12 +132,8 @@ Flourish empowers students and young professionals to take control of their fina
     * Create/manage budgets
     * Set savings goals
     * Access financial content
-    * Earn badges (OpenAI, 2025)
+    * Earn badges (Part 3)
 
-* **Admin** (optional future feature):
-
-    * Manage flagged content/resources
-    * Monitor user activities for QA (OpenAI, 2025)
 
 ## 🟢 Roadmap
 
@@ -146,19 +142,14 @@ Flourish empowers students and young professionals to take control of their fina
 * Dashboard, authentication, and navigation
 * Expense/income logging
 * Budget and category management
-* Financial literacy hub
-* Savings goals and gamification (OpenAI, 2025).
+
 
 **In Progress**
 
 * Advanced analytics dashboard
-* Enhanced PDF report generation (OpenAI, 2025).
-
-**Planned**
-
-* Integration with bank APIs
-* Chatbot for financial advice
-* Voice-based entry (OpenAI, 2025).
+* Enhanced PDF report generation
+* Financial literacy hub
+* Savings goals and gamification 
 
 ## 🟢 Images
 
@@ -202,7 +193,6 @@ https://youtu.be/wzVz7D5z9O0
 
 * Version-controlled via GitHub
 * Sprint-based commits aligning with development timeline
-* Unit and UI testing planned during the Testing phase. (OpenAI, 2025).
 
 ## Get Started
 
