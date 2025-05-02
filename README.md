@@ -156,8 +156,51 @@ Flourish empowers students and young professionals to take control of their fina
 
 ### Flourish UI Screenshots
 
+**Welcome/Authentication:**
+![Login/Signup Placeholder](placeholder_login_signup.png)
+The entry point for new and returning users, offering options to log in or sign up.
+
+**Signup with Currency Selection:**
+![Signup Screen with Currency Placeholder](placeholder_signup_currency.png)
+New users can create an account and choose their preferred currency for budgeting.
+
+**Login Screen:**
+![Login Screen Placeholder](placeholder_login.png)
+Existing users can securely access their Flourish account.
+
+**Personalized Dashboard:**
+![Dashboard Placeholder](placeholder_dashboard.png)
+A central overview of the user's current financial status and recent activity.
+
+**Creating Spending Categories:**
+![Create Category Placeholder](placeholder_create_category.png)
+Users can define custom categories to organize their expenses.
+
+**Category Transactions:**
+![Category Details Placeholder](placeholder_category_details.png)
+A detailed view of all expenses recorded within a specific category.
+
+**Adding a New Expense:**
+![Add Expense Placeholder](placeholder_add_expense.png)
+Users can input details of their spending, with optional receipt capture via camera or gallery.
+
+**Viewing Expense Details:**
+![View/Edit Expense Placeholder](placeholder_view_expense.png)
+Tapping on an expense allows users to see all associated information, including any attached receipt.
+
+**Setting Monthly Budgets:**
+![Set Budget Placeholder](placeholder_set_budget.png)
+Users can define maximum and minimum spending limits for each month.
+
+**Filtering Spending by Date:**
+![Filter Category Spending Placeholder](placeholder_filter_spending.png)
+Users can analyze their spending within specific date ranges.
+
 ## Demo Video
-https://youtu.be/wzVz7D5z9O0
+**Youtube Link:** https://youtu.be/wzVz7D5z9O0
+
+## Github Repository
+**Github Link:** 
 
 
 > Tools and languages used.
