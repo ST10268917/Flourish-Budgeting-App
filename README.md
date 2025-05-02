@@ -17,7 +17,7 @@ Flourish is an intelligent and user-friendly Android budgeting app designed to s
 
 *4*> Implementation and Prototype Execution
 
-*5*>	System Capabilities and Role Definitions
+*5*> System Capabilities and Role Definitions
 
 *6*> Roadmap
 
@@ -43,7 +43,7 @@ Functionality Requirements
 
  User Registration & Authentication
  
-* 	Email sign-up and login
+* Email sign-up and login
 * Secure password encryption & two-factor authentication
 *  Password reset functionality
 (Figma,2024)
@@ -57,21 +57,21 @@ Functionality Requirements
 
  Income & Expense Tracking
  
-* 	Manual transaction logging with category, method, date, and notes.
+* Manual transaction logging with category, method, date, and notes.
 * Optional photo attachment (e.g. receipts)
 (Figma,2024)
 
 Budgeting Tools
 
-* 	Set category-specific monthly budgets
+* Set category-specific monthly budgets
 * Visual indicators (progress bars, pie charts)
-* 	Budget overspend alerts
+* Budget overspend alerts
 (Figma,2024)
 
 
 Notifications
 
-* 	Reminders for bills, overdue payments, and budget updates
+* Reminders for bills, overdue payments, and budget updates
 (Figma,2024)
 
 Multi-Currency Support
@@ -83,19 +83,19 @@ Multi-Currency Support
 
 Financial Literacy Hub
 
-	* Videos, podcasts, and articles
+* Videos and podcasts and articles 
 * Categorized by media type and difficulty level
 (Figma,2024)
 
  Built-in Calculator
  
-* 	For complex calculations prior to logging transactions.
+* For complex calculations prior to logging transactions.
 (Figma,2024)
 
  Reports & Statements
  
-* 	Downloadable PDF statements
-* 	Graphical insights
+* Downloadable PDF statements
+* Graphical insights
 *  Custom date range
 (Figma,2024)
 
@@ -106,7 +106,7 @@ Financial Literacy Hub
 
 Currency Exchange Page
 
-* 	Real-time exchange rate display and conversions
+* Real-time exchange rate display and conversions
 (Figma,2024)
 
 Gamification(Implemented only in PART 3) 
@@ -121,28 +121,29 @@ Setup Instructions
 
 Tools Required:
 
-* 	Android Studio (latest version)
-* 	Firebase
-* 	Kotlin SDK
+* Android Studio (latest version)
+* Firebase
+* Kotlin SDK
 *  Emulator or Android device
 ( OpenAI, 2025).
 
 
  Installation and Setup
   
-*1*> Clone the repository
+*1*>  Clone the repository
 *2*>	Open it in Android Studio
 *3*>	Sync Gradle and resolve dependencies
 *4*>	Connect your Firebase project
 *5*>	Update google-services.json
 *6*>	Run the app on emulator/device
+
 ( OpenAI, 2025)
 
 
  Building and Running the Prototype
  
 * Open the project in Android Studio
-*	Sync Gradle and connect Firebase
+  Sync Gradle and connect Firebase
 * Run the app using Shift + F10 or the play button
 ( OpenAI, 2025)
 
