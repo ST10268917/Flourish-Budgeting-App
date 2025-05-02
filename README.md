@@ -1,13 +1,42 @@
-Flourish 
-
+🌱 Flourish
+**Grow Your Finances, Secure Your Future**
 
 ![image](https://github.com/user-attachments/assets/5897f43f-7708-4a38-9930-c6c3c1198aa2)
 
-Slogan : Grow Your Finances, Secure Your Future
 
-Flourish is an intelligent and user-friendly Android budgeting app designed to simplify money management. It offers instant financial insights, customizable savings targets, and tools to improve your financial knowledge all in a single, convenient platform. ( OpenAI, 2025) Developed using Kotlin and Firebase .Flourish blends the best features of leading apps like YNAB and TimelyBills into a gamified, engaging experience that makes handling your finances both effortless and enjoyable. ( OpenAI, 2025).
+Flourish is an intelligent and user-friendly Android budgeting app designed to simplify money management. It offers instant financial insights, customizable savings targets, and tools to improve your financial knowledge—all in a single, convenient platform.  
+Developed using Kotlin and Firebase, Flourish blends the best features of apps like YNAB and TimelyBills into a gamified, engaging experience that makes handling your finances both effortless and enjoyable (OpenAI, 2025).
 
- Contents Overview
+---
+
+## Features
+
+- **Expense Tracking**  
+  Add, view, and categorize expenses with optional receipt images.
+
+- **Budget Planning**  
+  Set monthly spending limits and monitor category-based spending.
+
+- **Smart Insights**  
+  View summaries of total spend per category for a selected period.
+
+- **Receipt Management**  
+  Attach photos from the camera or gallery for better record-keeping.
+
+- **User Authentication**  
+  Sign in securely using Firebase Authentication.
+
+- 📈 **Gamified Experience**  
+  Motivating visuals and feedback to encourage better money habits (Final POE)
+
+---
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ST10268917/Flourish-Budgeting-App/
+
  
 *1*> Introduction 
 
