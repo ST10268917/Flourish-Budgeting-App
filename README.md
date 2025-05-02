@@ -15,27 +15,37 @@ Flourish is an intelligent and user-friendly Android budgeting app designed to s
 
 *3*> Setup guide/instructions 
 
-4> 	Implementation and Prototype Execution
-5>	System Capabilities and Role Definitions
-6>	Roadmap
-7>	Images
-8>	Demo video  
-9> Technology stack  
-10>	Coding activities
-11> 	Get started
-12>	Contributing 
+*4*> Implementation and Prototype Execution
+
+*5*>	System Capabilities and Role Definitions
+
+*6*> Roadmap
+
+*7*> Images
+
+*8*>	Demo video  
+
+*9*> Technology stack  
+
+*10*>	Coding activities
+
+*11*>	Get started
+
+*12*> Contributing 
 
 
 Introduction
+
 Flourish empowers students and young professionals to take control of their finances effortlessly. Unlike traditional budgeting apps, it combines real-time spending insights, interactive financial dashboards, and multi-currency support with a gamified learning experience. ( OpenAI, 2025) .Built for clarity and engagement, Flourish turns complex money management into an intuitive, educational, and even rewarding journey just from your smartphone. ( OpenAI, 2025)
 
 
 Functionality Requirements
 
  User Registration & Authentication
-•	Email sign-up and login
-•	Secure password encryption & two-factor authentication
-•	Password reset functionality
+ 
+* 	Email sign-up and login
+* Secure password encryption & two-factor authentication
+*  Password reset functionality
 (Figma,2024)
 
  Financial Dashboard
