@@ -113,18 +113,38 @@ class CategoryDetail : AppCompatActivity() {
         galleryImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val selectedImageUri: Uri? = result.data?.data
-                selectedImageUri?.let { uri ->
-                    val internalUri = copyImageToInternalStorage(uri)
-                    internalUri?.let {
-                        receiptImageView?.setImageURI(it)
-                        receiptImageView?.visibility = View.VISIBLE
-                        selectedReceiptUri = it
-                    } ?: run {
-                        Toast.makeText(this, "Error saving selected image", Toast.LENGTH_SHORT).show()
-                    }
+                if (selectedImageUri == null) {
+                    Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show()
+                    Log.e("GALLERY_PICKED", "No image URI returned.")
+                    return@registerForActivityResult
                 }
+
+                Log.d("GALLERY_PICKED", "Selected URI: $selectedImageUri")
+
+                try {
+                    contentResolver.takePersistableUriPermission(
+                        selectedImageUri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+                } catch (e: SecurityException) {
+                    Log.w("GALLERY_PICKED", "Persistable URI permission not granted: ${e.message}")
+                }
+
+                val internalUri = copyImageToInternalStorage(selectedImageUri)
+                if (internalUri != null) {
+                    receiptImageView?.setImageURI(internalUri)
+                    receiptImageView?.visibility = View.VISIBLE
+                    selectedReceiptUri = internalUri
+                } else {
+                    Log.e("GALLERY_ERROR", "copyImageToInternalStorage failed for URI: $selectedImageUri")
+                    Toast.makeText(this, "Error saving selected image", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Log.e("GALLERY_PICKED", "Image selection was canceled or failed.")
+                Toast.makeText(this, "Image selection canceled", Toast.LENGTH_SHORT).show()
             }
         }
+
 
         val btnAddExpense = findViewById<Button>(R.id.btnAddExpense)
         btnAddExpense.setOnClickListener { showAddExpenseDialog() }
@@ -166,7 +186,11 @@ class CategoryDetail : AppCompatActivity() {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 openGallery()
             } else {
-                storagePermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    storagePermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
+                } else {
+                    storagePermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                }
             }
         }
 
@@ -272,35 +296,47 @@ class CategoryDetail : AppCompatActivity() {
 
 
     private fun openGallery() {
-        galleryImageLauncher.launch(pickImageIntent)
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        intent.type = "image/*"
+        intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+        galleryImageLauncher.launch(intent)
     }
+
 
     private fun copyImageToInternalStorage(uri: Uri): Uri? {
         return try {
-            // Always try opening the input stream through the content resolver
-            val inputStream = contentResolver.openInputStream(uri) ?: return null
+            Log.d("GALLERY_URI", "Trying to copy URI: $uri")
 
-            // Create a unique file name
+            val inputStream = when (uri.scheme) {
+                "content" -> contentResolver.openInputStream(uri)
+                "file" -> {
+                    val file = File(uri.path!!)
+                    Log.d("GALLERY_DEBUG", "File exists: ${file.exists()}, Path: ${file.absolutePath}")
+                    file.inputStream()
+                }
+                else -> null
+            } ?: throw IOException("Unable to open input stream for URI: $uri")
+
             val fileName = "receipt_${System.currentTimeMillis()}.jpg"
             val file = File(filesDir, fileName)
-
-            // Create output stream to the file
             val outputStream = FileOutputStream(file)
 
-            // Copy the input to output
             inputStream.copyTo(outputStream)
 
-            // Close streams
             outputStream.close()
             inputStream.close()
 
-            // Return a content URI using FileProvider
             FileProvider.getUriForFile(this, "${packageName}.fileprovider", file)
         } catch (e: Exception) {
+            Log.e("GALLERY_COPY_ERROR", "Failed to copy image from URI: $uri")
+            Log.e("GALLERY_COPY_ERROR", "Exception: ${e.message}")
             e.printStackTrace()
             null
         }
     }
+
+
 
 
 
