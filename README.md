@@ -42,63 +42,58 @@ Flourish empowers students and young professionals to take control of their fina
 
     * Email sign-up and login
     * Secure password encryption & two-factor authentication
-    * Password reset functionality (Figma, 2024)
 
 * **Financial Dashboard:**
 
     * View total balance across accounts
     * Monthly budget overview
-    * Upcoming bills & recent transactions (Figma, 2024)
+    * Upcoming bills & recent transactions 
 
 * **Income & Expense Tracking:**
 
     * Manual transaction logging with category, method, date, and notes.
-    * Optional photo attachment (e.g. receipts) (Figma, 2024)
+    * Optional photo attachment (e.g. receipts)
 
 * **Budgeting Tools:**
 
     * Set category-specific monthly budgets
     * Visual indicators (progress bars, pie charts)
-    * Budget overspend alerts (Figma, 2024)
+    * Budget overspend alerts
 
 * **Notifications:**
 
-    * Reminders for bills, overdue payments, and budget updates (Figma, 2024)
-
+    * Reminders for bills, overdue payments, and budget updates
+      
 * **Multi-Currency Support:**
 
     * Select default currency
     * Real-time exchange rates
-    * Multi-currency transaction recording (Figma, 2024)
+    * Multi-currency transaction recording 
 
 * **Financial Literacy Hub:**
 
     * Videos, podcasts, and articles
-    * Categorized by media type and difficulty level (Figma, 2024)
+    * Categorized by media type and difficulty level 
 
 * **Built-in Calculator:**
 
-    * For complex calculations prior to logging transactions. (Figma, 2024)
+    * For complex calculations prior to logging transactions.
 
 * **Reports & Statements:**
 
     * Downloadable PDF statements
     * Graphical insights
-    * Custom date range (Figma, 2024)
-
-* **Multiple Accounts:**
-
-    * Separate transaction history, budgets, and currencies per account. (Figma, 2024)
+    * Custom date range
 
 * **Currency Exchange Page:**
 
-    * Real-time exchange rate display and conversions (Figma, 2024)
+    * Real-time exchange rate display and conversions 
 
 * **Gamification:** (Implemented only in PART 3)
 
     * Achievement badges
     * Daily streaks
-    * Budgeting leaderboards (optional) (Figma, 2024)
+    * Budgeting leaderboards (optional) 
 
 ## 🟢 Setup Instructions
 
@@ -107,7 +102,7 @@ Flourish empowers students and young professionals to take control of their fina
 * Android Studio (latest version)
 * Firebase
 * Kotlin SDK
-* Emulator or Android device (OpenAI, 2025).
+* Emulator or Android device 
 
 ## 🟠 Installation and Setup
 
@@ -116,13 +111,13 @@ Flourish empowers students and young professionals to take control of their fina
 3.  Sync Gradle and resolve dependencies
 4.  Connect your Firebase project
 5.  Update `google-services.json`
-6.  Run the app on emulator/device (OpenAI, 2025)
+6.  Run the app on emulator/device 
 
 ## Building and Running the Prototype
 
 * Open the project in Android Studio
 * Sync Gradle and connect Firebase
-* Run the app using Shift + F10 or the play button (OpenAI, 2025)
+* Run the app using Shift + F10 or the play button (OpenAI, 2025).
 
 ## System Functionalities and User Roles
 
