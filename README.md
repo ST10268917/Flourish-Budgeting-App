@@ -177,13 +177,15 @@ Flourish empowers students and young professionals to take control of their fina
 
 **Personalized Dashboard:**
 
-![image](https://github.com/user-attachments/assets/3174c836-dd09-4262-a7bb-9fea995ac1d7)
+![image](https://github.com/user-attachments/assets/9c207eb4-e2af-438c-9907-161b1b63abaf)
+
 
 -A central overview of the user's current financial status and recent activity.
 
 **Creating Spending Categories:**
 
-![Create Category Placeholder](placeholder_create_category.png)
+![image](https://github.com/user-attachments/assets/9e04b09f-80a6-4346-8615-fb5184dcc0ab)
+
 
 -Users can define custom categories to organize their expenses.
 
