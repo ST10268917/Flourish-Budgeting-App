@@ -153,18 +153,22 @@ Flourish empowers students and young professionals to take control of their fina
 
 **Welcome/Authentication:**
 ![image](https://github.com/user-attachments/assets/66b0aa04-f901-475b-a085-18a95ebb460c)
+
 The entry point for new and returning users, offering options to log in or sign up.
 
 **Signup with Currency Selection:**
 ![image](https://github.com/user-attachments/assets/6e1734e3-f3d6-4562-a8bc-5a3da08a570f)
+
 New users can create an account and choose their preferred currency for budgeting.
 
 **Login Screen:**
-![Login Screen Placeholder](placeholder_login.png)
+![image](https://github.com/user-attachments/assets/19e4be41-9d93-4d46-a070-b30e342e22b3)
+
 Existing users can securely access their Flourish account.
 
 **Personalized Dashboard:**
-![Dashboard Placeholder](placeholder_dashboard.png)
+![image](https://github.com/user-attachments/assets/3174c836-dd09-4262-a7bb-9fea995ac1d7)
+
 A central overview of the user's current financial status and recent activity.
 
 **Creating Spending Categories:**
