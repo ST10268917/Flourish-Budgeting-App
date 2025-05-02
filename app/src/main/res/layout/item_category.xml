@@ -1,30 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="8dp">
+    android:layout_margin="8dp"
+    app:cardBackgroundColor="@color/darkGreen"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
 
-    <ImageView
-        android:id="@+id/imageViewCategory"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:scaleType="centerCrop"
-        android:background="@android:color/darker_gray"
-        android:layout_marginBottom="8dp"
-        android:contentDescription="Category Image" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="8dp">
 
-    <TextView
-        android:id="@+id/textViewCategoryName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Category Name"
-        android:textSize="12sp"
-        android:textAlignment="center"
-        android:maxLines="1"
-        android:textColor="@color/white"
-        android:ellipsize="end" />
+        <ImageView
+            android:id="@+id/imageViewCategory"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:background="@android:color/darker_gray"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="Category Image" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/textViewCategoryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category Name"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:ellipsize="end" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

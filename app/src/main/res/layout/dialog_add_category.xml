@@ -1,36 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="24dp"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:background="@color/teal">
 
-    <EditText
-        android:id="@+id/etCategoryName"
-        android:hint="Enter Category Name"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:layout_marginBottom="16dp"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        app:cardBackgroundColor="@color/darkGreen"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="12dp">
 
-    <!-- Temporary icon for now -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Category"
+                android:textSize="22sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/etCategoryName"
+                android:hint="Enter Category Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:background="@drawable/edit_text_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="16dp"/>
+
+            <ImageView
+                android:id="@+id/ivCategoryImage"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_launcher_background"
+                android:scaleType="centerCrop"
+                android:background="@android:color/darker_gray"
+                android:padding="8dp"
+                android:layout_marginBottom="16dp"/>
+
+            <Button
+                android:id="@+id/btnSaveCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save Category"
+                android:backgroundTint="@color/turquoise"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
     <ImageView
-        android:id="@+id/ivCategoryImage"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_launcher_background"
-        android:scaleType="centerCrop"
-        android:background="@android:color/darker_gray"
-        android:padding="8dp"
-        android:layout_marginBottom="16dp"/>
+        android:id="@+id/ivBack"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_back_arrow"
+        app:tint="@color/white"
+        android:layout_gravity="top|start" />
 
-
-    <Button
-        android:id="@+id/btnSaveCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save Category" />
-
-</LinearLayout>
+</FrameLayout>

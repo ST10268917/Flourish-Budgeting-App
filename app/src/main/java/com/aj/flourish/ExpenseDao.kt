@@ -29,6 +29,7 @@ interface ExpenseDao {
 """)
     suspend fun getSpendingPerCategory(userId: String, startDate: Long, endDate: Long): List<CategorySpending>
 
-
+    @Query("SELECT SUM(amount) FROM expenses WHERE userId = :userId AND strftime('%m', date/1000, 'unixepoch') = :month AND strftime('%Y', date/1000, 'unixepoch') = :year")
+    suspend fun getTotalExpensesForMonthAndYear(userId: String, month: Int, year: Int): Double?
 
 }

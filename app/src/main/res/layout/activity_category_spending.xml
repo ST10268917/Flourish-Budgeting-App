@@ -1,50 +1,89 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="24dp"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/teal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Spending Per Category"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"/>
-
-    <EditText
-        android:id="@+id/etStartDate"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="Start Date" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        app:cardBackgroundColor="@color/darkGreen"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="12dp">
 
-    <EditText
-        android:id="@+id/etEndDate"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="End Date"
-        android:layout_marginBottom="8dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-    <Button
-        android:id="@+id/btnFilterCategorySpending"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Load Spending" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spending Per Category"
+                android:textSize="22sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
 
-    <TextView
-        android:id="@+id/tvFilterInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Showing all-time spending"
-        android:textSize="14sp"
-        android:textColor="@android:color/darker_gray"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"/>
+            <EditText
+                android:id="@+id/etStartDate"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Start Date"
+                android:background="@drawable/edit_text_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp"/>
 
+            <EditText
+                android:id="@+id/etEndDate"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="End Date"
+                android:background="@drawable/edit_text_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewCategorySpending"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-</LinearLayout>
+            <Button
+                android:id="@+id/btnFilterCategorySpending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Load Spending"
+                android:backgroundTint="@color/turquoise"
+                android:textColor="@color/white"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/tvFilterInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Showing all-time spending"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewCategorySpending"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_back_arrow"
+        app:tint="@color/white"
+        android:layout_gravity="top|start" />
+
+</FrameLayout>

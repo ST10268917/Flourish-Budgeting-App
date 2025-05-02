@@ -1,82 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="24dp">
+    android:layout_height="match_parent"
+    android:background="@color/teal">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        app:cardBackgroundColor="@color/darkGreen"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="12dp">
 
-        <EditText
-            android:id="@+id/etExpenseDate"
-            android:hint="Date (e.g. 2025-04-27)"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:layout_marginBottom="16dp"/>
+            android:layout_height="match_parent"
+            android:padding="24dp">
 
-        <EditText
-            android:id="@+id/etExpenseAmount"
-            android:hint="Amount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:layout_marginBottom="16dp"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/etExpenseDescription"
-            android:hint="Description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:layout_marginBottom="16dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add New Expense"
+                    android:textSize="22sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="16dp" />
 
-        <ImageView
-            android:id="@+id/ivExpenseReceipt"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="centerCrop"
-            android:background="@android:color/darker_gray"
-            android:src="@drawable/ic_attach"
-            android:layout_marginBottom="16dp"
-            android:visibility="gone" />
+                <EditText
+                    android:id="@+id/etExpenseDate"
+                    android:hint="Date (e.g. 2025-04-27)"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edit_text_background"
+                    android:padding="12dp"
+                    android:textColor="@color/black" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+                <EditText
+                    android:id="@+id/etExpenseAmount"
+                    android:hint="Amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edit_text_background"
+                    android:padding="12dp"
+                    android:textColor="@color/black" />
 
-            <Button
-                android:drawableLeft="@drawable/ic_camera"
-                android:id="@+id/btnCaptureImage"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Take Photo"
-                android:layout_marginEnd="8dp"/>
+                <EditText
+                    android:id="@+id/etExpenseDescription"
+                    android:hint="Description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edit_text_background"
+                    android:padding="12dp"
+                    android:textColor="@color/black" />
 
-            <Button
-                android:drawableLeft="@drawable/ic_gallery"
-                android:id="@+id/btnSelectImage"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Choose Gallery"
-                android:layout_marginStart="8dp"/>
+                <ImageView
+                    android:id="@+id/ivExpenseReceipt"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="centerCrop"
+                    android:background="@android:color/darker_gray"
+                    android:src="@drawable/ic_attach"
+                    android:layout_marginBottom="16dp"
+                    android:visibility="gone" />
 
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
 
-        <Button
-            android:id="@+id/btnSaveExpense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save Expense"
-            android:layout_marginTop="16dp"/>
+                    <Button
+                        android:drawableLeft="@drawable/ic_camera"
+                        android:id="@+id/btnCaptureImage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Take Photo"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="@color/turquoise"
+                        android:textColor="@color/white" />
 
-    </LinearLayout>
-</ScrollView>
+                    <Button
+                        android:drawableLeft="@drawable/ic_gallery"
+                        android:id="@+id/btnSelectImage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Choose Gallery"
+                        android:layout_marginStart="8dp"
+                        android:backgroundTint="@color/turquoise"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnSaveExpense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Save Expense"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/turquoise"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_back_arrow"
+        app:tint="@color/white"
+        android:layout_gravity="top|start" />
+
+</FrameLayout>
