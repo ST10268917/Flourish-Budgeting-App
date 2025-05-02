@@ -27,4 +27,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="View all expenses" />
+
+    <Button
+        android:id="@+id/categoriesBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Expenses by Category" />
+
 </LinearLayout>
