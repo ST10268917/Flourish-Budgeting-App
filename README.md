@@ -157,50 +157,65 @@ Flourish empowers students and young professionals to take control of their fina
 
 
 
-The entry point for new and returning users, offering options to log in or sign up.
+-The entry point for new and returning users, offering options to log in or sign up.
+
 
 **Signup with Currency Selection:**
 
 ![image](https://github.com/user-attachments/assets/6e1734e3-f3d6-4562-a8bc-5a3da08a570f)
 
 
-New users can create an account and choose their preferred currency for budgeting.
+-New users can create an account and choose their preferred currency for budgeting.
+
 
 **Login Screen:**
 
 ![image](https://github.com/user-attachments/assets/19e4be41-9d93-4d46-a070-b30e342e22b3)
 
 
-Existing users can securely access their Flourish account.
+-Existing users can securely access their Flourish account.
 
 **Personalized Dashboard:**
+
 ![image](https://github.com/user-attachments/assets/3174c836-dd09-4262-a7bb-9fea995ac1d7)
 
-A central overview of the user's current financial status and recent activity.
+-A central overview of the user's current financial status and recent activity.
 
 **Creating Spending Categories:**
+
 ![Create Category Placeholder](placeholder_create_category.png)
-Users can define custom categories to organize their expenses.
+
+-Users can define custom categories to organize their expenses.
 
 **Category Transactions:**
+
 ![Category Details Placeholder](placeholder_category_details.png)
-A detailed view of all expenses recorded within a specific category.
+
+-A detailed view of all expenses recorded within a specific category.
 
 **Adding a New Expense:**
+
 ![Add Expense Placeholder](placeholder_add_expense.png)
-Users can input details of their spending, with optional receipt capture via camera or gallery.
+
+-Users can input details of their spending, with optional receipt capture via camera or gallery.
 
 **Viewing Expense Details:**
+
 ![View/Edit Expense Placeholder](placeholder_view_expense.png)
-Tapping on an expense allows users to see all associated information, including any attached receipt.
+
+-Tapping on an expense allows users to see all associated information, including any attached receipt.
 
 **Setting Monthly Budgets:**
+
 ![Set Budget Placeholder](placeholder_set_budget.png)
-Users can define maximum and minimum spending limits for each month.
+
+-Users can define maximum and minimum spending limits for each month.
 
 **Filtering Spending by Date:**
+
 ![Filter Category Spending Placeholder](placeholder_filter_spending.png)
-Users can analyze their spending within specific date ranges.
+
+-Users can analyze their spending within specific date ranges.
 
 ## Demo Video
 **Youtube Link:** https://youtu.be/wzVz7D5z9O0
