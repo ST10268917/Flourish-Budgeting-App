@@ -14,14 +14,15 @@ import androidx.room.RoomDatabase
 
 @Database(
     // Defines the list of entities (tables) in the databases.
-    entities = [Category::class, Expense::class],
-    version = 1,
+    entities = [Category::class, Expense::class, Budget::class],
+    version = 2,
 
 )
 abstract class AppDatabase : RoomDatabase() {
     // Abstract methods to access the DAOs (Data Access Objects)
     abstract fun categoryDao(): CategoryDao
     abstract fun expenseDao(): ExpenseDao
+    abstract fun budgetDao(): BudgetDao
 
     companion object {
         // Volatile ensures visibility of changes to INSTANCE across threads
@@ -35,7 +36,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext, // Prevents memory leaks
                     AppDatabase::class.java,   // The database class
                     "flourish_database"   // Name of the DB file
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }

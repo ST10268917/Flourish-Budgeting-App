@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!-- Camera Permissions -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
-
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -21,6 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Flourish"
         tools:targetApi="31">
+        <activity
+            android:name=".BudgetActivity"
+            android:exported="false" />
         <activity
             android:name=".CategoryDetail"
             android:exported="false" />
@@ -45,11 +49,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
-        </activity>
-
-        <!-- Add FileProvider -->
+        </activity> <!-- Add FileProvider -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"

@@ -13,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 class Dashboard : AppCompatActivity() {
 
     private lateinit var categoryBtn: Button
+    private lateinit var budgetBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +32,7 @@ class Dashboard : AppCompatActivity() {
             }
 
         categoryBtn = findViewById(R.id.categoryBtn)
+        budgetBtn = findViewById(R.id.budgetBtn)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -41,6 +43,12 @@ class Dashboard : AppCompatActivity() {
             startActivity(Intent(this, CreateCategory::class.java))
             finish()
         }
+
+        budgetBtn.setOnClickListener {
+            startActivity(Intent(this, BudgetActivity::class.java))
+            finish()
+        }
+
 
     }
 }
