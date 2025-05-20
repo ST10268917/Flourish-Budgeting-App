@@ -9,6 +9,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.aj.flourish.models.Expense
+import com.aj.flourish.repositories.BudgetRepository
+import com.aj.flourish.repositories.ExpenseRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
@@ -36,16 +39,10 @@ class Dashboard : AppCompatActivity() {
     private lateinit var recentTransactionsAdapter: ExpenseAdapter
     private val recentTransactionsList = mutableListOf<Expense>()
 
-    private lateinit var budgetDao: BudgetDao
-    private lateinit var expenseDao: ExpenseDao
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_dashboard)
-
-        budgetDao = AppDatabase.getInstance(this).budgetDao()
-        expenseDao = AppDatabase.getInstance(this).expenseDao()
 
         // Initialize UI elements
         categoryBtn = findViewById(R.id.categoryBtn)
@@ -79,35 +76,31 @@ class Dashboard : AppCompatActivity() {
                     tvWelcome.text = "Welcome, $username!"
 
                     updateBudgetDisplay()
-                    loadRecentTransactions(userId)
-                    loadCurrentBudget(userId) // Call loadCurrentBudget here
+                    loadRecentTransactions()
+                    loadCurrentBudget()
 
-                    // Icon click listeners (placeholders - implement later if needed)
                     ivProfile.setOnClickListener {
                         Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show()
-                        // startActivity(Intent(this, ProfileActivity::class.java))
                     }
 
                     ivSettings.setOnClickListener {
                         Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show()
-                        // startActivity(Intent(this, SettingsActivity::class.java))
                     }
 
                     ivNotifications.setOnClickListener {
                         Toast.makeText(this, "Notifications clicked", Toast.LENGTH_SHORT).show()
-                        // startActivity(Intent(this, NotificationsActivity::class.java))
                     }
 
                 } else {
                     updateBudgetDisplay()
-                    loadRecentTransactions(userId)
-                    loadCurrentBudget(userId) // Call loadCurrentBudget here as well
+                    loadRecentTransactions()
+                    loadCurrentBudget()
                 }
             }
             .addOnFailureListener {
                 updateBudgetDisplay()
-                loadRecentTransactions(userId)
-                loadCurrentBudget(userId) // Call loadCurrentBudget here in case of failure
+                loadRecentTransactions()
+                loadCurrentBudget()
             }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -116,33 +109,27 @@ class Dashboard : AppCompatActivity() {
             insets
         }
 
-        // Keep original navigation,
         categoryBtn.setOnClickListener {
             startActivity(Intent(this, CreateCategory::class.java))
-
         }
 
         budgetBtn.setOnClickListener {
             startActivity(Intent(this, BudgetActivity::class.java))
-
         }
 
         allExpensesBtn.setOnClickListener {
             startActivity(Intent(this, FilterExpensesActivity::class.java))
-
         }
 
         categoriesBtn.setOnClickListener {
             startActivity(Intent(this, CategorySpendingActivity::class.java))
-
         }
 
-        // Set icons for buttons
         setButtonIcons()
     }
 
     private fun setButtonIcons() {
-        val paddingInPixels = resources.getDimensionPixelSize(R.dimen.button_icon_padding) // Define this in dimens.xml
+        val paddingInPixels = resources.getDimensionPixelSize(R.dimen.button_icon_padding)
         categoryBtn.compoundDrawablePadding = paddingInPixels
         budgetBtn.compoundDrawablePadding = paddingInPixels
         allExpensesBtn.compoundDrawablePadding = paddingInPixels
@@ -154,26 +141,27 @@ class Dashboard : AppCompatActivity() {
         categoriesBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_categories, 0, 0, 0)
     }
 
-    private fun loadCurrentBudget(userId: String) {
+    private fun loadCurrentBudget() {
         CoroutineScope(Dispatchers.IO).launch {
             val calendar = Calendar.getInstance()
             val currentYear = calendar.get(Calendar.YEAR)
-            val currentMonth = calendar.get(Calendar.MONTH) + 1 // Month is 0-indexed
+            val currentMonth = calendar.get(Calendar.MONTH) + 1
 
-            // Get all budgets for the current year
-            val budgetsThisYear = budgetDao.getBudgetsForUserAndYear(userId, currentYear)
+            val budgetList = BudgetRepository().getBudgetsForYear(currentYear)
+            val currentBudget = budgetList.find { it.month == currentMonth }
 
-            // Find the budget for the current month
-            val currentBudget = budgetsThisYear.find { it.month == currentMonth }
-
-            // Get total expenses for the current month
-            val totalExpenses = expenseDao.getTotalExpensesForMonthAndYear(userId, currentMonth, currentYear)
+            val totalExpenses = ExpenseRepository().getExpensesForUser()
+                .filter {
+                    val cal = Calendar.getInstance().apply { timeInMillis = it.date }
+                    cal.get(Calendar.MONTH) + 1 == currentMonth &&
+                            cal.get(Calendar.YEAR) == currentYear
+                }
+                .sumOf { it.amount }
 
             withContext(Dispatchers.Main) {
                 if (currentBudget != null) {
                     val maxBudget = currentBudget.maxAmount
-                    val spentAmount = totalExpenses ?: 0.0
-                    val remaining = maxBudget - spentAmount
+                    val remaining = maxBudget - totalExpenses
                     val overspent = if (remaining < 0) -remaining else 0.0
 
                     tvTotalBudget.text = "${UserSettings.currencySymbol} ${String.format("%.2f", maxBudget)}"
@@ -181,9 +169,8 @@ class Dashboard : AppCompatActivity() {
                     tvOverspentBudget.text = "${UserSettings.currencySymbol} ${String.format("%.2f", overspent)}"
 
                     progressBarBudget.max = maxBudget.toInt()
-                    progressBarBudget.progress = spentAmount.toInt()
+                    progressBarBudget.progress = totalExpenses.toInt()
                 } else {
-                    // No budget set for this month
                     tvTotalBudget.text = "${UserSettings.currencySymbol} 0.00"
                     tvRemainingBudget.text = "${UserSettings.currencySymbol} 0.00"
                     tvOverspentBudget.text = "${UserSettings.currencySymbol} 0.00"
@@ -194,9 +181,9 @@ class Dashboard : AppCompatActivity() {
         }
     }
 
-    private fun loadRecentTransactions(userId: String) {
+    private fun loadRecentTransactions() {
         CoroutineScope(Dispatchers.IO).launch {
-            val recentExpenses = expenseDao.getExpensesForUser(userId).take(5)
+            val recentExpenses = ExpenseRepository().getExpensesForUser().sortedByDescending { it.date }.take(5)
             withContext(Dispatchers.Main) {
                 recentTransactionsList.clear()
                 recentTransactionsList.addAll(recentExpenses)

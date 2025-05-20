@@ -3,15 +3,10 @@ package com.aj.flourish
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Spinner
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -49,30 +44,22 @@ class SignUp : AppCompatActivity() {
         signUpButton = findViewById(R.id.btnSignUp)
         loginText = findViewById(R.id.tvLogin)
 
-        // Sign Up button clicked
         signUpButton.setOnClickListener {
             signUpUser()
         }
 
-        // Navigate to Login if already have an account
         loginText.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
 
-        val spinner: Spinner = findViewById(R.id.spinnerCurrency)
         val currencies = resources.getStringArray(R.array.currencies)
-        findViewById<ImageView>(R.id.ivBack).setOnClickListener {
-            finish()
-        }
-
         val adapter = object : ArrayAdapter<String>(
             this,
             android.R.layout.simple_spinner_item,
             currencies
         ) {
             override fun isEnabled(position: Int): Boolean {
-                // Disable the first item (hint)
                 return position != 0
             }
 
@@ -83,11 +70,13 @@ class SignUp : AppCompatActivity() {
                 return view
             }
         }
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = adapter
+        currencySpinner.adapter = adapter
+        currencySpinner.setSelection(0)
 
-        spinner.setSelection(0)
+        findViewById<ImageView>(R.id.ivBack).setOnClickListener {
+            finish()
+        }
     }
 
     private fun signUpUser() {
@@ -108,13 +97,14 @@ class SignUp : AppCompatActivity() {
             return
         }
 
+        Log.d("SignUp", "Attempting to create user with email: $emailText")
+
         auth.createUserWithEmailAndPassword(emailText, passwordText)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // User registered successfully
-                    Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show()
-
                     val userId = auth.currentUser?.uid
+                    Log.d("SignUp", "User created successfully: $userId")
+
                     val userMap = hashMapOf(
                         "username" to usernameText,
                         "email" to emailText,
@@ -126,19 +116,20 @@ class SignUp : AppCompatActivity() {
                         .document(userId!!)
                         .set(userMap)
                         .addOnSuccessListener {
-                            Toast.makeText(this, "Currency saved!", Toast.LENGTH_SHORT).show()
+                            Log.d("Firestore", "User data saved in Firestore under ID: $userId")
+                            Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this, Dashboard::class.java))
+                            finish()
                         }
                         .addOnFailureListener { e ->
-                            Toast.makeText(this, "Failed to save currency: ${e.message}", Toast.LENGTH_LONG).show()
+                            Log.e("Firestore", "Error saving user data", e)
+                            Toast.makeText(this, "Failed to save user data: ${e.message}", Toast.LENGTH_LONG).show()
                         }
 
-                    startActivity(Intent(this, Dashboard::class.java))
-                    finish()
                 } else {
-                    // If sign up fails
+                    Log.e("SignUp", "User creation failed", task.exception)
                     Toast.makeText(this, "Registration failed: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                 }
             }
     }
-
 }

@@ -13,23 +13,19 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.aj.flourish.models.Expense
+import com.aj.flourish.repositories.ExpenseRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
-import java.util.Locale
+import java.util.*
 
 class FilterExpensesActivity : AppCompatActivity() {
-    private lateinit var expenseDao: ExpenseDao
     private lateinit var expenseAdapter: ExpenseAdapter
     private lateinit var backButton: ImageView
-
-
-
     private lateinit var recyclerView: RecyclerView
     private val expenseList = mutableListOf<Expense>()
     private lateinit var startDateField: EditText
@@ -42,7 +38,6 @@ class FilterExpensesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_filter_expenses)
 
-        expenseDao = AppDatabase.getInstance(this).expenseDao()
         recyclerView = findViewById(R.id.recyclerViewFilteredExpenses)
         startDateField = findViewById(R.id.etStartDate)
         endDateField = findViewById(R.id.etEndDate)
@@ -61,16 +56,15 @@ class FilterExpensesActivity : AppCompatActivity() {
         startDateField.setOnClickListener { showDatePicker(true) }
         endDateField.setOnClickListener { showDatePicker(false) }
 
-        // Load all expenses on launch
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
-        if (userId != null) {
-            CoroutineScope(Dispatchers.IO).launch {
-                val allExpenses = expenseDao.getExpensesForUser(userId)
-                withContext(Dispatchers.Main) {
-                    expenseList.clear()
-                    expenseList.addAll(allExpenses)
-                    expenseAdapter.notifyDataSetChanged()
-                }
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
+        // Load all expenses
+        CoroutineScope(Dispatchers.IO).launch {
+            val allExpenses = ExpenseRepository().getExpensesForUser()
+            withContext(Dispatchers.Main) {
+                expenseList.clear()
+                expenseList.addAll(allExpenses)
+                expenseAdapter.notifyDataSetChanged()
             }
         }
 
@@ -80,10 +74,8 @@ class FilterExpensesActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val userIdFilter = FirebaseAuth.getInstance().currentUser?.uid ?: return@setOnClickListener
-
             CoroutineScope(Dispatchers.IO).launch {
-                val filteredExpenses = expenseDao.getExpensesBetweenDates(userIdFilter, startDate, endDate)
+                val filteredExpenses = ExpenseRepository().getExpensesBetweenDates(startDate, endDate)
                 withContext(Dispatchers.Main) {
                     expenseList.clear()
                     expenseList.addAll(filteredExpenses)

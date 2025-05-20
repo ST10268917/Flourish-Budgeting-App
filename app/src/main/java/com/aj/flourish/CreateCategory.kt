@@ -21,11 +21,11 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import androidx.core.content.FileProvider
+import com.aj.flourish.models.Category
+import com.aj.flourish.repositories.CategoryRepository
 
 class CreateCategory : AppCompatActivity() {
 
-    private lateinit var database: AppDatabase
-    private lateinit var categoryDao: CategoryDao
     private val categoryList = mutableListOf<Category>()
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var backButton: ImageView
@@ -39,9 +39,6 @@ class CreateCategory : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_category)
-
-        database = AppDatabase.getInstance(this)
-        categoryDao = database.categoryDao()
 
         recyclerView = findViewById(R.id.recyclerViewCategories)
         fabAddCategory = findViewById(R.id.btnAddCategory)
@@ -82,7 +79,7 @@ class CreateCategory : AppCompatActivity() {
     private fun loadCategoriesFromDb() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         CoroutineScope(Dispatchers.IO).launch {
-            val categoriesFromDb = categoryDao.getCategoriesForUser(userId)
+            val categoriesFromDb = CategoryRepository().getCategories()
             withContext(Dispatchers.Main) {
                 categoryList.clear()
                 categoryList.addAll(categoriesFromDb)
@@ -120,7 +117,7 @@ class CreateCategory : AppCompatActivity() {
                 )
 
                 CoroutineScope(Dispatchers.IO).launch {
-                    categoryDao.insertCategory(category)
+                    CategoryRepository().insertCategory(category)
                     withContext(Dispatchers.Main) {
                         loadCategoriesFromDb()
                         dialog.dismiss()

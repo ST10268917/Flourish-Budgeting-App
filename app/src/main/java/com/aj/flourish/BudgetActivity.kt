@@ -10,18 +10,16 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.aj.flourish.models.Budget
+import com.aj.flourish.repositories.BudgetRepository
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.text.DateFormatSymbols
 import java.util.*
 
 class BudgetActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var budgetDao: BudgetDao
     private lateinit var adapter: BudgetAdapter
     private val budgetList = mutableListOf<Budget>()
     private lateinit var backButton: ImageView
@@ -40,16 +38,13 @@ class BudgetActivity : AppCompatActivity() {
         tvCurrentYear = findViewById(R.id.tvCurrentYear)
         btnPrevYear = findViewById(R.id.btnPrevYear)
         btnNextYear = findViewById(R.id.btnNextYear)
-
-        budgetDao = AppDatabase.getInstance(this).budgetDao()
+        backButton = findViewById(R.id.ivBack)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         adapter = BudgetAdapter(budgetList) { budget ->
             showAddBudgetDialog(budget)
         }
-        backButton = findViewById(R.id.ivBack)
-
         recyclerView.adapter = adapter
 
         tvCurrentYear.text = currentYear.toString()
@@ -60,15 +55,14 @@ class BudgetActivity : AppCompatActivity() {
             loadBudgets()
         }
 
-        backButton.setOnClickListener {
-            val intent = Intent(this, Dashboard::class.java)
-            startActivity(intent)
-        }
-
         btnNextYear.setOnClickListener {
             currentYear++
             tvCurrentYear.text = currentYear.toString()
             loadBudgets()
+        }
+
+        backButton.setOnClickListener {
+            startActivity(Intent(this, Dashboard::class.java))
         }
 
         loadBudgets()
@@ -76,8 +70,9 @@ class BudgetActivity : AppCompatActivity() {
 
     private fun loadBudgets() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
         CoroutineScope(Dispatchers.IO).launch {
-            val existing = budgetDao.getBudgetsForUserAndYear(userId, currentYear)
+            val existing = BudgetRepository().getBudgetsForYear(currentYear)
             val existingMap = existing.associateBy { it.month }
 
             val fullList = (1..12).map { month ->
@@ -124,16 +119,13 @@ class BudgetActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
 
-                val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return@setOnClickListener
-
                 val updatedBudget = budget.copy(
-                    userId = userId,
                     minAmount = min,
                     maxAmount = max
                 )
 
                 CoroutineScope(Dispatchers.IO).launch {
-                    budgetDao.insertBudget(updatedBudget)
+                    BudgetRepository().insertOrUpdateBudget(updatedBudget)
                     withContext(Dispatchers.Main) {
                         loadBudgets()
                         dialog.dismiss()
