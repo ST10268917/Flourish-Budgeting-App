@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.aj.flourish.models.Category
+import com.bumptech.glide.Glide
 
 // Adapter class to display a list of Category items in a RecyclerView
 class CategoryAdapter(private val categories: List<Category>) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
@@ -29,36 +30,28 @@ class CategoryAdapter(private val categories: List<Category>) : RecyclerView.Ada
         val category = categories[position]
         holder.textViewCategoryName.text = category.name
 
-        // Try to load the category image from its URI, with fallback in case of error
-        try {
-            val uri = Uri.parse(category.imageUri)
-            if (uri != null && category.imageUri.isNotBlank()) {
-                holder.imageViewCategory.setImageURI(uri)
-            } else {
-                // Fallback image if URI is blank
-                holder.imageViewCategory.setImageResource(R.drawable.ic_receipt_placeholder)
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            holder.imageViewCategory.setImageResource(R.drawable.ic_error) // fallback on error
+        // Load image from Supabase URL using Glide
+        if (!category.imageUri.isNullOrBlank()) {
+            Glide.with(holder.itemView.context)
+                .load(category.imageUri)
+                .placeholder(R.drawable.ic_receipt_placeholder) // Optional: show while loading
+                .error(R.drawable.ic_error) // Optional: show on failure
+                .into(holder.imageViewCategory)
+        } else {
+            holder.imageViewCategory.setImageResource(R.drawable.ic_receipt_placeholder)
         }
 
-        // Set click listener to open category details screen when an item is tapped
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
-
-            // Check for a valid category name before proceeding
             if (category.name.isNullOrBlank()) {
                 Toast.makeText(context, "Category name is missing!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            // Create intent and attach category data to send to CategoryDetail activity
             val intent = Intent(context, CategoryDetail::class.java).apply {
                 putExtra("categoryName", category.name)
                 putExtra("categoryId", category.id)
                 putExtra("categoryImageUri", category.imageUri ?: "")
             }
-              // Attempt to start the activity safely
             try {
                 context.startActivity(intent)
             } catch (e: Exception) {
@@ -67,6 +60,7 @@ class CategoryAdapter(private val categories: List<Category>) : RecyclerView.Ada
             }
         }
     }
+
 
     // Returns the total number of items to be displayed in the RecyclerView
     override fun getItemCount(): Int = categories.size
