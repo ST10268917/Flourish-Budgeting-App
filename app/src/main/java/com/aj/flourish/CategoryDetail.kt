@@ -321,4 +321,6 @@ class CategoryDetail : AppCompatActivity() {
             currentPhotoPath = absolutePath
         }
     }
+
+
 }
