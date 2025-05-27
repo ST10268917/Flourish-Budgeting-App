@@ -3,6 +3,7 @@ package com.aj.flourish
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -29,11 +30,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aj.flourish.models.Expense
 import com.aj.flourish.repositories.ExpenseRepository
+import com.aj.flourish.supabase.RetrofitClient
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -90,7 +95,11 @@ class CategoryDetail : AppCompatActivity() {
                                 val internalUri = copyImageToInternalStorage(Uri.fromFile(file))
                                 internalUri?.let {
                                     selectedReceiptUri = it
-                                    receiptImageView?.setImageURI(it)
+                                    Glide.with(this)
+                                        .load(it)
+                                        .placeholder(R.drawable.ic_receipt_placeholder)
+                                        .into(receiptImageView!!)
+
                                     receiptImageView?.visibility = View.VISIBLE
                                 } ?: run {
                                     Toast.makeText(this, "Error saving captured image", Toast.LENGTH_SHORT).show()
@@ -201,20 +210,33 @@ class CategoryDetail : AppCompatActivity() {
                 System.currentTimeMillis()
             }
 
+
             val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return@setOnClickListener
             val categoryId = intent.getStringExtra("categoryId") ?: return@setOnClickListener
 
-            val expense = Expense(
-                userId = userId,
-                categoryId = categoryId,
-                description = descriptionText,
-                amount = amount,
-                date = selectedDateMillis,
-                receiptUri = selectedReceiptUri?.toString()
-            )
-
             CoroutineScope(Dispatchers.IO).launch {
+                var uploadedUrl = ""
+
+                selectedReceiptUri?.let { uri ->
+                    val bytes = getBytesFromUri(uri)
+                    Log.d("EXPENSE_IMAGE", "Byte size: ${bytes?.size ?: 0}")
+                    if (bytes != null) {
+                        val fileName = "expense_${System.currentTimeMillis()}.jpg"
+                        uploadedUrl = uploadExpenseToSupabase(bytes, fileName) ?: ""
+                    }
+                }
+
+                val expense = Expense(
+                    userId = userId,
+                    categoryId = categoryId,
+                    description = descriptionText,
+                    amount = amount,
+                    date = selectedDateMillis,
+                    receiptUri = uploadedUrl
+                )
+
                 ExpenseRepository().insertExpense(expense)
+
                 withContext(Dispatchers.Main) {
                     dialog.dismiss()
                     loadExpensesFromFirebase()
@@ -222,6 +244,8 @@ class CategoryDetail : AppCompatActivity() {
                 }
             }
         }
+
+
 
         dialog.show()
     }
@@ -301,7 +325,12 @@ class CategoryDetail : AppCompatActivity() {
 
         val imageViewReceipt = dialogView.findViewById<ImageView>(R.id.imageViewDetailReceipt)
         if (!expense.receiptUri.isNullOrEmpty()) {
-            imageViewReceipt.setImageURI(Uri.parse(expense.receiptUri))
+            Glide.with(this)
+                .load(expense.receiptUri)
+                .placeholder(R.drawable.ic_receipt_placeholder)
+                .error(R.drawable.ic_error)
+                .into(imageViewReceipt)
+
         } else {
             imageViewReceipt.setImageResource(android.R.color.darker_gray)
         }
@@ -321,6 +350,53 @@ class CategoryDetail : AppCompatActivity() {
             currentPhotoPath = absolutePath
         }
     }
+
+    suspend fun uploadExpenseToSupabase(
+        byteArray: ByteArray,
+        fileName: String,
+        bucket: String = "expense-images"
+    ): String? {
+        return withContext(Dispatchers.IO) {
+            try {
+                val mimeType = "image/jpeg"
+                val authHeader = "Bearer ${BuildConfig.SUPABASE_KEY}"
+                val body = byteArray.toRequestBody(mimeType.toMediaTypeOrNull())
+
+                val response = RetrofitClient.instance.uploadImage(
+                    authHeader = authHeader,
+                    contentType = mimeType,
+                    bucket = bucket,
+                    fileName = fileName,
+                    file = body
+                )
+
+                Log.d("SUPABASE_UPLOAD", "Response: ${response.code()} | ${response.message()}")
+
+                if (response.isSuccessful) {
+                    "https://${BuildConfig.SUPABASE_URL.removePrefix("https://")}/storage/v1/object/public/$bucket/$fileName"
+                } else {
+                    Log.e("SUPABASE_UPLOAD", "❌ Upload failed: ${response.code()} ${response.errorBody()?.string()}")
+                    null
+                }
+            } catch (e: Exception) {
+                Log.e("SUPABASE_UPLOAD", "❌ Exception: ${e.message}")
+                null
+            }
+        }
+    }
+
+
+    private fun getBytesFromUri(uri: Uri): ByteArray? {
+        return try {
+            val inputStream = contentResolver.openInputStream(uri)
+            inputStream?.readBytes()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+
 
 
 }
