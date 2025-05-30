@@ -74,6 +74,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("com.google.firebase:firebase-auth:22.0.0")
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0") // For Bar chart
 
     val room_version = "2.6.1"
     implementation("androidx.room:room-runtime:$room_version")

@@ -8,6 +8,9 @@
     <color name="turquoise">#00C1A4</color>
     <color name="mintGreen">#DFF7E2</color>
     <color name="darkTeal">#004d4d</color>
+    <color name="lightGrey">#F0F0F0</color>
+    <color name="darkPurple">#F0F0F0</color>
+    <color name="red">#F0F0F0</color>
 <!--    categories-->
     <color name="purple">#9D00FF</color>
 </resources>
