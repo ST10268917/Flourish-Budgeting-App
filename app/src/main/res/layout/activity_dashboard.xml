@@ -219,6 +219,24 @@
                 android:paddingEnd="24dp" />
 
             <TextView
+                android:id="@+id/tvCategoryBudgets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Category Budgets"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/darkPurple"
+                android:layout_marginBottom="8dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCategoryBudgets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:layout_marginBottom="16dp"/>
+
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Recent Transactions"

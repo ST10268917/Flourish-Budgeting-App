@@ -25,9 +25,12 @@ import java.io.File
 import java.io.FileOutputStream
 import androidx.core.content.FileProvider
 import com.aj.flourish.models.Category
+import com.aj.flourish.models.CategoryBudget
 import com.aj.flourish.repositories.CategoryRepository
 import com.aj.flourish.supabase.RetrofitClient
+import com.google.firebase.firestore.FirebaseFirestore
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import java.util.Calendar
 
 class CreateCategory : AppCompatActivity() {
 
@@ -96,6 +99,7 @@ class CreateCategory : AppCompatActivity() {
     private fun showAddCategoryDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_category, null)
         val editTextName = dialogView.findViewById<EditText>(R.id.etCategoryName)
+        val etBudgetAmount = dialogView.findViewById<EditText>(R.id.etCategoryBudget)
         val imageView = dialogView.findViewById<ImageView>(R.id.ivCategoryImage)
         imageViewInDialog = imageView
         val btnSave = dialogView.findViewById<Button>(R.id.btnSaveCategory)
@@ -113,38 +117,93 @@ class CreateCategory : AppCompatActivity() {
 
         btnSave.setOnClickListener {
             val name = editTextName.text.toString().trim()
-            if (name.isNotEmpty()) {
-                val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
-                CoroutineScope(Dispatchers.IO).launch {
-                    var imageUrl = ""
+            val budgetText = etBudgetAmount.text.toString().trim()
 
-                    selectedImageUri?.let { uri ->
-                        val bytes = getBytesFromUri(uri)
-                        if (bytes != null) {
-                            val fileName = "category_${System.currentTimeMillis()}.jpg"
-                            imageUrl = uploadToSupabase(bytes, fileName) ?: ""
-                        }
-                    }
+            if (name.isEmpty()) {
+                Toast.makeText(this, "Please enter a category name", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-                    val category = Category(
-                        name = name,
-                        imageUri = imageUrl,
-                        userId = userId
-                    )
+            if (budgetText.isEmpty()) {
+                Toast.makeText(this, "Please enter a budget amount", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-                    CategoryRepository().insertCategory(category)
+            val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+            val budgetAmount = budgetText.toDoubleOrNull() ?: 0.0
 
-                    withContext(Dispatchers.Main) {
-                        loadCategoriesFromDb()
-                        dialog.dismiss()
-                        selectedImageUri = null
+            // --- All your existing logic below here ---
+            CoroutineScope(Dispatchers.IO).launch {
+                var imageUrl = ""
+
+                selectedImageUri?.let { uri ->
+                    val bytes = getBytesFromUri(uri)
+                    if (bytes != null) {
+                        val fileName = "category_${System.currentTimeMillis()}.jpg"
+                        imageUrl = uploadToSupabase(bytes, fileName) ?: ""
                     }
                 }
 
-            } else {
-                Toast.makeText(this, "Please enter a category name", Toast.LENGTH_SHORT).show()
+                val db = FirebaseFirestore.getInstance()
+
+                // Create category under the current user
+                val categoryRef = db.collection("users")
+                    .document(userId)
+                    .collection("categories")
+                    .document()
+                val categoryId = categoryRef.id
+
+                val category = Category(
+                    id = categoryId,
+                    name = name,
+                    imageUri = imageUrl,
+                    userId = userId
+                )
+
+                // Save category under user's categories
+                categoryRef.set(category)
+                    .addOnSuccessListener {
+                        Log.d("CreateCategory", "Category saved successfully!")
+
+                        val calendar = Calendar.getInstance()
+                        val month = calendar.get(Calendar.MONTH) + 1
+                        val year = calendar.get(Calendar.YEAR)
+
+                        val categoryBudget = CategoryBudget(
+                            userId = userId,
+                            categoryId = categoryId,
+                            month = month,
+                            year = year,
+                            budgetAmount = budgetAmount
+                        )
+
+                        // Save category budget under user's category_budgets
+                        db.collection("users")
+                            .document(userId)
+                            .collection("category_budgets")
+                            .add(categoryBudget)
+                            .addOnSuccessListener {
+                                Log.d("CreateCategory", "Category budget saved successfully!")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e("CreateCategory", "Failed to save category budget: ${e.message}")
+                            }
+
+                        CoroutineScope(Dispatchers.Main).launch {
+                            loadCategoriesFromDb()
+                            dialog.dismiss()
+                            selectedImageUri = null
+                        }
+                    }
+                    .addOnFailureListener { e ->
+                        Log.e("CreateCategory", "Failed to save category: ${e.message}")
+                        CoroutineScope(Dispatchers.Main).launch {
+                            Toast.makeText(this@CreateCategory, "Failed to save category.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
             }
         }
+
 
         dialog.show()
     }
@@ -197,6 +256,9 @@ class CreateCategory : AppCompatActivity() {
                 file = body
             )
 
+            Log.d("SUPABASE_DEBUG", "SUPABASE_URL: ${BuildConfig.SUPABASE_URL}")
+            Log.d("SUPABASE_DEBUG", "SUPABASE_KEY: ${BuildConfig.SUPABASE_KEY}")
+
             Log.d("SUPABASE_UPLOAD", "Response: ${response.code()} | ${response.message()}")
 
             if (response.isSuccessful) {
@@ -206,6 +268,4 @@ class CreateCategory : AppCompatActivity() {
             }
         }
     }
-
-
 }

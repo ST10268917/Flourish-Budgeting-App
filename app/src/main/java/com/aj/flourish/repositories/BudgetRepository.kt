@@ -1,6 +1,7 @@
 package com.aj.flourish.repositories
 
 import com.aj.flourish.models.Budget
+import com.aj.flourish.models.CategoryBudget
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
@@ -33,4 +34,22 @@ class BudgetRepository {
         val snapshot = userBudgetsRef().get().await()
         return snapshot.toObjects(Budget::class.java)
     }
+
+    suspend fun getCategoryBudgetsForMonth(year: Int, month: Int): List<CategoryBudget> {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return emptyList()
+        val budgets = mutableListOf<CategoryBudget>()
+        val snapshot = FirebaseFirestore.getInstance()
+            .collection("category_budgets")
+            .whereEqualTo("userId", userId)
+            .whereEqualTo("year", year)
+            .whereEqualTo("month", month)
+            .get()
+            .await()
+
+        for (doc in snapshot.documents) {
+            budgets.add(doc.toObject(CategoryBudget::class.java)!!.copy(id = doc.id))
+        }
+        return budgets
+    }
+
 }

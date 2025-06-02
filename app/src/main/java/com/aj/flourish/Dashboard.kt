@@ -53,6 +53,7 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.components.Legend
 import android.graphics.Color
 import android.view.View // New import for android.view.View
+import kotlinx.coroutines.tasks.await
 
 
 class Dashboard : AppCompatActivity() {
@@ -62,6 +63,10 @@ class Dashboard : AppCompatActivity() {
     private lateinit var budgetBtn: Button
     private lateinit var allExpensesBtn: Button
     private lateinit var categoriesBtn: Button
+
+    private lateinit var rvCategoryBudgets: RecyclerView
+    private lateinit var categoryBudgetAdapter: CategoryBudgetAdapter
+    private val categoryBudgetList = mutableListOf<CategoryBudgetDisplay>()
 
     // Existing Header UI declarations
     private lateinit var tvWelcome: TextView
@@ -97,6 +102,12 @@ class Dashboard : AppCompatActivity() {
         budgetBtn = findViewById(R.id.budgetBtn)
         allExpensesBtn = findViewById(R.id.allExpensesBtn)
         categoriesBtn = findViewById(R.id.categoriesBtn)
+
+        rvCategoryBudgets = findViewById(R.id.rvCategoryBudgets)
+        rvCategoryBudgets.layoutManager = LinearLayoutManager(this)
+        categoryBudgetAdapter = CategoryBudgetAdapter(categoryBudgetList)
+        rvCategoryBudgets.adapter = categoryBudgetAdapter
+
 
         tvWelcome = findViewById(R.id.tvWelcome)
         ivProfile = findViewById(R.id.ivProfile)
@@ -211,7 +222,7 @@ class Dashboard : AppCompatActivity() {
         categoriesBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_categories, 0, 0, 0)
     }
 
-    // --- NEW: Helper function to determine dates based on Spinner selection ---
+    // Helper function to determine dates based on Spinner selection ---
     private fun loadDashboardDataForSelectedPeriod(periodIndex: Int) {
         val calendar = Calendar.getInstance()
         var startDate: Long
@@ -301,10 +312,10 @@ class Dashboard : AppCompatActivity() {
     }
 
 
-    // --- MODIFIED: loadDashboardData now accepts start and end dates, and an isCurrentMonth flag ---
+    // loadDashboardData accepts start and end dates, and an isCurrentMonth flag ---
     private fun loadDashboardData(startDate: Long, endDate: Long, isCurrentMonth: Boolean) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
-        Log.d("Dashboard", "loadDashboardData executing with Start: ${startDate}, End: ${endDate}, IsCurrentMonth: $isCurrentMonth")
+        Log.d("Dashboard", "loadDashboardData executing with Start: $startDate, End: $endDate, IsCurrentMonth: $isCurrentMonth")
 
         CoroutineScope(Dispatchers.IO).launch {
             val expensesForSelectedPeriod = ExpenseRepository().getExpensesBetweenDates(startDate, endDate)
@@ -312,6 +323,32 @@ class Dashboard : AppCompatActivity() {
 
             val allCategories = CategoryRepository().getCategories()
             Log.d("Dashboard", "Fetched ${allCategories.size} categories.")
+
+            // Fetch category budgets and compare spending
+            val db = FirebaseFirestore.getInstance()
+            val categoryBudgetCollection = db.collection("users").document(userId).collection("category_budgets")
+            val categoryBudgetsSnapshot = categoryBudgetCollection
+                .whereEqualTo("month", Calendar.getInstance().get(Calendar.MONTH) + 1)
+                .whereEqualTo("year", Calendar.getInstance().get(Calendar.YEAR))
+                .get()
+                .await()
+
+            val categoryBudgets = categoryBudgetsSnapshot.documents.mapNotNull {
+                it.toObject(com.aj.flourish.models.CategoryBudget::class.java)
+            }
+
+            Log.d("Dashboard", "Fetched ${categoryBudgets.size} category budgets.")
+
+            val spendingByCategory = expensesForSelectedPeriod
+                .groupBy { it.categoryId }
+                .mapValues { entry -> entry.value.sumOf { it.amount } }
+
+            for (budget in categoryBudgets) {
+                val spent = spendingByCategory[budget.categoryId] ?: 0.0
+                if (spent > budget.budgetAmount) {
+                    Log.w("Dashboard", "🚨 Category ${budget.categoryId} overspent! Spent: $spent, Budget: ${budget.budgetAmount}")
+                }
+            }
 
             // Fetch current month's budget ONLY if it's the current month we are viewing
             var currentMonthBudget: Budget? = null
@@ -323,18 +360,15 @@ class Dashboard : AppCompatActivity() {
                 Log.d("Dashboard", "Budget for current month fetched: ${currentMonthBudget != null}")
             }
 
-
             withContext(Dispatchers.Main) {
                 val totalSpending = expensesForSelectedPeriod.sumOf { it.amount }
                 tvTotalSpending.text = "Total Spending (${spinnerPeriodFilter.selectedItem}): ${UserSettings.currencySymbol} ${"%.2f".format(totalSpending)}"
                 Log.d("Dashboard", "Updated Total Spending text: ${tvTotalSpending.text}")
 
-
                 // Update Monthly Budget display and CardView summary
-                if (isCurrentMonth) { // Only show budget details if "This Month" is selected
+                if (isCurrentMonth) {
                     currentMonthBudget?.let { budget ->
-                        tvMonthlyBudget.text = "Monthly Budget: ${UserSettings.currencySymbol}${
-                            "%.2f".format(budget.minAmount)} - ${UserSettings.currencySymbol}${"%.2f".format(budget.maxAmount)}"
+                        tvMonthlyBudget.text = "Monthly Budget: ${UserSettings.currencySymbol}${"%.2f".format(budget.minAmount)} - ${UserSettings.currencySymbol}${"%.2f".format(budget.maxAmount)}"
 
                         val maxBudget = budget.maxAmount
                         val remaining = maxBudget - totalSpending
@@ -351,7 +385,7 @@ class Dashboard : AppCompatActivity() {
                         tvOverspentBudget.text = "${UserSettings.currencySymbol} 0.00"
                         Log.d("Dashboard", "No budget set for current month. Displayed defaults.")
                     }
-                } else { // Clear budget details if not current month
+                } else {
                     tvMonthlyBudget.text = "Budget details for current month only"
                     tvTotalBudget.text = "${UserSettings.currencySymbol} 0.00"
                     tvRemainingBudget.text = "${UserSettings.currencySymbol} 0.00"
@@ -359,17 +393,53 @@ class Dashboard : AppCompatActivity() {
                     Log.d("Dashboard", "Cleared budget details for non-current month view.")
                 }
 
-                // --- Trigger the chart setup with the fetched data for the selected period ---
+                // Chart and transactions
                 setupCategorySpendingChart(expensesForSelectedPeriod, allCategories)
-                // --- End Chart Trigger ---
+                loadRecentTransactions(startDate, endDate)
 
-                // Refresh recent transactions RecyclerView
-                loadRecentTransactions(startDate, endDate) // Pass dates to recent transactions
+                val selectedMonth = Calendar.getInstance().get(Calendar.MONTH) + 1
+                val selectedYear = Calendar.getInstance().get(Calendar.YEAR)
+
+                FirebaseFirestore.getInstance()
+                    .collection("users")
+                    .document(userId)
+                    .collection("category_budgets")
+                    .whereEqualTo("month", selectedMonth)
+                    .whereEqualTo("year", selectedYear)
+                    .get()
+                    .addOnSuccessListener { snapshot ->
+                        val budgetDisplays = mutableListOf<CategoryBudgetDisplay>()
+                        for (doc in snapshot.documents) {
+                            val categoryId = doc.getString("categoryId") ?: continue
+                            val budgetAmount = doc.getDouble("budgetAmount") ?: 0.0
+                            val category = allCategories.find { it.id == categoryId } ?: continue
+                            val spentAmount = expensesForSelectedPeriod
+                                .filter { it.categoryId == categoryId }
+                                .sumOf { it.amount }
+
+                            budgetDisplays.add(CategoryBudgetDisplay(
+                                categoryName = category.name,
+                                budgetAmount = budgetAmount,
+                                spentAmount = spentAmount
+                            ))
+                        }
+
+                        Log.d("Dashboard", "Budgets to show: ${budgetDisplays.size}")
+
+                        categoryBudgetList.clear()
+                        categoryBudgetList.addAll(budgetDisplays)
+                        categoryBudgetAdapter.notifyDataSetChanged()
+                    }
+                    .addOnFailureListener { e ->
+                        Log.e("Dashboard", "Error loading category budgets: ${e.message}")
+                    }
             }
         }
     }
 
-    // --- MODIFIED: loadRecentTransactions now accepts start and end dates ---
+
+
+    // loadRecentTransactions accepts start and end dates ---
     private fun loadRecentTransactions(startDate: Long, endDate: Long) {
         CoroutineScope(Dispatchers.IO).launch {
             Log.d("Dashboard", "loadRecentTransactions executing with Start: ${startDate}, End: ${endDate}")
