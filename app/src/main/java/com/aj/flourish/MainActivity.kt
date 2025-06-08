@@ -10,6 +10,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.aj.flourish.Utils.BadgeManager
+import com.aj.flourish.Utils.LoginTracker
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,6 +40,16 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SignUp::class.java)
             startActivity(intent)
         }
+
+        (R.layout.activity_main) // Or your main layout
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val unlocked = LoginTracker.updateLoginStreak(this@MainActivity)
+            if (unlocked) {
+                BadgeManager.checkAndUnlockBadge(this@MainActivity, "seven_days_logged_in")
+            }
+        }
+
     }
 }
 

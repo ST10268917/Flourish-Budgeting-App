@@ -49,6 +49,13 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".AchievementsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".BadgePopupActivity"
+            android:exported="false"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

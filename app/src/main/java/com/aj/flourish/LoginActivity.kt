@@ -2,6 +2,7 @@ package com.aj.flourish
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -53,6 +54,8 @@ class LoginActivity : AppCompatActivity() {
         val email = emailEditText.text.toString().trim()
         val password = passwordEditText.text.toString().trim()
 
+        Log.d("Login", "Attempting login with: $email / $password")
+
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please enter email and password.", Toast.LENGTH_SHORT).show()
             return
@@ -61,6 +64,7 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    Log.d("Login", "Attempting login with: $email / $password")
 
                     Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
 
@@ -69,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-
+                    Log.e("Login", "Login failed", task.exception)
                     Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
             }

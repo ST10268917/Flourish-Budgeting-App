@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.aj.flourish.Utils.BadgeManager
 import com.aj.flourish.models.Expense
 import com.aj.flourish.repositories.ExpenseRepository
 import com.google.firebase.auth.FirebaseAuth
@@ -76,13 +78,22 @@ class FilterExpensesActivity : AppCompatActivity() {
 
             CoroutineScope(Dispatchers.IO).launch {
                 val filteredExpenses = ExpenseRepository().getExpensesBetweenDates(startDate, endDate)
+
+                // 🔥 Unlock test badge after filtering
                 withContext(Dispatchers.Main) {
                     expenseList.clear()
                     expenseList.addAll(filteredExpenses)
                     expenseAdapter.notifyDataSetChanged()
+
+                    Toast.makeText(this@FilterExpensesActivity, "Filtered ${filteredExpenses.size} expenses", Toast.LENGTH_SHORT).show()
+
+                    // 🚨 TEST BADGE: Award every time filter is used
+                    Log.d("BadgeTest", "Triggering test badge from filter...")
+                    BadgeManager.checkAndUnlockBadge(this@FilterExpensesActivity, "filter_expense")  // change badgeId if needed
                 }
             }
         }
+
     }
 
     private fun showDatePicker(isStartDate: Boolean) {

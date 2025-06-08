@@ -1,5 +1,6 @@
 package com.aj.flourish
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.aj.flourish.Utils.BadgeManager
 import com.aj.flourish.models.Budget
 import com.aj.flourish.repositories.BudgetRepository
 import com.google.firebase.auth.FirebaseAuth
@@ -123,6 +125,10 @@ class BudgetActivity : AppCompatActivity() {
                     minAmount = min,
                     maxAmount = max
                 )
+                val prefs = getSharedPreferences("user_progress", Context.MODE_PRIVATE)
+                val isFirstBudget = !prefs.getBoolean("first_budget_created", false)
+
+
 
                 CoroutineScope(Dispatchers.IO).launch {
                     BudgetRepository().insertOrUpdateBudget(updatedBudget)
@@ -130,10 +136,16 @@ class BudgetActivity : AppCompatActivity() {
                         loadBudgets()
                         dialog.dismiss()
                     }
+                    if (isFirstBudget) {
+                        // Use `this@YourActivity` to refer to the Activity context.
+                        BadgeManager.checkAndUnlockBadge(this@BudgetActivity, "first_budget")
+                        prefs.edit().putBoolean("first_budget_created", true).apply()
+                    }
                 }
-            }
-        }
 
-        dialog.show()
+            }
+
+            dialog.show()
+        }
     }
 }

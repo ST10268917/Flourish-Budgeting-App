@@ -1,6 +1,7 @@
 package com.aj.flourish
 
 // Standard AndroidX and Android UI imports
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -53,6 +54,7 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.components.Legend
 import android.graphics.Color
 import android.view.View // New import for android.view.View
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.tasks.await
 
 
@@ -63,6 +65,8 @@ class Dashboard : AppCompatActivity() {
     private lateinit var budgetBtn: Button
     private lateinit var allExpensesBtn: Button
     private lateinit var categoriesBtn: Button
+    private lateinit var tvLoginStreak: TextView
+
 
     private lateinit var rvCategoryBudgets: RecyclerView
     private lateinit var categoryBudgetAdapter: CategoryBudgetAdapter
@@ -102,6 +106,7 @@ class Dashboard : AppCompatActivity() {
         budgetBtn = findViewById(R.id.budgetBtn)
         allExpensesBtn = findViewById(R.id.allExpensesBtn)
         categoriesBtn = findViewById(R.id.categoriesBtn)
+        tvLoginStreak = findViewById(R.id.tvLoginStreak)
 
         rvCategoryBudgets = findViewById(R.id.rvCategoryBudgets)
         rvCategoryBudgets.layoutManager = LinearLayoutManager(this)
@@ -130,6 +135,11 @@ class Dashboard : AppCompatActivity() {
         rvRecentTransactions.layoutManager = LinearLayoutManager(this)
         recentTransactionsAdapter = ExpenseAdapter(recentTransactionsList) {}
         rvRecentTransactions.adapter = recentTransactionsAdapter
+
+        val btnViewAllBadges = findViewById<Button>(R.id.btnViewAllBadges)
+        btnViewAllBadges.setOnClickListener {
+            startActivity(Intent(this, AchievementsActivity::class.java)) // Replace with BadgesActivity if you used that name
+        }
 
         // Set up the Spinner listener BEFORE loading initial data
         spinnerPeriodFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -206,6 +216,43 @@ class Dashboard : AppCompatActivity() {
         }
 
         setButtonIcons() // Your existing function to set drawable icons on buttons
+
+        val prefs = getSharedPreferences("login_tracker", Context.MODE_PRIVATE)
+        val streak = prefs.getInt("login_streak", 0)
+        tvLoginStreak.text = "Login Streak: $streak day${if (streak != 1) "s" else ""}"
+
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    // You're already on the home screen, no action needed
+                    true
+                }
+                R.id.nav_create_category -> {
+                    // 🔁 Actually opens CreateCategory activity
+                    startActivity(Intent(this, CreateCategory::class.java))
+                    true
+                }
+                R.id.nav_budget -> {
+                    startActivity(Intent(this, BudgetActivity::class.java))
+                    true
+                }
+                R.id.nav_expenses -> {
+                    startActivity(Intent(this, FilterExpensesActivity::class.java))
+                    true
+                }
+                R.id.nav_category_spending -> {
+                    // 🔁 Actually opens CategorySpending activity
+                    startActivity(Intent(this, CategorySpendingActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+
+        }
+
+
+
     }
 
     // Your existing function to set button icons

@@ -74,7 +74,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("com.google.firebase:firebase-auth:22.0.0")
-    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0") // For Bar chart
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0") // For Bar chart
 
     val room_version = "2.6.1"
     implementation("androidx.room:room-runtime:$room_version")
@@ -89,11 +89,17 @@ dependencies {
     ksp("com.github.bumptech.glide:ksp:4.16.0")
 
     // For image loading
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 
     //retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
+
+    //Konfetti
+    implementation("nl.dionsegijn:konfetti-xml:2.0.2")
+    ksp("com.google.devtools.ksp:symbol-processing-api:2.1.0-1.0.28")
+
+
 }

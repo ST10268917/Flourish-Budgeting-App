@@ -1,5 +1,6 @@
 package com.aj.flourish
 
+import com.aj.flourish.repositories.BudgetRepository
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.DatePickerDialog
@@ -28,6 +29,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.aj.flourish.Utils.BadgeManager
 import com.aj.flourish.models.Expense
 import com.aj.flourish.repositories.ExpenseRepository
 import com.aj.flourish.supabase.RetrofitClient
@@ -237,10 +239,42 @@ class CategoryDetail : AppCompatActivity() {
 
                 ExpenseRepository().insertExpense(expense)
 
+              // This is the code for the badges
+                val existingExpenses = ExpenseRepository().getExpensesForUser()
+                Log.d("BadgeTest", "Existing expenses count: ${existingExpenses.size}")
+                val isFirstTransaction = existingExpenses.size == 3
+                val totalAmount = existingExpenses.sumOf { it.amount }
+                val unlockedSave500 = totalAmount >= 500
+
+                val now = Calendar.getInstance()
+                val sevenDaysAgo = Calendar.getInstance().apply { add(Calendar.DAY_OF_YEAR, -7) }
+
+                val last7DaysExpenses = ExpenseRepository().getExpensesBetweenDates(sevenDaysAgo.timeInMillis, now.timeInMillis)
+                val totalLast7Days = last7DaysExpenses.sumOf { it.amount }
+
+                val currentMonth = now.get(Calendar.MONTH) + 1
+                val currentYear = now.get(Calendar.YEAR)
+
+                val budgets = BudgetRepository().getBudgetsForYear(currentYear)
+                val currentMonthBudget = budgets.find { it.month == currentMonth }
+                val maxBudget = currentMonthBudget?.maxAmount ?: 0.0
+                val isWithinBudget = maxBudget > 0 && totalLast7Days <= maxBudget
+
                 withContext(Dispatchers.Main) {
                     dialog.dismiss()
                     loadExpensesFromFirebase()
                     Toast.makeText(this@CategoryDetail, "Expense saved!", Toast.LENGTH_SHORT).show()
+                }
+                if (isFirstTransaction) {
+                    BadgeManager.checkAndUnlockBadge(this@CategoryDetail, "first_transaction")
+                }
+
+                if (unlockedSave500) {
+                    BadgeManager.checkAndUnlockBadge(this@CategoryDetail, "save_500")
+                }
+
+                if (isWithinBudget) {
+                    BadgeManager.checkAndUnlockBadge(this@CategoryDetail, "no_overspending_week")
                 }
             }
         }
