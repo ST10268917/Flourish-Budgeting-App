@@ -20,9 +20,10 @@ Flourish is an intelligent and user-friendly Android budgeting app designed to s
 11. [Technology Stack](#technology-stack)
 12. [Coding Activity](#coding-activity)
 13. [Get Started](#get-started)
-14. [Contributing](#contributing)
-15. [Reference List](#reference-list)
-16. [Group Members](#Group-Members)
+14. [GitHub and GitHub Actions Usage](#github-and-github-actions-usage)
+15. [Contributing](#contributing)
+16. [Reference List](#reference-list)
+17. [Group Members](#Group-Members)
 
 ## 🟢Introduction
 
@@ -301,6 +302,29 @@ To boost user motivation and engagement, Flourish introduces a gamified budgetin
 ## Get Started
 
 Follow the [Installation and Setup](#installation-and-setup) and [Building and Running the Prototype](#building-and-running-the-prototype) instructions to begin using Flourish on your Android device. (OpenAI, 2025).
+
+## 🟠GitHub and  GitHub Actions Usage
+
+Repository Management
+
+This project was version-controlled using GitHub, ensuring all team members could collaborate effectively. Each sprint phase was mapped to specific branches (e.g., feature-authentication, feature-dashboard, feature-gamification), and pull requests were used to merge tested code into main.
+
+GitHub Actions Integration
+
+To maintain code quality and streamline builds:
+
+*  Gradle Build Automation ran checks on every push.
+*  Firebase App Distribution (planned) to automate app testing.
+
+GitHub Activity Highlights:
+
+* Daily commits and sprint logs
+
+* Detailed PRs with peer reviews
+
+* Branch naming conventions and issue linking for traceability
+
+
 
 ## 🟠 Contributing
 
