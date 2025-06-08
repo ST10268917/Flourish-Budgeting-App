@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.aj.flourish.Utils.BadgeManager
+import com.aj.flourish.Utils.LoginTracker
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
@@ -63,6 +65,12 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
 
                     Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
+
+                    // Inside loginUser() → task.isSuccessful block
+                    if (LoginTracker.updateLoginStreak(this)) {
+                        BadgeManager.checkAndUnlockBadge(this, "seven_days_logged_in")
+                    }
+                    LoginTracker.updateLoginStreak(this)
 
                     // Go to Main/Dashboard
                     val intent = Intent(this, Dashboard::class.java)
