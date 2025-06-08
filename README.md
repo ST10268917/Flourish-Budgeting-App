@@ -9,19 +9,20 @@ Flourish is an intelligent and user-friendly Android budgeting app designed to s
 
 1.  [Introduction](#introduction)
 2.  [Features](#features)
-3.  [Functionality Requirements](#functionality-requirements)
-4.  [Setup Instructions](#setup-instructions)
-5.  [Installation and Setup](#installation-and-setup)
-6.  [Building and Running the Prototype](#building-and-running-the-prototype)
-7.  [System Functionalities and User Roles](#system-functionalities-and-user-roles)
-8.  [Roadmap](#roadmap)
-9.  [Demo Video](#demo-video)
-10. [Technology Stack](#technology-stack)
-11. [Coding Activity](#coding-activity)
-12. [Get Started](#get-started)
-13. [Contributing](#contributing)
-14. [Reference List](#reference-list)
-15. [Group Members](#Group-Members)
+3.  [Two Features]
+4.  [Functionality Requirements](#functionality-requirements)
+5.  [Setup Instructions](#setup-instructions)
+6.  [Installation and Setup](#installation-and-setup)
+7.  [Building and Running the Prototype](#building-and-running-the-prototype)
+8.  [System Functionalities and User Roles](#system-functionalities-and-user-roles)
+9.  [Roadmap](#roadmap)
+10.  [Demo Video](#demo-video)
+11. [Technology Stack](#technology-stack)
+12. [Coding Activity](#coding-activity)
+13. [Get Started](#get-started)
+14. [Contributing](#contributing)
+15. [Reference List](#reference-list)
+16. [Group Members](#Group-Members)
 
 ## 🟢Introduction
 
@@ -35,6 +36,35 @@ Flourish empowers students and young professionals to take control of their fina
 * **Receipt Management:** Attach photos from the camera or gallery for better record-keeping.
 * **User Authentication:** Sign in securely using Firebase Authentication.
 * **Gamified Experience:** Motivating visuals and feedback to encourage better money habits (Final POE - *Note: This is mentioned as a general feature, but the Functionality Requirements specify this is implemented in Part 3*).
+
+## 🟠 Two Features 
+
+*1* Currency Converter 
+
+Flourish includes a dedicated Currency Exchange feature, allowing users to view and convert between currencies using real-time exchange rates. This supports international students or users who earn/spend across different currencies.
+
+Main Functions :
+* Converts between multiple global currencies.
+
+* Real-time rates fetched from online APIs.
+
+* Accessible under the “Currency Exchange” page.
+
+* Tied directly into expense tracking and category summaries.
+
+*2* Gamification
+
+To boost user motivation and engagement, Flourish introduces a gamified budgeting journey. Users are rewarded with visual achievements and can build streaks for consistent budgeting behavior.
+
+* Achievement Badges: Earned for milestones like first budget set, week-long streak, or consistent saving.
+
+*  Daily Streaks: Encourages daily logins and financial activity.
+
+* Finance Quizzes & XP (Planned): Optional mini-quizzes to earn XP and unlock insights.
+
+*  Leaderboard (Stretch Goal): Compete with friends via secure code.
+
+
 
 ## 🟠 Functionality Requirements
 
