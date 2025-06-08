@@ -9,7 +9,7 @@ Flourish is an intelligent and user-friendly Android budgeting app designed to s
 
 1.  [Introduction](#introduction)
 2.  [Features](#features)
-3.  [Two Features]
+3.  [Two Features](#features)
 4.  [Functionality Requirements](#functionality-requirements)
 5.  [Setup Instructions](#setup-instructions)
 6.  [Installation and Setup](#installation-and-setup)
