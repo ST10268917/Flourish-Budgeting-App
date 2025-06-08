@@ -4,14 +4,13 @@
     <!-- Camera Permissions -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
         android:allowBackup="true"
@@ -23,6 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Flourish"
         tools:targetApi="31">
+        <activity
+            android:name=".CurrencyConverterActivity"
+            android:exported="false" />
         <activity
             android:name=".CategorySpendingActivity"
             android:exported="false" />
@@ -51,10 +53,9 @@
         <activity
             android:name=".AchievementsActivity"
             android:exported="false" />
-
         <activity
             android:name=".BadgePopupActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -73,9 +74,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-
-
     </application>
 
 </manifest>

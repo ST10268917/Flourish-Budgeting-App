@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Base currency spinner -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Base Currency:" />
+
+    <Spinner
+        android:id="@+id/spinner_base_currency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Quote currency spinner -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quote Currency:" />
+
+    <Spinner
+        android:id="@+id/spinner_quote_currency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Amount input -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Amount:" />
+
+    <EditText
+        android:id="@+id/edit_text_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal" />
+
+    <!-- Button to convert -->
+    <Button
+        android:id="@+id/button_convert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Convert" />
+
+    <!-- TextView to show result -->
+    <TextView
+        android:id="@+id/text_view_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Result will appear here"
+        android:paddingTop="16dp"
+        android:textSize="18sp" />
+
+</LinearLayout>

@@ -355,6 +355,21 @@
                     android:drawableTop="@drawable/ic_categories"
                     android:gravity="center"
                     android:layout_margin="8dp" />
+
+                <Button
+                    android:id="@+id/currencyConverterBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:text="Currency Converter"
+                    android:backgroundTint="@color/turquoise"
+                    android:textColor="@android:color/white"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:drawableTop="@drawable/ic_categories"
+                    android:gravity="center"
+                    android:layout_margin="8dp" />
             </GridLayout>
 
         </LinearLayout>
