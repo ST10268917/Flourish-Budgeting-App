@@ -346,7 +346,7 @@ To maintain code quality and streamline builds:
 We integrated GitHub Actions to:
 
 *  Automatically build the project on every push to `main`
-*  Run unit tests
+
 
 GitHub Activity Highlights:
 
