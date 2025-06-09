@@ -87,7 +87,7 @@ Flourish includes a dedicated Currency Exchange feature, allowing users to view 
 
 * Accessible under the Currency Exchange page.
 
-* Tied directly into expense tracking and category summaries.
+
 
 
 
@@ -103,7 +103,7 @@ To boost user motivation and engagement, Flourish introduces a gamified budgetin
 
 *  Daily Streaks: Encourages daily logins and financial activity.
 
-*  Leaderboard (Stretch Goal): Compete with friends via secure code.
+
 
 
 
