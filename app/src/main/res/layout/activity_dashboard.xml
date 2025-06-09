@@ -180,48 +180,34 @@
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
-                        <Button
-                            android:id="@+id/btnViewAllBadges"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="View All Badges"
-                            android:backgroundTint="@color/turquoise"
-                            android:textColor="@android:color/white"
-                            android:drawableStart="@drawable/ic_badge_default"
-                            android:drawablePadding="8dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:paddingStart="16dp"
-                            android:paddingEnd="16dp"
-                            android:paddingTop="12dp"
-                            android:paddingBottom="12dp"
-                            app:layout_constraintTop_toBottomOf="@id/allExpensesBtn"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent" />
+
 
                     </LinearLayout>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+
+            <TextView
+                android:id="@+id/tvCategorySpending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Category Spending"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/darkGreen"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="15dp"/>
+
+
             <TextView
                 android:id="@+id/tvTotalSpending"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Total Spending (This Month): R 0.00"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/darkPurple"
+                android:textSize="15sp"
+                android:textColor="@color/black"
                 android:layout_marginBottom="4dp" />
-
-            <TextView
-                android:id="@+id/tvMonthlyBudget"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Monthly Budget: Not set"
-                android:textSize="16sp"
-                android:textColor="@color/darkPurple"
-                android:layout_marginBottom="16dp" />
 
             <Spinner
                 android:id="@+id/spinnerPeriodFilter"
@@ -355,6 +341,21 @@
                     android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
                     android:text="Currency Converter"
+                    android:backgroundTint="@color/turquoise"
+                    android:textColor="@android:color/white"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:drawableTop="@drawable/ic_categories"
+                    android:gravity="center"
+                    android:layout_margin="8dp" />
+
+                <Button
+                    android:id="@+id/btnViewAllBadges"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    android:text="View All Badges"
                     android:backgroundTint="@color/turquoise"
                     android:textColor="@android:color/white"
                     android:paddingTop="16dp"

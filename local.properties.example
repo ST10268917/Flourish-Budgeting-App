@@ -1,0 +1,13 @@
+sdk.dir=C\:\\Users\\User\\AppData\\Local\\Android\\Sdk
+SUPABASE_URL=https://your-supabase-url.supabase.co
+SUPABASE_KEY=your_supabase_key_here
+EXCHANGERATE_API_KEY=your_exchangerate_api_key_here
+
+
+//My API keys for ease of use to test app
+//Gitignore has been set up and local.properties doesn't get pushed to the remote repo
+//This example file was created in its place for the lecturer to run the app
+//See README.md (on GitHUb repo) for full instructions
+SUPABASE_URL=https://cbwdbipbwbyxszjmibnm.supabase.co
+SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNid2RiaXBid2J5eHN6am1pYm5tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc3NTYxOTUsImV4cCI6MjA2MzMzMjE5NX0.dihxpC79neCyBTlXxMWlyrH9b6qLfou-zgLzzcJe3OE
+EXCHANGERATE_API_KEY=43f058c346a9064f49651f4f

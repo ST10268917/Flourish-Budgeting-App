@@ -3,6 +3,7 @@ package com.aj.flourish
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,7 @@ class AchievementsActivity : AppCompatActivity() {
     private lateinit var badgeAdapter: BadgeAdapter
     private lateinit var progressBar: ProgressBar
     private lateinit var emptyText: TextView
+    private lateinit var backButton: ImageView
 
     private val badgeList = BadgeConstants.allBadges
     private val unlockedBadgeIds = mutableListOf<String>()
@@ -26,6 +28,7 @@ class AchievementsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_achievements)
 
+        backButton = findViewById(R.id.ivBack)
         badgeRecyclerView = findViewById(R.id.recycler_view_badges)
         progressBar = findViewById(R.id.progressBar)
         emptyText = findViewById(R.id.emptyText)
@@ -34,6 +37,10 @@ class AchievementsActivity : AppCompatActivity() {
             val intent = Intent(this, BadgeDetailActivity::class.java)
             intent.putExtra("BADGE_ID", badge.id)
             startActivity(intent)
+        }
+
+        backButton.setOnClickListener {
+            startActivity(Intent(this, Dashboard::class.java))
         }
 
         badgeRecyclerView.layoutManager = GridLayoutManager(this, 2)
@@ -57,7 +64,7 @@ class AchievementsActivity : AppCompatActivity() {
             .addOnSuccessListener { documents ->
                 unlockedBadgeIds.clear()
                 for (doc in documents) {
-                    val isUnlocked = doc.getBoolean("isUnlocked") ?: false
+                    val isUnlocked = doc.getBoolean("unlocked") ?: false
                     if (isUnlocked) {
                         unlockedBadgeIds.add(doc.id)
                     }

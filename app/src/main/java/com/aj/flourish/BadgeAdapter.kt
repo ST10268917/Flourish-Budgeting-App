@@ -56,15 +56,6 @@ class BadgeAdapter(
             .setInterpolator(OvershootInterpolator())
             .start()
 
-        // Click behavior
-        holder.itemView.setOnClickListener {
-            if (isUnlocked) {
-                onBadgeClick?.invoke(badge)
-                    ?: Toast.makeText(context, "${badge.name}: ${badge.description}", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(context, "This badge is still locked!", Toast.LENGTH_SHORT).show()
-            }
-        }
     }
 
     override fun getItemCount(): Int = badgeList.size

@@ -82,10 +82,10 @@ class Dashboard : AppCompatActivity() {
     private lateinit var tvTotalBudget: TextView
     private lateinit var tvRemainingBudget: TextView
     private lateinit var tvOverspentBudget: TextView
+    private lateinit var tvCategorySpending: TextView
 
     // New UI elements for overall monthly spending summary and chart
     private lateinit var tvTotalSpending: TextView
-    private lateinit var tvMonthlyBudget: TextView
     private lateinit var categorySpendingChart: BarChart
 
     private lateinit var spinnerPeriodFilter: Spinner // Declaration for the new Spinner
@@ -107,6 +107,7 @@ class Dashboard : AppCompatActivity() {
         categoriesBtn = findViewById(R.id.categoriesBtn)
         tvLoginStreak = findViewById(R.id.tvLoginStreak)
         currencyConverterBtn = findViewById(R.id.currencyConverterBtn)
+        tvCategorySpending = findViewById(R.id.tvCategorySpending)
 
         rvCategoryBudgets = findViewById(R.id.rvCategoryBudgets)
         rvCategoryBudgets.layoutManager = LinearLayoutManager(this)
@@ -125,7 +126,6 @@ class Dashboard : AppCompatActivity() {
 
         // --- NEW CHART AND SUMMARY UI INITIALIZATIONS ---
         tvTotalSpending = findViewById(R.id.tvTotalSpending)
-        tvMonthlyBudget = findViewById(R.id.tvMonthlyBudget)
         categorySpendingChart = findViewById(R.id.categorySpendingChart)
         spinnerPeriodFilter = findViewById(R.id.spinnerPeriodFilter) // Initialize the Spinner
         // --- END NEW CHART UI INITIALIZATIONS ---
@@ -137,7 +137,7 @@ class Dashboard : AppCompatActivity() {
 
         val btnViewAllBadges = findViewById<Button>(R.id.btnViewAllBadges)
         btnViewAllBadges.setOnClickListener {
-            startActivity(Intent(this, AchievementsActivity::class.java)) // Replace with BadgesActivity if you used that name
+            startActivity(Intent(this, AchievementsActivity::class.java))
         }
 
         // Set up the Spinner listener BEFORE loading initial data
@@ -415,7 +415,6 @@ class Dashboard : AppCompatActivity() {
                 // Update Monthly Budget display and CardView summary
                 if (isCurrentMonth) {
                     currentMonthBudget?.let { budget ->
-                        tvMonthlyBudget.text = "Monthly Budget: ${UserSettings.currencySymbol}${"%.2f".format(budget.minAmount)} - ${UserSettings.currencySymbol}${"%.2f".format(budget.maxAmount)}"
 
                         val maxBudget = budget.maxAmount
                         val remaining = maxBudget - totalSpending
@@ -426,14 +425,12 @@ class Dashboard : AppCompatActivity() {
                         tvOverspentBudget.text = "${UserSettings.currencySymbol} ${String.format("%.2f", overspent)}"
                         Log.d("Dashboard", "Displayed current month budget details.")
                     } ?: run {
-                        tvMonthlyBudget.text = "Monthly Budget: Not set"
                         tvTotalBudget.text = "${UserSettings.currencySymbol} 0.00"
                         tvRemainingBudget.text = "${UserSettings.currencySymbol} 0.00"
                         tvOverspentBudget.text = "${UserSettings.currencySymbol} 0.00"
                         Log.d("Dashboard", "No budget set for current month. Displayed defaults.")
                     }
                 } else {
-                    tvMonthlyBudget.text = "Budget details for current month only"
                     tvTotalBudget.text = "${UserSettings.currencySymbol} 0.00"
                     tvRemainingBudget.text = "${UserSettings.currencySymbol} 0.00"
                     tvOverspentBudget.text = "${UserSettings.currencySymbol} 0.00"
