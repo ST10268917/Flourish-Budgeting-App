@@ -1,5 +1,6 @@
 package com.aj.flourish.repositories
 
+import android.util.Log
 import com.aj.flourish.models.Budget
 import com.aj.flourish.models.CategoryBudget
 import com.google.firebase.auth.FirebaseAuth
@@ -18,10 +19,21 @@ class BudgetRepository {
         firestore.collection("users").document(getUserId()).collection("budgets")
 
     suspend fun insertOrUpdateBudget(budget: Budget) {
-        val docId = "${budget.year}_${budget.month}" // Unique doc ID per month/year
-        val updatedBudget = budget.copy(userId = getUserId())
-        userBudgetsRef().document(docId).set(updatedBudget).await()
+        try {
+            val docId = "${budget.year}_${budget.month}"  // Unique doc ID per month/year
+            Log.d("BudgetRepository", "Attempting to save budget: $docId -> $budget")  // Add this line
+
+            val updatedBudget = budget.copy(userId = getUserId())
+            userBudgetsRef().document(docId).set(updatedBudget).await()
+
+            Log.d("BudgetRepository", "Budget saved successfully: $docId")  // Add this line
+        } catch (e: Exception) {
+            Log.e("BudgetRepository", "Error saving budget: ${e.message}", e)
+            throw e
+        }
     }
+
+
 
     suspend fun getBudgetsForYear(year: Int): List<Budget> {
         val snapshot = userBudgetsRef()

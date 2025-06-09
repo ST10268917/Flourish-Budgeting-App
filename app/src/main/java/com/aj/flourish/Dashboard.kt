@@ -87,7 +87,6 @@ class Dashboard : AppCompatActivity() {
     private lateinit var tvTotalSpending: TextView
     private lateinit var tvMonthlyBudget: TextView
     private lateinit var categorySpendingChart: BarChart
-    private lateinit var btnFilterExpenses: Button
 
     private lateinit var spinnerPeriodFilter: Spinner // Declaration for the new Spinner
 
@@ -128,7 +127,6 @@ class Dashboard : AppCompatActivity() {
         tvTotalSpending = findViewById(R.id.tvTotalSpending)
         tvMonthlyBudget = findViewById(R.id.tvMonthlyBudget)
         categorySpendingChart = findViewById(R.id.categorySpendingChart)
-        btnFilterExpenses = findViewById(R.id.btnFilterExpenses)
         spinnerPeriodFilter = findViewById(R.id.spinnerPeriodFilter) // Initialize the Spinner
         // --- END NEW CHART UI INITIALIZATIONS ---
 
@@ -212,9 +210,6 @@ class Dashboard : AppCompatActivity() {
             startActivity(Intent(this, CategorySpendingActivity::class.java))
         }
 
-        btnFilterExpenses.setOnClickListener {
-            startActivity(Intent(this, FilterExpensesActivity::class.java))
-        }
 
         currencyConverterBtn.setOnClickListener {
             startActivity(Intent(this, CurrencyConverterActivity::class.java))

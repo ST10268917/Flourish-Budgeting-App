@@ -1,5 +1,6 @@
 package com.aj.flourish
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +40,7 @@ class BudgetAdapter(
         }
 
         holder.btnEdit.setOnClickListener {
+            Log.d("BudgetAdapter", "Edit button clicked for budget: $budget")
             onEditClick(budget)
         }
     }

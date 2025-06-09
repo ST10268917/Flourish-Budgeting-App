@@ -241,27 +241,18 @@
                 android:layout_marginBottom="16dp"
                 android:background="@color/darkTeal" />
 
-            <Button
-                android:id="@+id/btnFilterExpenses"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Filter Expenses"
-                android:backgroundTint="@color/turquoise"
-                android:textColor="@android:color/white"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="16dp"
-                android:paddingStart="24dp"
-                android:paddingEnd="24dp" />
+
 
             <TextView
                 android:id="@+id/tvCategoryBudgets"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Category Budgets"
-                android:textSize="18sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
-                android:textColor="@color/darkPurple"
-                android:layout_marginBottom="8dp" />
+                android:textColor="@color/darkGreen"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="15dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCategoryBudgets"
@@ -274,10 +265,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Recent Transactions"
-                android:textColor="@color/darkPurple"
-                android:textSize="18sp"
+                android:textColor="@color/darkGreen"
+                android:textSize="25sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="15dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvRecentTransactions"

@@ -73,13 +73,5 @@
         </ScrollView>
     </androidx.cardview.widget.CardView>
 
-    <ImageView
-        android:id="@+id/ivBack"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_back_arrow"
-        app:tint="@color/white"
-        android:layout_gravity="top|start" />
 
 </FrameLayout>

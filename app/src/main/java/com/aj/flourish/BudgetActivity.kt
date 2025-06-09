@@ -3,6 +3,7 @@ package com.aj.flourish
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -113,6 +114,7 @@ class BudgetActivity : AppCompatActivity() {
         dialog.setOnShowListener {
             val saveBtn = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
             saveBtn.setOnClickListener {
+                Log.d("BudgetActivity", "Save button clicked!")
                 val min = etMin.text.toString().toDoubleOrNull()
                 val max = etMax.text.toString().toDoubleOrNull()
 
@@ -128,24 +130,24 @@ class BudgetActivity : AppCompatActivity() {
                 val prefs = getSharedPreferences("user_progress", Context.MODE_PRIVATE)
                 val isFirstBudget = !prefs.getBoolean("first_budget_created", false)
 
-
-
                 CoroutineScope(Dispatchers.IO).launch {
+                    Log.d("BudgetActivity", "Inside CoroutineScope - about to save budget")
                     BudgetRepository().insertOrUpdateBudget(updatedBudget)
                     withContext(Dispatchers.Main) {
                         loadBudgets()
                         dialog.dismiss()
                     }
                     if (isFirstBudget) {
-                        // Use `this@YourActivity` to refer to the Activity context.
                         BadgeManager.checkAndUnlockBadge(this@BudgetActivity, "first_budget")
                         prefs.edit().putBoolean("first_budget_created", true).apply()
                     }
                 }
-
             }
-
-            dialog.show()
         }
+
+        dialog.show()
+
+
     }
-}
+    }
+
