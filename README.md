@@ -35,7 +35,7 @@ Flourish empowers students and young professionals to take control of their fina
 
 ## 🟠 Purpose of the app 
 
-The Flourish Budgeting App was created to empower users—particularly people , students and young professionals to take full control of their personal finances. The goal is to help users : 
+The Flourish Budgeting App was created to empower users particularly people , students and young professionals to take full control of their personal finances. The goal is to help users : 
 
 *  Understand their spending habits
 *  Set achievable financial goals
