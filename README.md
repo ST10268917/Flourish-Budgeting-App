@@ -272,6 +272,7 @@ To boost user motivation and engagement, Flourish introduces a gamified budgetin
 **Setting Monthly Budgets:**
 
 ![image](https://github.com/user-attachments/assets/4b2dc3a1-3e80-4874-91f1-77fe7f996975)
+
 ![image](https://github.com/user-attachments/assets/75c034d1-5328-4960-b8fe-b745ac6875b7)
 
 
