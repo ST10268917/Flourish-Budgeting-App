@@ -324,6 +324,14 @@ Follow the [Installation and Setup](#installation-and-setup) and [Building and R
 
 ## 🟠GitHub and  GitHub Actions Usage
 
+We used GitHub for:
+
+*  Version control
+*  Team collaboration
+*  Issue tracking
+*  Branching and pull requests
+
+  
 Repository Management
 
 This project was version-controlled using GitHub, ensuring all team members could collaborate effectively. Each sprint phase was mapped to specific branches (e.g., feature-authentication, feature-dashboard, feature-gamification), and pull requests were used to merge tested code into main.
@@ -335,12 +343,15 @@ To maintain code quality and streamline builds:
 *  Gradle Build Automation ran checks on every push.
 *  Firebase App Distribution (planned) to automate app testing.
 
+We integrated GitHub Actions to:
+
+*  Automatically build the project on every push to `main`
+*  Run unit tests
+
 GitHub Activity Highlights:
 
 * Daily commits and sprint logs
-
 * Detailed PRs with peer reviews
-
 * Branch naming conventions and issue linking for traceability
 
 
