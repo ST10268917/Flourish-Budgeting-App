@@ -8,26 +8,60 @@ Flourish is an intelligent and user-friendly Android budgeting app designed to s
 ## Table of Contents
 
 1.  [Introduction](#introduction)
-2.  [Features](#features)
-3.  [Two Features](#features)
-4.  [Functionality Requirements](#functionality-requirements)
-5.  [Setup Instructions](#setup-instructions)
-6.  [Installation and Setup](#installation-and-setup)
-7.  [Building and Running the Prototype](#building-and-running-the-prototype)
-8.  [System Functionalities and User Roles](#system-functionalities-and-user-roles)
-9.  [Roadmap](#roadmap)
-10.  [Demo Video](#demo-video)
-11. [Technology Stack](#technology-stack)
-12. [Coding Activity](#coding-activity)
-13. [Get Started](#get-started)
-14. [GitHub and GitHub Actions Usage](#github-and-github-actions-usage)
-15. [Contributing](#contributing)
-16. [Reference List](#reference-list)
-17. [Group Members](#Group-Members)
+2.  [Purpose of the App](#purpose-of-the-app)
+3.  [Timeline](#timeline)
+4.  [Improvements](#improvements)
+5.  [Features](#features)
+6.  [Two Features](#features)
+7.  [Functionality Requirements](#functionality-requirements)
+8.  [Setup Instructions](#setup-instructions)
+9.  [Installation and Setup](#installation-and-setup)
+10.  [Building and Running the Prototype](#building-and-running-the-prototype)
+11.  [System Functionalities and User Roles](#system-functionalities-and-user-roles)
+12.  [Roadmap](#roadmap)
+13.  [Demo Video](#demo-video)
+14. [Technology Stack](#technology-stack)
+15. [Coding Activity](#coding-activity)
+16. [Get Started](#get-started)
+17. [GitHub and GitHub Actions Usage](#github-and-github-actions-usage)
+18. [Contributing](#contributing)
+19. [Reference List](#reference-list)
+20. [Group Members](#Group-Members)
 
 ## 🟢Introduction
 
-Flourish empowers students and young professionals to take control of their finances effortlessly. Unlike traditional budgeting apps, it combines real-time spending insights, interactive financial dashboards, and multi-currency support with a gamified learning experience. (OpenAI, 2025). Built for clarity and engagement, Flourish turns complex money management into an intuitive, educational, and even rewarding journey just from your smartphone. (OpenAI, 2025)
+Flourish empowers students and young professionals to take control of their finances effortlessly. Unlike traditional budgeting apps, it combines real-time spending insights, interactive financial dashboards, and multi-currency support with a gamified learning experience. (OpenAI, 2025). Built for clarity and engagement, Flourish turns complex money management into an intuitive, educational, and even rewarding journey just from your smartphone. (OpenAI, 2025).
+
+
+## 🟠 Purpose of the app 
+
+The Flourish Budgeting App was created to empower users—particularly people , students and young professionals to take full control of their personal finances. The goal is to help users : 
+
+*  Understand their spending habits
+*  Set achievable financial goals
+*  Receive instant feedback on their budget activity
+*  Build financial literacy through gamified, engaging tools
+
+Unlike standard budgeting apps, Flourish focuses on:
+
+* User-friendliness
+*  Real-time feedback
+* Financial education
+* Fun and motivation through rewards and milestones
+
+
+
+## 🟠 Timeline 
+
+* **Part 1:** In Part 1, we conducted research, developed a detailed project plan, and created design documents to guide the development process.
+* **Part 2:** In Part 2,We started implementing the core features based on the Flourish app requirements.
+* **Part 3:** In Part 3, we refined the application by incorporating feedback from our lecturer. The end result is a fully functional mobile app that runs smoothly on a mobile device.
+
+## 🟠 Improvements
+* In Part 1, we followed the project requirements and planned the structure of our Flourish app.
+* In Part 2, we began building the application and received feedback from our lecturer, who suggested adding a navigation bar for better usability.
+* In Part 3, we implemented the navigation bar and refined the app accordingly.
+  
 
 ## 🟠 Features
 
@@ -36,34 +70,40 @@ Flourish empowers students and young professionals to take control of their fina
 * **Smart Insights:** View summaries of total spend per category for a selected period.
 * **Receipt Management:** Attach photos from the camera or gallery for better record-keeping.
 * **User Authentication:** Sign in securely using Firebase Authentication.
-* **Gamified Experience:** Motivating visuals and feedback to encourage better money habits (Final POE - *Note: This is mentioned as a general feature, but the Functionality Requirements specify this is implemented in Part 3*).
+* **Currency Converter:** Flourish's Currency Exchange allows users to convert currencies in real time using up-to-date rates.
+* **Gamified Experience:** Motivating visuals and feedback to encourage better money habits.
 
 ## 🟠 Two Features 
 
-*1* Currency Converter 
+**1**      **Currency Converter** 
 
 Flourish includes a dedicated Currency Exchange feature, allowing users to view and convert between currencies using real-time exchange rates. This supports international students or users who earn/spend across different currencies.
 
-Main Functions :
-* Converts between multiple global currencies.
+**Main Functions/Purpose**  :
+
+* Converts between global currencies.
 
 * Real-time rates fetched from online APIs.
 
-* Accessible under the “Currency Exchange” page.
+* Accessible under the Currency Exchange page.
 
-* Tied directly into expense tracking and category summaries.
 
-*2* Gamification
+
+
+
+
+
+**2**   **Gamification**
 
 To boost user motivation and engagement, Flourish introduces a gamified budgeting journey. Users are rewarded with visual achievements and can build streaks for consistent budgeting behavior.
+
+**Main Functions/Purpose**  :
 
 * Achievement Badges: Earned for milestones like first budget set, week-long streak, or consistent saving.
 
 *  Daily Streaks: Encourages daily logins and financial activity.
 
-* Finance Quizzes & XP (Planned): Optional mini-quizzes to earn XP and unlock insights.
 
-*  Leaderboard (Stretch Goal): Compete with friends via secure code.
 
 
 
@@ -72,13 +112,14 @@ To boost user motivation and engagement, Flourish introduces a gamified budgetin
 * **User Registration & Authentication:**
 
     * Email sign-up and login
-    * Secure password encryption & two-factor authentication
+    * Secure password encryption 
 
 * **Financial Dashboard:**
 
     * View total balance across accounts
     * Monthly budget overview
-    * Upcoming bills & recent transactions 
+    * Upcoming bills & recent transactions
+    * View graphs 
 
 * **Income & Expense Tracking:**
 
@@ -93,34 +134,18 @@ To boost user motivation and engagement, Flourish introduces a gamified budgetin
 
 * **Notifications:**
 
-    * Reminders for bills, overdue payments, and budget updates
+    * Reminders for bills, overdue payments, and budget updates.
       
-* **Multi-Currency Support:**
-
-    * Select default currency
-    * Real-time exchange rates
-    * Multi-currency transaction recording 
-
-* **Financial Literacy Hub:**
-
-    * Videos, podcasts, and articles
-    * Categorized by media type and difficulty level 
 
 * **Built-in Calculator:**
 
     * For complex calculations prior to logging transactions.
 
-* **Reports & Statements:**
-
-    * Downloadable PDF statements
-    * Graphical insights
-    * Custom date range
-
-* **Currency Exchange Page:**
+* **Currency Converter:**
 
     * Real-time exchange rate display and conversions 
 
-* **Gamification:** (Implemented only in PART 3)
+* **Gamification:** 
 
     * Achievement badges
     * Daily streaks
@@ -159,7 +184,7 @@ To boost user motivation and engagement, Flourish introduces a gamified budgetin
     * Create/manage budgets
     * Set savings goals
     * Access financial content
-    * Earn badges (Part 3)
+    * Earn badges
 
 
 ## 🟢 Roadmap
@@ -285,12 +310,6 @@ To boost user motivation and engagement, Flourish introduces a gamified budgetin
       </a>
       <br>Firebase
     </td>
-    <td align="center" width="96">
-      <a href="#figma">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/1024px-Figma-logo.svg.png" width="48" height="48" alt="Figma" />
-      </a>
-      <br>Figma
-    </td>
     </tr>
 </table>
 
@@ -305,6 +324,14 @@ Follow the [Installation and Setup](#installation-and-setup) and [Building and R
 
 ## 🟠GitHub and  GitHub Actions Usage
 
+We used GitHub for:
+
+*  Version control
+*  Team collaboration
+*  Issue tracking
+*  Branching and pull requests
+
+  
 Repository Management
 
 This project was version-controlled using GitHub, ensuring all team members could collaborate effectively. Each sprint phase was mapped to specific branches (e.g., feature-authentication, feature-dashboard, feature-gamification), and pull requests were used to merge tested code into main.
@@ -316,12 +343,15 @@ To maintain code quality and streamline builds:
 *  Gradle Build Automation ran checks on every push.
 *  Firebase App Distribution (planned) to automate app testing.
 
+We integrated GitHub Actions to:
+
+*  Automatically build the project on every push to `main`
+
+
 GitHub Activity Highlights:
 
 * Daily commits and sprint logs
-
 * Detailed PRs with peer reviews
-
 * Branch naming conventions and issue linking for traceability
 
 
@@ -338,9 +368,6 @@ We welcome your ideas and fixes:
 
 ## 🟢 Reference List
 
-Draw.io, 2023. draw.io. [online] Available at: [https://app.diagrams.net/](https://app.diagrams.net/) [Accessed 2 April 2025].
-
-Figma, 2025. Figma. [online] Available at: [https://www.figma.com/](https://www.figma.com/) [Accessed 2 April 2025].
 
 Google Fonts. n.d. Browse Fonts - Google Fonts. [online] Available at: [https://fonts.google.com/](https://fonts.google.com/) [Accessed 2 May 2025].
 

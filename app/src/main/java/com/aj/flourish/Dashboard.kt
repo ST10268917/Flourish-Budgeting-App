@@ -68,7 +68,6 @@ class Dashboard : AppCompatActivity() {
     private lateinit var tvLoginStreak: TextView
     private lateinit var currencyConverterBtn: Button
 
-
     private lateinit var rvCategoryBudgets: RecyclerView
     private lateinit var categoryBudgetAdapter: CategoryBudgetAdapter
     private val categoryBudgetList = mutableListOf<CategoryBudgetDisplay>()

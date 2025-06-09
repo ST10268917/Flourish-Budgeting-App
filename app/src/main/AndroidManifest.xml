@@ -53,10 +53,9 @@
         <activity
             android:name=".AchievementsActivity"
             android:exported="false" />
-
         <activity
             android:name=".BadgePopupActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
