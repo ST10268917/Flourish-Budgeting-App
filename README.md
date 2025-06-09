@@ -55,7 +55,7 @@ Flourish empowers students and young professionals to take control of their fina
 
 ## 🟠 Two Features 
 
-*  **Currency Converter** 
+**1**      **Currency Converter** 
 
 Flourish includes a dedicated Currency Exchange feature, allowing users to view and convert between currencies using real-time exchange rates. This supports international students or users who earn/spend across different currencies.
 
@@ -70,7 +70,10 @@ Flourish includes a dedicated Currency Exchange feature, allowing users to view 
 * Tied directly into expense tracking and category summaries.
 
 
-*  **Gamification**
+
+
+
+**2**   **Gamification**
 
 To boost user motivation and engagement, Flourish introduces a gamified budgeting journey. Users are rewarded with visual achievements and can build streaks for consistent budgeting behavior.
 
