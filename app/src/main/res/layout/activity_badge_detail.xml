@@ -1,21 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkTeal">
+    android:background="@color/darkTeal"
+    android:padding="16dp">
 
+    <!-- Glow background shown only for unlocked badges -->
+    <ImageView
+        android:id="@+id/glowBackground"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/glow_effect"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Badge Icon -->
     <ImageView
         android:id="@+id/badgeIcon"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="40dp"
+        android:src="@drawable/ic_badge_default"
+        android:contentDescription="Badge Icon"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_badge_default"
-        android:contentDescription="Badge Icon" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Badge Name -->
     <TextView
         android:id="@+id/badgeName"
         android:layout_width="wrap_content"
@@ -29,6 +45,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Badge Description -->
     <TextView
         android:id="@+id/badgeDescription"
         android:layout_width="0dp"
@@ -37,10 +54,12 @@
         android:textSize="16sp"
         android:textColor="@color/white"
         android:padding="16dp"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/badgeName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Unlocked Date -->
     <TextView
         android:id="@+id/dateTextView"
         android:layout_width="wrap_content"
@@ -53,16 +72,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Close Button -->
     <Button
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" Awesome "
+        android:text="Awesome"
         android:layout_marginTop="24dp"
         android:background="@drawable/glow_button"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/dateTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

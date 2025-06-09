@@ -7,11 +7,11 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.aj.flourish.Utils.BadgeManager // 🟡 BadgeManager for unlocking badges
 import com.aj.flourish.models.Category
 import com.aj.flourish.models.Expense
 import com.aj.flourish.repositories.CategoryRepository
 import com.aj.flourish.repositories.ExpenseRepository
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -42,6 +42,7 @@ class CategorySpendingActivity : AppCompatActivity() {
         etEndDate = findViewById(R.id.etEndDate)
         tvFilterInfo = findViewById(R.id.tvFilterInfo)
         backButton = findViewById(R.id.ivBack)
+
         backButton.setOnClickListener {
             startActivity(Intent(this, Dashboard::class.java))
         }
@@ -75,10 +76,14 @@ class CategorySpendingActivity : AppCompatActivity() {
                     spendingList.addAll(grouped)
                     adapter.notifyDataSetChanged()
                     tvFilterInfo.text = "Showing spending from ${etStartDate.text} to ${etEndDate.text}"
+
+                    // 🟢 Unlock the "Filter Explorer" badge after using the filter
+                    BadgeManager.checkAndUnlockBadge(this@CategorySpendingActivity, "filter_test")
                 }
             }
         }
 
+        // 🔄 Load default (all-time) data when activity starts
         CoroutineScope(Dispatchers.IO).launch {
             val expenses = expenseRepo.getExpensesForUser()
             val categories = categoryRepo.getCategories()

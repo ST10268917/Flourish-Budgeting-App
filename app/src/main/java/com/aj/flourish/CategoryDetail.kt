@@ -243,8 +243,9 @@ class CategoryDetail : AppCompatActivity() {
                 val existingExpenses = ExpenseRepository().getExpensesForUser()
                 Log.d("BadgeTest", "Existing expenses count: ${existingExpenses.size}")
                 val isFirstTransaction = existingExpenses.size == 3
-                val totalAmount = existingExpenses.sumOf { it.amount }
-                val unlockedSave500 = totalAmount >= 500
+
+                val expensesInCategory = ExpenseRepository().getExpensesForCategory(categoryId)
+                val unlockedFiveInCategory = expensesInCategory.size >= 5
 
                 val now = Calendar.getInstance()
                 val sevenDaysAgo = Calendar.getInstance().apply { add(Calendar.DAY_OF_YEAR, -7) }
@@ -269,8 +270,8 @@ class CategoryDetail : AppCompatActivity() {
                     BadgeManager.checkAndUnlockBadge(this@CategoryDetail, "first_transaction")
                 }
 
-                if (unlockedSave500) {
-                    BadgeManager.checkAndUnlockBadge(this@CategoryDetail, "save_500")
+                if (unlockedFiveInCategory) {
+                    BadgeManager.checkAndUnlockBadge(this@CategoryDetail, "five_expenses_one_category")
                 }
 
                 if (isWithinBudget) {

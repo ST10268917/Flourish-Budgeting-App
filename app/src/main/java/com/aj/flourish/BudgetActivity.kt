@@ -125,27 +125,26 @@ class BudgetActivity : AppCompatActivity() {
                     minAmount = min,
                     maxAmount = max
                 )
+                //This is for the budget badge
                 val prefs = getSharedPreferences("user_progress", Context.MODE_PRIVATE)
                 val isFirstBudget = !prefs.getBoolean("first_budget_created", false)
-
-
 
                 CoroutineScope(Dispatchers.IO).launch {
                     BudgetRepository().insertOrUpdateBudget(updatedBudget)
                     withContext(Dispatchers.Main) {
                         loadBudgets()
                         dialog.dismiss()
+                        Toast.makeText(this@BudgetActivity, "Budget saved successfully", Toast.LENGTH_SHORT).show()
                     }
+                    //this is for the buget badge to check and award the badge
                     if (isFirstBudget) {
-                        // Use `this@YourActivity` to refer to the Activity context.
                         BadgeManager.checkAndUnlockBadge(this@BudgetActivity, "first_budget")
                         prefs.edit().putBoolean("first_budget_created", true).apply()
                     }
                 }
-
             }
-
-            dialog.show()
         }
+
+        dialog.show()
     }
 }

@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_currency_converter"
+        android:title="Currency Converter"
+        android:icon="@drawable/ic_currency" />
+    <item
+        android:id="@+id/nav_calculator"
+        android:title="Calculator"
+        android:icon="@drawable/ic_calculator" />
+    <item
+        android:id="@+id/nav_achievements"
+        android:title="Achievements"
+        android:icon="@drawable/ic_achievement" />
+</menu>

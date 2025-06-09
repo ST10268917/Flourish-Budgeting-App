@@ -1,5 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- App Name -->
     <string name="app_name">Flourish</string>
+
+    <!-- Currency Options -->
     <string-array name="currencies">
         <item>Pick a currency</item>
         <item>USD</item>
@@ -7,4 +11,15 @@
         <item>ZAR</item>
         <item>GBP</item>
     </string-array>
+
+    <!-- Calculator Strings -->
+    <string name="clear">C</string>
+    <string name="equals">=</string>
+    <string name="decimal">.</string>
+    <string name="add">+</string>
+    <string name="subtract">-</string>
+    <string name="multiply">×</string>
+    <string name="divide">÷</string>
+    <string name="bracket_open">(</string>
+    <string name="bracket_close">)</string>
 </resources>

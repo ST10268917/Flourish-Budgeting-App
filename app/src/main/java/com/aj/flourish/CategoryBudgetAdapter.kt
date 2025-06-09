@@ -1,12 +1,16 @@
 package com.aj.flourish
 
-import android.graphics.Color
+import android.animation.ObjectAnimator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.aj.flourish.Utils.BadgeManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CategoryBudgetAdapter(private val budgets: List<CategoryBudgetDisplay>)
     : RecyclerView.Adapter<CategoryBudgetAdapter.BudgetViewHolder>() {
@@ -36,14 +40,17 @@ class CategoryBudgetAdapter(private val budgets: List<CategoryBudgetDisplay>)
             0
         }
 
-        holder.progressBar.progress = progress
+        // Animate progress bar
+        ObjectAnimator.ofInt(holder.progressBar, "progress", 0, progress).apply {
+            duration = 800
+            start()
+        }
 
-        if (item.spentAmount > item.budgetAmount) {
-            holder.progressBar.progressDrawable.setColorFilter(
-                Color.RED, android.graphics.PorterDuff.Mode.SRC_IN)
-        } else {
-            holder.progressBar.progressDrawable.setColorFilter(
-                Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN)
+        // Award badge for staying under budget
+        if (item.spentAmount <= item.budgetAmount && item.spentAmount > 0) {
+            CoroutineScope(Dispatchers.Main).launch {
+                BadgeManager.checkAndUnlockBadge(holder.itemView.context, "under_budget")
+            }
         }
     }
 

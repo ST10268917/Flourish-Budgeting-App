@@ -44,8 +44,8 @@ class MainActivity : AppCompatActivity() {
         (R.layout.activity_main) // Or your main layout
 
         CoroutineScope(Dispatchers.IO).launch {
-            val unlocked = LoginTracker.updateLoginStreak(this@MainActivity)
-            if (unlocked) {
+            val streak = LoginTracker.updateLoginStreak(this@MainActivity)
+            if (streak >= 7) {  // You can change this to whatever threshold you want
                 BadgeManager.checkAndUnlockBadge(this@MainActivity, "seven_days_logged_in")
             }
         }

@@ -15,7 +15,7 @@ import com.aj.flourish.models.Badge
 
 class BadgeAdapter(
     private val badgeList: List<Badge>,
-    private val unlockedBadgeIds: List<String> = emptyList(),
+    private val unlockedBadgeIds: MutableList<String> = mutableListOf(),
     private val context: Context,
     private val onBadgeClick: ((Badge) -> Unit)? = null
 ) : RecyclerView.Adapter<BadgeAdapter.BadgeViewHolder>() {
@@ -34,19 +34,21 @@ class BadgeAdapter(
         val iconRes = badge.iconRes.takeIf { it != 0 } ?: R.drawable.ic_badge_default
         holder.badgeIcon.setImageResource(iconRes)
 
-        // Set background and color filter for locked/unlocked
-        val context = holder.itemView.context
+        // Set visuals based on unlock status
         if (isUnlocked) {
             holder.badgeContainer.setBackgroundResource(R.drawable.glow_badge_background)
             holder.badgeIcon.clearColorFilter()
             holder.badgeIcon.alpha = 1f
         } else {
             holder.badgeContainer.setBackgroundResource(R.drawable.locked_badge_background)
-            holder.badgeIcon.setColorFilter(ContextCompat.getColor(context, R.color.grey_dark), PorterDuff.Mode.SRC_IN)
+            holder.badgeIcon.setColorFilter(
+                ContextCompat.getColor(context, R.color.grey_dark),
+                PorterDuff.Mode.SRC_IN
+            )
             holder.badgeIcon.alpha = 0.5f
         }
 
-        // Optional animation
+        // Bounce animation
         holder.badgeContainer.scaleX = 0f
         holder.badgeContainer.scaleY = 0f
         holder.badgeContainer.animate()
@@ -56,7 +58,7 @@ class BadgeAdapter(
             .setInterpolator(OvershootInterpolator())
             .start()
 
-        // Click behavior
+        // Click action
         holder.itemView.setOnClickListener {
             if (isUnlocked) {
                 onBadgeClick?.invoke(badge)
@@ -68,6 +70,12 @@ class BadgeAdapter(
     }
 
     override fun getItemCount(): Int = badgeList.size
+
+    fun updateUnlockedBadgeIds(newUnlockedIds: List<String>) {
+        unlockedBadgeIds.clear()
+        unlockedBadgeIds.addAll(newUnlockedIds)
+        notifyDataSetChanged()
+    }
 
     class BadgeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val badgeIcon: ImageView = itemView.findViewById(R.id.badge_icon)

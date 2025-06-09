@@ -8,29 +8,29 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.aj.flourish.R.id.progressBar
 import com.aj.flourish.Utils.BadgeConstants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AchievementsActivity : AppCompatActivity() {
+
     private lateinit var badgeRecyclerView: RecyclerView
     private lateinit var badgeAdapter: BadgeAdapter
     private lateinit var progressBar: ProgressBar
     private lateinit var emptyText: TextView
 
-    private val badgeList = BadgeConstants.allBadges
-    private val unlockedBadgeIds = mutableListOf<String>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_achievements)
 
+        // Initialize views
         badgeRecyclerView = findViewById(R.id.recycler_view_badges)
         progressBar = findViewById(R.id.progressBar)
         emptyText = findViewById(R.id.emptyText)
 
-        badgeAdapter = BadgeAdapter(badgeList, unlockedBadgeIds, this) { badge ->
+        // Set up RecyclerView and Adapter
+        badgeAdapter = BadgeAdapter(BadgeConstants.allBadges.toMutableList(), mutableListOf(), this) { badge ->
+            // Handle badge click
             val intent = Intent(this, BadgeDetailActivity::class.java)
             intent.putExtra("BADGE_ID", badge.id)
             startActivity(intent)
@@ -39,6 +39,7 @@ class AchievementsActivity : AppCompatActivity() {
         badgeRecyclerView.layoutManager = GridLayoutManager(this, 2)
         badgeRecyclerView.adapter = badgeAdapter
 
+        // Load data
         loadUnlockedBadges()
     }
 
@@ -47,7 +48,14 @@ class AchievementsActivity : AppCompatActivity() {
         emptyText.visibility = View.GONE
         badgeRecyclerView.visibility = View.GONE
 
-        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId == null) {
+            progressBar.visibility = View.GONE
+            emptyText.text = "User not logged in."
+            emptyText.visibility = View.VISIBLE
+            return
+        }
+
         val badgeCollection = FirebaseFirestore.getInstance()
             .collection("users")
             .document(userId)
@@ -55,18 +63,19 @@ class AchievementsActivity : AppCompatActivity() {
 
         badgeCollection.get()
             .addOnSuccessListener { documents ->
-                unlockedBadgeIds.clear()
+                val unlockedIds = mutableListOf<String>()
                 for (doc in documents) {
                     val isUnlocked = doc.getBoolean("isUnlocked") ?: false
                     if (isUnlocked) {
-                        unlockedBadgeIds.add(doc.id)
+                        unlockedIds.add(doc.id)
                     }
                 }
 
-                badgeAdapter.notifyDataSetChanged()
-                progressBar.visibility = View.GONE
+                // Update adapter with new unlocked badges
+                badgeAdapter.updateUnlockedBadgeIds(unlockedIds)
 
-                if (unlockedBadgeIds.isEmpty()) {
+                progressBar.visibility = View.GONE
+                if (unlockedIds.isEmpty()) {
                     emptyText.visibility = View.VISIBLE
                 } else {
                     badgeRecyclerView.visibility = View.VISIBLE
@@ -74,8 +83,8 @@ class AchievementsActivity : AppCompatActivity() {
             }
             .addOnFailureListener { e ->
                 progressBar.visibility = View.GONE
-                emptyText.visibility = View.VISIBLE
                 emptyText.text = "Failed to load badges: ${e.message}"
+                emptyText.visibility = View.VISIBLE
             }
     }
 }

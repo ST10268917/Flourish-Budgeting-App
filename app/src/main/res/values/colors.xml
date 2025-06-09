@@ -1,27 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Base colors -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Teal palette -->
     <color name="teal">#13C8B1</color>
-    <color name="darkGreen">#003B3B</color>
-    <color name="lightGreen">#B2DFDB</color>
     <color name="turquoise">#00C1A4</color>
-    <color name="mintGreen">#DFF7E2</color>
     <color name="darkTeal">#004d4d</color>
+    <color name="lightGreen">#B2DFDB</color>
+    <color name="mintGreen">#DFF7E2</color>
+    <color name="glow">#80DEEA</color>
+    <color name="teal_200">#03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+
+    <!-- Grey shades -->
     <color name="lightGrey">#F0F0F0</color>
+    <color name="grey_light">#D3D3D3</color>
+    <color name="grey_medium">#A9A9A9</color>
+    <color name="grey_dark">#696969</color>
+    <color name="darkGreen">#003B3B</color>
     <color name="darkPurple">#F0F0F0</color>
     <color name="red">#F0F0F0</color>
-    <color name="grey_light">#D3D3D3</color>  <!-- Light grey -->
-    <color name="grey_medium">#A9A9A9</color> <!-- Medium grey -->
-    <color name="grey_dark">#696969</color>   <!-- Dark grey -->
+
 
     <!--    categories-->
     <color name="purple">#9D00FF</color>
     <color name="primary">#009688</color> <!-- example teal -->
-    <color name="glow">#80DEEA</color>   <!-- light teal glow -->
+      <!-- light teal glow -->
     <color name="grey">#B0BEC5</color>   <!-- soft grey -->
-    <color name="teal_200">#03DAC5</color>
 
+
+
+
+    <!-- Calculator specific (Updated) -->
+    <color name="button_color">#333333</color> <!-- Neutral dark -->
+    <color name="operator_color">#00C1A4</color> <!-- Replaced orange with turquoise -->
+
+    <!-- Material defaults (if used) -->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
 
 
 </resources>
+
+

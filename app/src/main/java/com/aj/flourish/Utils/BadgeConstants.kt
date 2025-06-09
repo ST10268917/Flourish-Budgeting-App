@@ -32,10 +32,10 @@ object  BadgeConstants {
             iconRes = R.drawable.ic_badge1_7_days
         ),
         Badge(
-            id = "no_overspending_week",
-            name = "No Overspending This Week",
-            description = "You stayed within your budget this week. Great discipline!",
-            iconRes = R.drawable.ic_badge5_no_overspend
+            id = "five_expenses_one_category",
+            name = "Dedicated Tracker",
+            description = "You've logged 5 expenses in a single category. Keep going!",
+            iconRes = R.drawable.ic_badge_tracker
         ),
         Badge(
             id = "calculator_used_3_times",
@@ -43,16 +43,26 @@ object  BadgeConstants {
             description = "You've used the currency calculator 3 times.",
             iconRes = R.drawable.ic_badge6_calculator
         ),
-        // Add the code for more badges here
-                Badge(
-                id = "filter_test",
+        Badge(
+            id = "filter_test",
         name = "Filter Explorer",
         description = "You've filtered your expenses — keep digging!",
         iconRes = R.drawable.ic_badge6_calculator, // You can use a real icon or default one like ic_badge_default
         isUnlocked = false
+        ),
+       Badge(
+            id = "under_budget",
+    name = "Budget Master",
+    description = "You stayed under budget for a category. Smart and strategic!",
+    lockedDescription = "Stay under your set budget in a category to unlock this badge.",
+    iconRes = R.drawable.ic_badge_under_budget
     )
 
+
+            // Add the code for more badges here
     )
+
+
     fun getBadgeById(id: String): Badge? {
         return allBadges.find { it.id == id }
     }

@@ -5,11 +5,12 @@
     android:layout_height="match_parent"
     android:background="@color/teal">
 
+    <!-- Main card, bottom margin leaves space for navbar -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="100dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         app:cardBackgroundColor="@color/darkGreen"
@@ -29,7 +30,7 @@
                 android:textSize="24sp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,7 +38,7 @@
                 android:text="Minimum Amount"
                 android:textSize="20sp"
                 android:textColor="@color/white"
-                android:layout_marginBottom="4dp"/>
+                android:layout_marginBottom="4dp" />
 
             <EditText
                 android:id="@+id/etMin"
@@ -48,7 +49,7 @@
                 android:background="@drawable/edit_text_background"
                 android:padding="12dp"
                 android:textColor="@color/black"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -56,7 +57,7 @@
                 android:text="Maximum Amount"
                 android:textSize="20sp"
                 android:textColor="@color/white"
-                android:layout_marginBottom="4dp"/>
+                android:layout_marginBottom="4dp" />
 
             <EditText
                 android:id="@+id/etMax"
@@ -66,11 +67,12 @@
                 android:hint="e.g. 500.00"
                 android:background="@drawable/edit_text_background"
                 android:padding="12dp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <!-- Back button -->
     <ImageView
         android:id="@+id/ivBack"
         android:layout_width="24dp"
@@ -79,5 +81,17 @@
         android:src="@drawable/ic_back_arrow"
         app:tint="@color/white"
         android:layout_gravity="top|start" />
+
+    <!-- Bottom Navigation View -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/custom_bottom_nav_background"
+        app:itemIconTint="@color/nav_item_selector"
+        app:itemTextColor="@color/nav_item_selector"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_menu" />
 
 </FrameLayout>

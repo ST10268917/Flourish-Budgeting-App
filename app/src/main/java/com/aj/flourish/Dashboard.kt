@@ -2,6 +2,7 @@ package com.aj.flourish
 
 // Standard AndroidX and Android UI imports
 import android.content.Context
+import androidx.core.view.GravityCompat
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -54,8 +55,12 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.components.Legend
 import android.graphics.Color
 import android.view.View // New import for android.view.View
+import androidx.drawerlayout.widget.DrawerLayout
+import com.aj.flourish.Utils.LoginTracker
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.tasks.await
+
 
 
 class Dashboard : AppCompatActivity() {
@@ -78,6 +83,9 @@ class Dashboard : AppCompatActivity() {
     private lateinit var ivSettings: ImageView
     private lateinit var ivNotifications: ImageView
 
+    val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
+    val ivMenu = findViewById<ImageView>(R.id.ivMenu)
+
     // Existing Budget Overview CardView UI declarations (ProgressBar removed)
     private lateinit var tvTotalBudget: TextView
     private lateinit var tvRemainingBudget: TextView
@@ -95,6 +103,8 @@ class Dashboard : AppCompatActivity() {
     private lateinit var rvRecentTransactions: RecyclerView
     private lateinit var recentTransactionsAdapter: ExpenseAdapter
     private val recentTransactionsList = mutableListOf<Expense>()
+    val calculatorBtn = findViewById<Button>(R.id.calculatorBtn)
+    val achievementsBtn = findViewById<Button>(R.id.achievementsBtn)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -141,7 +151,10 @@ class Dashboard : AppCompatActivity() {
         btnViewAllBadges.setOnClickListener {
             startActivity(Intent(this, AchievementsActivity::class.java)) // Replace with BadgesActivity if you used that name
         }
-
+        //This is for the menu
+        ivMenu.setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
         // Set up the Spinner listener BEFORE loading initial data
         spinnerPeriodFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -219,12 +232,47 @@ class Dashboard : AppCompatActivity() {
         currencyConverterBtn.setOnClickListener {
             startActivity(Intent(this, CurrencyConverterActivity::class.java))
         }
+        calculatorBtn.setOnClickListener {
+            startActivity(Intent(this, CalculatorActivity::class.java))
+        }
+
+        achievementsBtn.setOnClickListener {
+            startActivity(Intent(this, AchievementsActivity::class.java))
+        }
 
         setButtonIcons() // Your existing function to set drawable icons on buttons
 
+        //side menu dashboard
+        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
+        val navigationView = findViewById<NavigationView>(R.id.navigationView)
+
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_currency_converter -> {
+                    startActivity(Intent(this, CurrencyConverterActivity::class.java))
+                }
+                R.id.nav_calculator -> {
+                    startActivity(Intent(this, CalculatorActivity::class.java))
+                }
+                R.id.nav_achievements -> {
+                    startActivity(Intent(this, AchievementsActivity::class.java))
+                }
+            }
+
+            // Close the drawer after item is clicked
+            drawerLayout.closeDrawers()
+            true
+        }
+
+
         val prefs = getSharedPreferences("login_tracker", Context.MODE_PRIVATE)
-        val streak = prefs.getInt("login_streak", 0)
+        val streak = LoginTracker.updateLoginStreak(this) {
+            // Optional callback when badge is unlocked
+            Log.d("LoginTracker", "7-day badge triggered.")
+        }
+
         tvLoginStreak.text = "Login Streak: $streak day${if (streak != 1) "s" else ""}"
+
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNav.setOnItemSelectedListener { item ->
@@ -273,6 +321,10 @@ class Dashboard : AppCompatActivity() {
         allExpensesBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_expenses, 0, 0, 0)
         categoriesBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_categories, 0, 0, 0)
     }
+
+
+
+
 
     // Helper function to determine dates based on Spinner selection ---
     private fun loadDashboardDataForSelectedPeriod(periodIndex: Int) {

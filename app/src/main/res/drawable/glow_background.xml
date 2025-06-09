@@ -1,23 +1,18 @@
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Outer glow layer -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/primary" />
-            <corners android:radius="30dp" />
-            <stroke android:width="2dp" android:color="@color/glow" />
+            <solid android:color="#00FFFFFF" /> <!-- Transparent center -->
+            <stroke android:width="8dp" android:color="#FFD700" /> <!-- Gold glow -->
+            <corners android:radius="32dp" />
         </shape>
     </item>
-    <item>
+
+    <!-- Inner solid background if needed -->
+    <item android:top="4dp" android:bottom="4dp" android:left="4dp" android:right="4dp">
         <shape android:shape="rectangle">
-            <solid android:color="@color/primary" />
-            <corners android:radius="30dp" />
-            <stroke android:width="2dp" android:color="@color/glow" />
-            <gradient
-                android:type="radial"
-                android:gradientRadius="100"
-                android:centerX="50%"
-                android:centerY="50%"
-                android:startColor="@color/glow"
-                android:endColor="@android:color/transparent" />
+            <solid android:color="@android:color/white" />
+            <corners android:radius="24dp" />
         </shape>
     </item>
-</selector>
+</layer-list>
