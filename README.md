@@ -9,22 +9,23 @@ Flourish is an intelligent and user-friendly Android budgeting app designed to s
 
 1.  [Introduction](#introduction)
 2.  [Timeline](#timeline)
-3.  [Features](#features)
-4.  [Two Features](#features)
-5.  [Functionality Requirements](#functionality-requirements)
-6.  [Setup Instructions](#setup-instructions)
-7.  [Installation and Setup](#installation-and-setup)
-8.  [Building and Running the Prototype](#building-and-running-the-prototype)
-9.  [System Functionalities and User Roles](#system-functionalities-and-user-roles)
-10.  [Roadmap](#roadmap)
-11.  [Demo Video](#demo-video)
-12. [Technology Stack](#technology-stack)
-13. [Coding Activity](#coding-activity)
-14. [Get Started](#get-started)
-15. [GitHub and GitHub Actions Usage](#github-and-github-actions-usage)
-16. [Contributing](#contributing)
-17. [Reference List](#reference-list)
-18. [Group Members](#Group-Members)
+3.  [Improvements](#improvements)
+4.  [Features](#features)
+5.  [Two Features](#features)
+6.  [Functionality Requirements](#functionality-requirements)
+7.  [Setup Instructions](#setup-instructions)
+8.  [Installation and Setup](#installation-and-setup)
+9.  [Building and Running the Prototype](#building-and-running-the-prototype)
+10.  [System Functionalities and User Roles](#system-functionalities-and-user-roles)
+11.  [Roadmap](#roadmap)
+12.  [Demo Video](#demo-video)
+13. [Technology Stack](#technology-stack)
+14. [Coding Activity](#coding-activity)
+15. [Get Started](#get-started)
+16. [GitHub and GitHub Actions Usage](#github-and-github-actions-usage)
+17. [Contributing](#contributing)
+18. [Reference List](#reference-list)
+19. [Group Members](#Group-Members)
 
 ## 🟢Introduction
 
@@ -35,6 +36,12 @@ Flourish empowers students and young professionals to take control of their fina
 * **Part 1:** In Part 1, we conducted research, developed a detailed project plan, and created design documents to guide the development process.
 * **Part 2:** In Part 2,We started implementing the core features based on the Flourish app requirements.
 * **Part 3:** In Part 3, we refined the application by incorporating feedback from our lecturer. The end result is a fully functional mobile app that runs smoothly on a mobile device.
+
+## 🟠 Improvements
+* In Part 1, we followed the project requirements and planned the structure of our Flourish app.
+* In Part 2, we began building the application and received feedback from our lecturer, who suggested adding a navigation bar for better usability.
+* In Part 3, we implemented the navigation bar and refined the app accordingly.
+  
 
 ## 🟠 Features
 
@@ -48,7 +55,7 @@ Flourish empowers students and young professionals to take control of their fina
 
 ## 🟠 Two Features 
 
-*1* Currency Converter 
+**1** Currency Converter 
 
 Flourish includes a dedicated Currency Exchange feature, allowing users to view and convert between currencies using real-time exchange rates. This supports international students or users who earn/spend across different currencies.
 
@@ -62,18 +69,15 @@ Main Functions/Purpose  :
 
 * Tied directly into expense tracking and category summaries.
 
-*2* Gamification
+**2** Gamification
 
 To boost user motivation and engagement, Flourish introduces a gamified budgeting journey. Users are rewarded with visual achievements and can build streaks for consistent budgeting behavior.
 
 Main Functions/Purpose  :
 
-
 * Achievement Badges: Earned for milestones like first budget set, week-long streak, or consistent saving.
 
 *  Daily Streaks: Encourages daily logins and financial activity.
-
-* Finance Quizzes & XP (Planned): Optional mini-quizzes to earn XP and unlock insights.
 
 *  Leaderboard (Stretch Goal): Compete with friends via secure code.
 
