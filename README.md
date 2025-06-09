@@ -143,7 +143,7 @@ This built-in calculator allows the user to perform mathematical calculations to
 3.  Sync Gradle and resolve dependencies
 4.  Connect your Firebase project
 5.  Update `google-services.json`
-6.  Run the app on emulator/device 
+6.  Run the app on emulator/device
 
 ## Building and Running the Prototype
 
@@ -264,14 +264,14 @@ This built-in calculator allows the user to perform mathematical calculations to
 
 ![image](https://github.com/user-attachments/assets/999b9577-df08-4ea9-9ee4-09a792104278)
 
-- Converts an amount from one currency to another using live exchange rates from APIs
+- Converts an amount from one currency to another using live exchange rates from an API
 
 
 ## Demo Video
 **Youtube Link:** https://youtu.be/wzVz7D5z9O0
 
 ## Github Repository
-**Github Link:** 
+**Github Link:** https://github.com/ST10268917/Flourish-Budgeting-App.git 
 
 
 > Tools and languages used.
