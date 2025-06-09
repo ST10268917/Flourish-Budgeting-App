@@ -8,26 +8,33 @@ Flourish is an intelligent and user-friendly Android budgeting app designed to s
 ## Table of Contents
 
 1.  [Introduction](#introduction)
-2.  [Features](#features)
-3.  [Two Features](#features)
-4.  [Functionality Requirements](#functionality-requirements)
-5.  [Setup Instructions](#setup-instructions)
-6.  [Installation and Setup](#installation-and-setup)
-7.  [Building and Running the Prototype](#building-and-running-the-prototype)
-8.  [System Functionalities and User Roles](#system-functionalities-and-user-roles)
-9.  [Roadmap](#roadmap)
-10.  [Demo Video](#demo-video)
-11. [Technology Stack](#technology-stack)
-12. [Coding Activity](#coding-activity)
-13. [Get Started](#get-started)
-14. [GitHub and GitHub Actions Usage](#github-and-github-actions-usage)
-15. [Contributing](#contributing)
-16. [Reference List](#reference-list)
-17. [Group Members](#Group-Members)
+2.  [Timeline](#timeline)
+3.  [Features](#features)
+4.  [Two Features](#features)
+5.  [Functionality Requirements](#functionality-requirements)
+6.  [Setup Instructions](#setup-instructions)
+7.  [Installation and Setup](#installation-and-setup)
+8.  [Building and Running the Prototype](#building-and-running-the-prototype)
+9.  [System Functionalities and User Roles](#system-functionalities-and-user-roles)
+10.  [Roadmap](#roadmap)
+11.  [Demo Video](#demo-video)
+12. [Technology Stack](#technology-stack)
+13. [Coding Activity](#coding-activity)
+14. [Get Started](#get-started)
+15. [GitHub and GitHub Actions Usage](#github-and-github-actions-usage)
+16. [Contributing](#contributing)
+17. [Reference List](#reference-list)
+18. [Group Members](#Group-Members)
 
 ## 🟢Introduction
 
-Flourish empowers students and young professionals to take control of their finances effortlessly. Unlike traditional budgeting apps, it combines real-time spending insights, interactive financial dashboards, and multi-currency support with a gamified learning experience. (OpenAI, 2025). Built for clarity and engagement, Flourish turns complex money management into an intuitive, educational, and even rewarding journey just from your smartphone. (OpenAI, 2025)
+Flourish empowers students and young professionals to take control of their finances effortlessly. Unlike traditional budgeting apps, it combines real-time spending insights, interactive financial dashboards, and multi-currency support with a gamified learning experience. (OpenAI, 2025). Built for clarity and engagement, Flourish turns complex money management into an intuitive, educational, and even rewarding journey just from your smartphone. (OpenAI, 2025).
+
+## 🟠 Timeline 
+
+* **Part 1:** In Part 1, we conducted research, developed a detailed project plan, and created design documents to guide the development process.
+* **Part 2:** In Part 2,We started implementing the core features based on the Flourish app requirements.
+* **Part 3:** In Part 3, we refined the application by incorporating feedback from our lecturer. The end result is a fully functional mobile app that runs smoothly on a mobile device.
 
 ## 🟠 Features
 
