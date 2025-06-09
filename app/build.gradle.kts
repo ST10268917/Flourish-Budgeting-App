@@ -35,6 +35,11 @@ android {
 
         println("🔍 SUPABASE_URL: $supabaseUrl")
         println("🔍 SUPABASE_KEY: ${supabaseKey.take(10)}...")
+
+        val exchangeRateApiKey: String = localProperties.getProperty("EXCHANGERATE_API_KEY") ?: ""
+        buildConfigField("String", "EXCHANGERATE_API_KEY", "\"${exchangeRateApiKey}\"")
+        println("🔍 EXCHANGERATE_API_KEY: ${exchangeRateApiKey.take(10)}...")
+
     }
 
     buildFeatures {
@@ -101,5 +106,5 @@ dependencies {
     implementation("nl.dionsegijn:konfetti-xml:2.0.2")
     ksp("com.google.devtools.ksp:symbol-processing-api:2.1.0-1.0.28")
 
-
+    
 }

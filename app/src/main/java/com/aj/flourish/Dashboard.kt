@@ -66,6 +66,7 @@ class Dashboard : AppCompatActivity() {
     private lateinit var allExpensesBtn: Button
     private lateinit var categoriesBtn: Button
     private lateinit var tvLoginStreak: TextView
+    private lateinit var currencyConverterBtn: Button
 
 
     private lateinit var rvCategoryBudgets: RecyclerView
@@ -107,6 +108,7 @@ class Dashboard : AppCompatActivity() {
         allExpensesBtn = findViewById(R.id.allExpensesBtn)
         categoriesBtn = findViewById(R.id.categoriesBtn)
         tvLoginStreak = findViewById(R.id.tvLoginStreak)
+        currencyConverterBtn = findViewById(R.id.currencyConverterBtn)
 
         rvCategoryBudgets = findViewById(R.id.rvCategoryBudgets)
         rvCategoryBudgets.layoutManager = LinearLayoutManager(this)
@@ -213,6 +215,10 @@ class Dashboard : AppCompatActivity() {
 
         btnFilterExpenses.setOnClickListener {
             startActivity(Intent(this, FilterExpensesActivity::class.java))
+        }
+
+        currencyConverterBtn.setOnClickListener {
+            startActivity(Intent(this, CurrencyConverterActivity::class.java))
         }
 
         setButtonIcons() // Your existing function to set drawable icons on buttons
