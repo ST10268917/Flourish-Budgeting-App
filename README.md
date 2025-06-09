@@ -141,9 +141,10 @@ This built-in calculator allows the user to perform mathematical calculations to
 1.  Clone the repository
 2.  Open it in Android Studio
 3.  Sync Gradle and resolve dependencies
-4.  Connect your Firebase project
-5.  Update `google-services.json`
-6.  Run the app on emulator/device
+4.  Create your local.properties file. Copy the sample file local.properties.example. Fill in your local API keys in the local.properties file
+6.  Connect your Firebase project
+7.  Update `google-services.json`
+8.  Run the app on emulator/device
 
 ## Building and Running the Prototype
 
