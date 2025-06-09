@@ -81,7 +81,7 @@ Flourish includes a dedicated Currency Exchange feature, allowing users to view 
 
 To boost user motivation and engagement, Flourish introduces a gamified budgeting journey. Users are rewarded with visual achievements (badges) and can build streaks for consistent budgeting behavior. Achievement Badges are earned for milestones like first budget set etc. Daily Streaks: Encourages daily logins and financial activity.
 
-**2**   **Calculator**
+**3**   **Calculator**
 
 This built-in calculator allows the user to perform mathematical calculations to manage their finances without having to leave the app. 
 
