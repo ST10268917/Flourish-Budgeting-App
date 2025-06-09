@@ -269,6 +269,8 @@ This built-in calculator allows the user to perform mathematical calculations to
 
 
   **Gamification:**
+
+
   ![image](https://github.com/user-attachments/assets/1e246f7e-ea3b-4e39-ab15-ce22ce42491e)
 
 - Flourish boosts motivation with a gamified budgeting journey. Users earn badges for milestones like setting their first budget and build daily streaks for consistent activity and logins.
