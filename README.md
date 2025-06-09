@@ -328,9 +328,6 @@ We welcome your ideas and fixes:
 
 ## 🟢 Reference List
 
-Draw.io, 2023. draw.io. [online] Available at: [https://app.diagrams.net/](https://app.diagrams.net/) [Accessed 2 April 2025].
-
-Figma, 2025. Figma. [online] Available at: [https://www.figma.com/](https://www.figma.com/) [Accessed 2 April 2025].
 
 Google Fonts. n.d. Browse Fonts - Google Fonts. [online] Available at: [https://fonts.google.com/](https://fonts.google.com/) [Accessed 2 May 2025].
 
