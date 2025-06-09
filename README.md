@@ -36,7 +36,8 @@ Flourish empowers students and young professionals to take control of their fina
 * **Smart Insights:** View summaries of total spend per category for a selected period.
 * **Receipt Management:** Attach photos from the camera or gallery for better record-keeping.
 * **User Authentication:** Sign in securely using Firebase Authentication.
-* **Gamified Experience:** Motivating visuals and feedback to encourage better money habits (Final POE - *Note: This is mentioned as a general feature, but the Functionality Requirements specify this is implemented in Part 3*).
+* **Currency Converter:** Flourish's Currency Exchange allows users to convert currencies in real time using up-to-date rates.
+* **Gamified Experience:** Motivating visuals and feedback to encourage better money habits.
 
 ## 🟠 Two Features 
 
@@ -44,18 +45,22 @@ Flourish empowers students and young professionals to take control of their fina
 
 Flourish includes a dedicated Currency Exchange feature, allowing users to view and convert between currencies using real-time exchange rates. This supports international students or users who earn/spend across different currencies.
 
-Main Functions :
-* Converts between multiple global currencies.
+Main Functions/Purpose  :
+
+* Converts between global currencies.
 
 * Real-time rates fetched from online APIs.
 
-* Accessible under the “Currency Exchange” page.
+* Accessible under the Currency Exchange page.
 
 * Tied directly into expense tracking and category summaries.
 
 *2* Gamification
 
 To boost user motivation and engagement, Flourish introduces a gamified budgeting journey. Users are rewarded with visual achievements and can build streaks for consistent budgeting behavior.
+
+Main Functions/Purpose  :
+
 
 * Achievement Badges: Earned for milestones like first budget set, week-long streak, or consistent saving.
 
@@ -72,13 +77,14 @@ To boost user motivation and engagement, Flourish introduces a gamified budgetin
 * **User Registration & Authentication:**
 
     * Email sign-up and login
-    * Secure password encryption & two-factor authentication
+    * Secure password encryption 
 
 * **Financial Dashboard:**
 
     * View total balance across accounts
     * Monthly budget overview
-    * Upcoming bills & recent transactions 
+    * Upcoming bills & recent transactions
+    * View graphs 
 
 * **Income & Expense Tracking:**
 
@@ -93,34 +99,18 @@ To boost user motivation and engagement, Flourish introduces a gamified budgetin
 
 * **Notifications:**
 
-    * Reminders for bills, overdue payments, and budget updates
+    * Reminders for bills, overdue payments, and budget updates.
       
-* **Multi-Currency Support:**
-
-    * Select default currency
-    * Real-time exchange rates
-    * Multi-currency transaction recording 
-
-* **Financial Literacy Hub:**
-
-    * Videos, podcasts, and articles
-    * Categorized by media type and difficulty level 
 
 * **Built-in Calculator:**
 
     * For complex calculations prior to logging transactions.
 
-* **Reports & Statements:**
-
-    * Downloadable PDF statements
-    * Graphical insights
-    * Custom date range
-
-* **Currency Exchange Page:**
+* **Currency Converter:**
 
     * Real-time exchange rate display and conversions 
 
-* **Gamification:** (Implemented only in PART 3)
+* **Gamification:** 
 
     * Achievement badges
     * Daily streaks
@@ -159,7 +149,7 @@ To boost user motivation and engagement, Flourish introduces a gamified budgetin
     * Create/manage budgets
     * Set savings goals
     * Access financial content
-    * Earn badges (Part 3)
+    * Earn badges
 
 
 ## 🟢 Roadmap
