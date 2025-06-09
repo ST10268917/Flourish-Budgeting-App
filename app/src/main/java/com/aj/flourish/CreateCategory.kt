@@ -264,7 +264,9 @@ class CreateCategory : AppCompatActivity() {
             if (response.isSuccessful) {
                 "https://cbwdbipbwbyxszjmibnm.supabase.co/storage/v1/object/public/$bucket/$fileName"
             } else {
+                Log.e("SUPABASE_UPLOAD", "Upload failed with code: ${response.code()}, message: ${response.message()}")
                 null
+
             }
         }
     }

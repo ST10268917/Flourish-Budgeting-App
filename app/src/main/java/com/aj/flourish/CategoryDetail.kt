@@ -145,7 +145,16 @@ class CategoryDetail : AppCompatActivity() {
         val categoryImageUri = intent.getStringExtra("categoryImageUri")
 
         textView.text = categoryName
-        if (categoryImageUri != null) imageView.setImageURI(Uri.parse(categoryImageUri))
+        if (categoryImageUri != null && categoryImageUri.isNotEmpty()) {
+            Glide.with(this)
+                .load(categoryImageUri)
+                .placeholder(R.drawable.ic_category)
+                .error(R.drawable.ic_error)
+                .into(imageView)
+        } else {
+            imageView.setImageResource(R.drawable.ic_category)
+        }
+
 
         loadExpensesFromFirebase()
     }
