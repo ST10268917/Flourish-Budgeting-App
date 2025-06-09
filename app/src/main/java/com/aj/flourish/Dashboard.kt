@@ -55,6 +55,7 @@ import com.github.mikephil.charting.components.Legend
 import android.graphics.Color
 import android.view.View // New import for android.view.View
 import android.widget.LinearLayout
+import com.github.mikephil.charting.components.LimitLine
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.tasks.await
 
@@ -68,6 +69,8 @@ class Dashboard : AppCompatActivity() {
     private lateinit var categoriesBtn: Button
     private lateinit var tvLoginStreak: TextView
     private lateinit var currencyConverterBtn: Button
+    private lateinit var tvGoalsSummary: TextView
+
 
     private lateinit var rvCategoryBudgets: RecyclerView
     private lateinit var categoryBudgetAdapter: CategoryBudgetAdapter
@@ -109,6 +112,7 @@ class Dashboard : AppCompatActivity() {
         tvLoginStreak = findViewById(R.id.tvLoginStreak)
         currencyConverterBtn = findViewById(R.id.currencyConverterBtn)
         tvCategorySpending = findViewById(R.id.tvCategorySpending)
+        tvGoalsSummary = findViewById(R.id.tvGoalsSummary)
 
         rvCategoryBudgets = findViewById(R.id.rvCategoryBudgets)
         rvCategoryBudgets.layoutManager = LinearLayoutManager(this)
@@ -371,6 +375,23 @@ class Dashboard : AppCompatActivity() {
 
             val allCategories = CategoryRepository().getCategories()
             Log.d("Dashboard", "Fetched ${allCategories.size} categories.")
+            // Fetch all budgets in the selected period
+            val budgetDocs = FirebaseFirestore.getInstance()
+                .collection("users")
+                .document(userId)
+                .collection("budgets")
+                .whereGreaterThanOrEqualTo("startDate", startDate)
+                .whereLessThanOrEqualTo("endDate", endDate)
+                .get()
+                .await()
+
+            val budgetList = budgetDocs.documents.mapNotNull { it.toObject(Budget::class.java) }
+
+// Sum min and max goals for the entire period
+            val totalMinGoal = budgetList.sumOf { it.minAmount }
+            val totalMaxGoal = budgetList.sumOf { it.maxAmount }
+
+            Log.d("Dashboard", "Total Min Goal: $totalMinGoal, Total Max Goal: $totalMaxGoal")
 
             // Fetch category budgets and compare spending
             val db = FirebaseFirestore.getInstance()
@@ -438,8 +459,20 @@ class Dashboard : AppCompatActivity() {
                     Log.d("Dashboard", "Cleared budget details for non-current month view.")
                 }
 
+                var totalMinGoal = 0.0
+                var totalMaxGoal = 0.0
+
+                for (budget in categoryBudgets) {
+                    totalMinGoal += budget.minAmount
+                    totalMaxGoal += budget.maxAmount
+                }
+                Log.d("Dashboard", "totalMinGoal: $totalMinGoal, totalMaxGoal: $totalMaxGoal")
+
+                fetchCurrentMonthBudget()
+
                 // Chart and transactions
-                setupCategorySpendingChart(expensesForSelectedPeriod, allCategories)
+                setupCategorySpendingChart(expensesForSelectedPeriod, allCategories, totalMinGoal, totalMaxGoal)
+
                 loadRecentTransactions(startDate, endDate)
 
                 val selectedMonth = Calendar.getInstance().get(Calendar.MONTH) + 1
@@ -483,6 +516,38 @@ class Dashboard : AppCompatActivity() {
     }
 
 
+    private fun fetchCurrentMonthBudget() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val calendar = Calendar.getInstance()
+        val currentMonth = calendar.get(Calendar.MONTH) + 1  // +1 because Calendar.MONTH is zero-based
+        val currentYear = calendar.get(Calendar.YEAR)
+
+        val budgetDocId = "${currentYear}_${currentMonth}"
+
+        FirebaseFirestore.getInstance()
+            .collection("users")
+            .document(userId)
+            .collection("budgets")
+            .document(budgetDocId)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val budget = document.toObject(Budget::class.java)
+                    val minGoal = budget?.minAmount ?: 0.0
+                    val maxGoal = budget?.maxAmount ?: 0.0
+                    tvGoalsSummary.text = "Min Goal: ${UserSettings.currencySymbol} ${"%.2f".format(minGoal)}, " +
+                            "Max Goal: ${UserSettings.currencySymbol} ${"%.2f".format(maxGoal)}"
+                } else {
+                    tvGoalsSummary.text = "No budget set for this month."
+                }
+            }
+            .addOnFailureListener { e ->
+                tvGoalsSummary.text = "Failed to load budget."
+                Log.e("Dashboard", "Error fetching current month budget: ${e.message}")
+            }
+    }
+
+
 
     // loadRecentTransactions accepts start and end dates ---
     private fun loadRecentTransactions(startDate: Long, endDate: Long) {
@@ -504,7 +569,12 @@ class Dashboard : AppCompatActivity() {
     }
 
     // --- Function to set up and populate the Bar Chart ---
-    private fun setupCategorySpendingChart(expenses: List<Expense>, categories: List<Category>) {
+    private fun setupCategorySpendingChart(
+        expenses: List<Expense>,
+        categories: List<Category>,
+        totalMinGoal: Double,
+        totalMaxGoal: Double
+    ) {
         Log.d("Dashboard", "setupCategorySpendingChart called with ${expenses.size} expenses and ${categories.size} categories.")
 
         // 1. Aggregate expenses by category
@@ -622,11 +692,26 @@ class Dashboard : AppCompatActivity() {
 
             // Left Y-axis configuration (spending amounts)
             axisLeft.apply {
-                axisMinimum = 0f // Start from 0
-                setDrawGridLines(true) // Draw horizontal grid lines
-                setDrawAxisLine(true) // Draw the axis line
-                textColor = Color.BLACK
-                textSize = 10f
+                removeAllLimitLines() // Remove previous limit lines
+
+                val minLimitLine = LimitLine(totalMinGoal.toFloat(), "Min Goal").apply {
+                    lineColor = Color.GREEN
+                    lineWidth = 2f
+                    textColor = Color.GREEN
+                    textSize = 10f
+                    enableDashedLine(10f, 10f, 0f)
+                }
+                addLimitLine(minLimitLine)
+
+                val maxLimitLine = LimitLine(totalMaxGoal.toFloat(), "Max Goal").apply {
+                    lineColor = Color.RED
+                    lineWidth = 2f
+                    textColor = Color.RED
+                    textSize = 10f
+                    enableDashedLine(10f, 10f, 0f)
+                }
+                addLimitLine(maxLimitLine)
+
             }
 
             // Right Y-axis (disable, as we only need one Y-axis for amounts)
