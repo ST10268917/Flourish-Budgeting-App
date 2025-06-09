@@ -9,10 +9,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aj.flourish.Utils.BadgeConstants
 import com.aj.flourish.R
+import com.aj.flourish.base.BaseActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
-class BadgeDetailActivity : AppCompatActivity() {
+class BadgeDetailActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

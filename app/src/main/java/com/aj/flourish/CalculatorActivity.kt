@@ -6,12 +6,13 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.aj.flourish.Utils.BadgeManager
+import com.aj.flourish.base.BaseActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class CalculatorActivity : AppCompatActivity() {
+class CalculatorActivity : BaseActivity() {
     private lateinit var tvResult: TextView
     private lateinit var tvHistory: TextView
     private var currentInput = StringBuilder()

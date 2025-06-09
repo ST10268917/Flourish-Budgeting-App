@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.aj.flourish.base.BaseActivity
 import com.aj.flourish.network.ExchangeRateResponse
 import com.aj.flourish.network.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CurrencyConverterActivity : AppCompatActivity() {
+class CurrencyConverterActivity : BaseActivity() {
     private val TAG = "CurrencyConverter"
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aj.flourish.Utils.BadgeManager
+import com.aj.flourish.base.BaseActivity
 import com.aj.flourish.models.Budget
 import com.aj.flourish.repositories.BudgetRepository
 import com.google.firebase.auth.FirebaseAuth
@@ -19,7 +20,7 @@ import kotlinx.coroutines.*
 import java.text.DateFormatSymbols
 import java.util.*
 
-class BudgetActivity : AppCompatActivity() {
+class BudgetActivity : BaseActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: BudgetAdapter
@@ -34,7 +35,7 @@ class BudgetActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_budget)
+        setContentView(R.layout.activity_budget) // Injects into base_layout automatically
 
         recyclerView = findViewById(R.id.recyclerViewBudgets)
         tvCurrentYear = findViewById(R.id.tvCurrentYear)

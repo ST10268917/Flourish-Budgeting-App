@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aj.flourish.Utils.BadgeManager
+import com.aj.flourish.base.BaseActivity
 import com.aj.flourish.models.Expense
 import com.aj.flourish.repositories.ExpenseRepository
 import com.google.firebase.auth.FirebaseAuth
@@ -25,7 +26,7 @@ import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
 
-class FilterExpensesActivity : AppCompatActivity() {
+class FilterExpensesActivity : BaseActivity() {
     private lateinit var expenseAdapter: ExpenseAdapter
     private lateinit var backButton: ImageView
     private lateinit var recyclerView: RecyclerView
@@ -87,9 +88,7 @@ class FilterExpensesActivity : AppCompatActivity() {
 
                     Toast.makeText(this@FilterExpensesActivity, "Filtered ${filteredExpenses.size} expenses", Toast.LENGTH_SHORT).show()
 
-                    // 🚨 TEST BADGE: Award every time filter is used
-                    Log.d("BadgeTest", "Triggering test badge from filter...")
-                    BadgeManager.checkAndUnlockBadge(this@FilterExpensesActivity, "filter_expense")  // change badgeId if needed
+
                 }
             }
         }

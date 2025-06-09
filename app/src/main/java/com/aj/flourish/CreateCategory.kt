@@ -24,6 +24,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import androidx.core.content.FileProvider
+import com.aj.flourish.base.BaseActivity
 import com.aj.flourish.models.Category
 import com.aj.flourish.models.CategoryBudget
 import com.aj.flourish.repositories.CategoryRepository
@@ -32,7 +33,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import java.util.Calendar
 
-class CreateCategory : AppCompatActivity() {
+class CreateCategory : BaseActivity() {
 
     private val categoryList = mutableListOf<Category>()
     private lateinit var categoryAdapter: CategoryAdapter

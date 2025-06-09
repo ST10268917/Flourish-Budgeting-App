@@ -30,6 +30,7 @@ import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aj.flourish.Utils.BadgeManager
+import com.aj.flourish.base.BaseActivity
 import com.aj.flourish.models.Expense
 import com.aj.flourish.repositories.ExpenseRepository
 import com.aj.flourish.supabase.RetrofitClient
@@ -47,7 +48,7 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CategoryDetail : AppCompatActivity() {
+class CategoryDetail : BaseActivity() {
     private lateinit var expenseAdapter: ExpenseAdapter
     private val expenseList = mutableListOf<Expense>()
     private var selectedReceiptUri: Uri? = null

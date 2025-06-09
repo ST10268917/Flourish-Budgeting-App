@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aj.flourish.Utils.BadgeManager // 🟡 BadgeManager for unlocking badges
+import com.aj.flourish.base.BaseActivity
 import com.aj.flourish.models.Category
 import com.aj.flourish.models.Expense
 import com.aj.flourish.repositories.CategoryRepository
@@ -16,7 +17,7 @@ import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CategorySpendingActivity : AppCompatActivity() {
+class CategorySpendingActivity : BaseActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: CategorySpendingAdapter

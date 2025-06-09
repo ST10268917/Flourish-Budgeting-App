@@ -9,10 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aj.flourish.Utils.BadgeConstants
+import com.aj.flourish.base.BaseActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class AchievementsActivity : AppCompatActivity() {
+class AchievementsActivity : BaseActivity() {
 
     private lateinit var badgeRecyclerView: RecyclerView
     private lateinit var badgeAdapter: BadgeAdapter

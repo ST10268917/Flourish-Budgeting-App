@@ -43,13 +43,7 @@ object  BadgeConstants {
             description = "You've used the currency calculator 3 times.",
             iconRes = R.drawable.ic_badge6_calculator
         ),
-        Badge(
-            id = "filter_test",
-        name = "Filter Explorer",
-        description = "You've filtered your expenses — keep digging!",
-        iconRes = R.drawable.ic_badge6_calculator, // You can use a real icon or default one like ic_badge_default
-        isUnlocked = false
-        ),
+
        Badge(
             id = "under_budget",
     name = "Budget Master",
@@ -58,8 +52,7 @@ object  BadgeConstants {
     iconRes = R.drawable.ic_badge_under_budget
     )
 
-
-            // Add the code for more badges here
+        // Add the code for more badges here
     )
 
 
