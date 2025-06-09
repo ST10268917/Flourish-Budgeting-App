@@ -10,16 +10,16 @@ Flourish is an intelligent and user-friendly Android budgeting app designed to s
 1.  [Introduction](#introduction)
 2.  [Purpose of the App](#purpose-of-the-app)
 3.  [Timeline](#timeline)
-4.  [Improvements](#improvements)
+4.  [Lecturer Feedback](#lecturer-feedback)
 5.  [Features](#features)
-6.  [Two Features](#features)
-7.  [Functionality Requirements](#functionality-requirements)
+6.  [Own Features](#features)
+7.  [Functional Requirements](#functionality-requirements)
 8.  [Setup Instructions](#setup-instructions)
 9.  [Installation and Setup](#installation-and-setup)
-10.  [Building and Running the Prototype](#building-and-running-the-prototype)
-11.  [System Functionalities and User Roles](#system-functionalities-and-user-roles)
-12.  [Roadmap](#roadmap)
-13.  [Demo Video](#demo-video)
+10. [Building and Running the Prototype](#building-and-running-the-prototype)
+11. [System Functionalities and User Roles](#system-functionalities-and-user-roles)
+12. [Roadmap](#roadmap)
+13. [Demo Video](#demo-video)
 14. [Technology Stack](#technology-stack)
 15. [Coding Activity](#coding-activity)
 16. [Get Started](#get-started)
@@ -50,18 +50,15 @@ Unlike standard budgeting apps, Flourish focuses on:
 * Fun and motivation through rewards and milestones
 
 
-
 ## 🟠 Timeline 
 
-* **Part 1:** In Part 1, we conducted research, developed a detailed project plan, and created design documents to guide the development process.
-* **Part 2:** In Part 2,We started implementing the core features based on the Flourish app requirements.
-* **Part 3:** In Part 3, we refined the application by incorporating feedback from our lecturer. The end result is a fully functional mobile app that runs smoothly on a mobile device.
+* **Part 1:** In Part 1, we conducted research by looking at existing budgeting apps and created a design document to guide the development process.
+* **Part 2:** In Part 2, we started implementing the core features of the Flourish app. This included login/signup, adding categories and expenses and setting a budget for the month. 
+* **Part 3:** In Part 3, we refined the application by incorporating feedback from our lecturer. We also implemented graphics and visuals, gamification, a currency converter and a calculator. The end result is a fully functional mobile app that runs smoothly on a mobile device.
 
-## 🟠 Improvements
-* In Part 1, we followed the project requirements and planned the structure of our Flourish app.
-* In Part 2, we began building the application and received feedback from our lecturer, who suggested adding a navigation bar for better usability.
-* In Part 3, we implemented the navigation bar and refined the app accordingly.
-  
+## 🟠 Lecturer Feedback
+In Part 2, our lecturer gave us feedback to add a navbar and menu for easy navigation across the app screens. We implemented this in Part 3. 
+
 
 ## 🟠 Features
 
@@ -71,43 +68,26 @@ Unlike standard budgeting apps, Flourish focuses on:
 * **Receipt Management:** Attach photos from the camera or gallery for better record-keeping.
 * **User Authentication:** Sign in securely using Firebase Authentication.
 * **Currency Converter:** Flourish's Currency Exchange allows users to convert currencies in real time using up-to-date rates.
-* **Gamified Experience:** Motivating visuals and feedback to encourage better money habits.
+* **Gamified Experience:** Motivating badges and feedback to encourage better money habits.
 
-## 🟠 Two Features 
+## 🟠 Own Features 
 
-**1**      **Currency Converter** 
+**1** **Currency Converter** 
 
-Flourish includes a dedicated Currency Exchange feature, allowing users to view and convert between currencies using real-time exchange rates. This supports international students or users who earn/spend across different currencies.
-
-**Main Functions/Purpose**  :
-
-* Converts between global currencies.
-
-* Real-time rates fetched from online APIs.
-
-* Accessible under the Currency Exchange page.
-
-
-
-
-
+Flourish includes a dedicated Currency Exchange feature, allowing users to view and convert between currencies using real-time exchange rates. This supports international students or users who earn/spend across different currencies. For the currency converter, we used the Exchange Rates API. 
 
 
 **2**   **Gamification**
 
-To boost user motivation and engagement, Flourish introduces a gamified budgeting journey. Users are rewarded with visual achievements and can build streaks for consistent budgeting behavior.
+To boost user motivation and engagement, Flourish introduces a gamified budgeting journey. Users are rewarded with visual achievements (badges) and can build streaks for consistent budgeting behavior. Achievement Badges are earned for milestones like first budget set etc. Daily Streaks: Encourages daily logins and financial activity.
 
-**Main Functions/Purpose**  :
+**2**   **Calculator**
 
-* Achievement Badges: Earned for milestones like first budget set, week-long streak, or consistent saving.
-
-*  Daily Streaks: Encourages daily logins and financial activity.
+This built-in calculator allows the user to perform mathematical calculations to manage their finances without having to leave the app. 
 
 
 
-
-
-## 🟠 Functionality Requirements
+## 🟠 Functional Requirements
 
 * **User Registration & Authentication:**
 
@@ -129,17 +109,13 @@ To boost user motivation and engagement, Flourish introduces a gamified budgetin
 * **Budgeting Tools:**
 
     * Set category-specific monthly budgets
-    * Visual indicators (progress bars, pie charts)
+    * Visual indicators (progress bars, bar graph)
     * Budget overspend alerts
-
-* **Notifications:**
-
-    * Reminders for bills, overdue payments, and budget updates.
       
 
 * **Built-in Calculator:**
 
-    * For complex calculations prior to logging transactions.
+    * For calculations prior to logging transactions.
 
 * **Currency Converter:**
 
@@ -149,7 +125,7 @@ To boost user motivation and engagement, Flourish introduces a gamified budgetin
 
     * Achievement badges
     * Daily streaks
-    * Budgeting leaderboards (optional) 
+    * 
 
 ## 🟢 Setup Instructions
 
@@ -182,9 +158,9 @@ To boost user motivation and engagement, Flourish introduces a gamified budgetin
     * Register/login
     * Add expenses/income
     * Create/manage budgets
-    * Set savings goals
-    * Access financial content
     * Earn badges
+    * Perform calculations
+    * Convert between currencies
 
 
 ## 🟢 Roadmap
@@ -194,14 +170,15 @@ To boost user motivation and engagement, Flourish introduces a gamified budgetin
 * Dashboard, authentication, and navigation
 * Expense/income logging
 * Budget and category management
+* Gamification
+* Calculator 
 
 
-**In Progress**
+**Future Considerations**
 
 * Advanced analytics dashboard
 * Enhanced PDF report generation
 * Financial literacy hub
-* Savings goals and gamification 
 
 ## 🟢 Images
 
@@ -328,7 +305,7 @@ To boost user motivation and engagement, Flourish introduces a gamified budgetin
 
 ## Get Started
 
-Follow the [Installation and Setup](#installation-and-setup) and [Building and Running the Prototype](#building-and-running-the-prototype) instructions to begin using Flourish on your Android device. (OpenAI, 2025).
+Follow the [Installation and Setup](#installation-and-setup) and [Building and Running the Prototype](#building-and-running-the-prototype) instructions to begin using Flourish on your Android device.
 
 ## 🟠GitHub and  GitHub Actions Usage
 
@@ -336,32 +313,22 @@ We used GitHub for:
 
 *  Version control
 *  Team collaboration
-*  Issue tracking
 *  Branching and pull requests
 
   
 Repository Management
 
-This project was version-controlled using GitHub, ensuring all team members could collaborate effectively. Each sprint phase was mapped to specific branches (e.g., feature-authentication, feature-dashboard, feature-gamification), and pull requests were used to merge tested code into main.
+This project was version-controlled using GitHub, ensuring all team members could collaborate effectively. Regular commits were made by team members and pull requests were used to merge tested code into main.
 
 GitHub Actions Integration
 
 To maintain code quality and streamline builds:
 
 *  Gradle Build Automation ran checks on every push.
-*  Firebase App Distribution (planned) to automate app testing.
 
 We integrated GitHub Actions to:
 
 *  Automatically build the project on every push to `main`
-
-
-GitHub Activity Highlights:
-
-* Daily commits and sprint logs
-* Detailed PRs with peer reviews
-* Branch naming conventions and issue linking for traceability
-
 
 
 ## 🟠 Contributing
@@ -375,7 +342,6 @@ We welcome your ideas and fixes:
 5.  Submit a Pull Request (OpenAI, 2025).
 
 ## 🟢 Reference List
-
 
 Google Fonts. n.d. Browse Fonts - Google Fonts. [online] Available at: [https://fonts.google.com/](https://fonts.google.com/) [Accessed 2 May 2025].
 
