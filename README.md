@@ -275,12 +275,6 @@ Main Functions/Purpose  :
       </a>
       <br>Firebase
     </td>
-    <td align="center" width="96">
-      <a href="#figma">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/1024px-Figma-logo.svg.png" width="48" height="48" alt="Figma" />
-      </a>
-      <br>Figma
-    </td>
     </tr>
 </table>
 
