@@ -7,5 +7,6 @@ data class Expense(
     var description: String = "",
     var amount: Double = 0.0,
     var date: Long = 0L,
-    var receiptUri: String? = null
+    var receiptUri: String? = null,
+    var type: String? = null
 )

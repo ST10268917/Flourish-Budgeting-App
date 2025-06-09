@@ -54,6 +54,7 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.components.Legend
 import android.graphics.Color
 import android.view.View // New import for android.view.View
+import android.widget.LinearLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.tasks.await
 
@@ -545,16 +546,48 @@ class Dashboard : AppCompatActivity() {
             return
         }
 
-        val dataSet = BarDataSet(entries, "Spending per Category").apply {
-            // Use predefined colors or define your own custom colors here
-            colors = ColorTemplate.MATERIAL_COLORS.toList() // Using a list directly
+        val barColors = listOf(
+            Color.rgb(244, 67, 54),    // Red
+            Color.rgb(76, 175, 80),    // Green
+            Color.rgb(33, 150, 243),   // Blue
+            Color.rgb(255, 193, 7),    // Amber
+            Color.rgb(156, 39, 176)    // Purple
+        )
+
+// Assign colors to each bar individually
+        val colorsForEntries = entries.mapIndexed { index, _ ->
+            barColors[index % barColors.size]
+        }
+
+        val dataSet = BarDataSet(entries, "").apply {
+            colors = colorsForEntries
             valueTextColor = Color.BLACK
             valueTextSize = 10f
+            valueFormatter = object : com.github.mikephil.charting.formatter.ValueFormatter() {
+                override fun getFormattedValue(value: Float): String {
+                    return "${UserSettings.currencySymbol} ${String.format("%.2f", value)}"
+                }
+            }
         }
+
 
         val barData = BarData(dataSet)
         categorySpendingChart.data = barData
         barData.barWidth = 0.9f
+
+        // Draw the custom legend
+        val legendLayout = findViewById<LinearLayout>(R.id.legendLayout)
+        legendLayout.removeAllViews() // Clear old items
+
+        for ((index, categoryName) in categoryLabels.withIndex()) {
+            val legendItem = TextView(this).apply {
+                text = "⬤ $categoryName"
+                setTextColor(colorsForEntries[index % colorsForEntries.size])
+                setPadding(16, 0, 16, 0)
+                textSize = 12f
+            }
+            legendLayout.addView(legendItem)
+        }
 
         // 3. Configure the chart appearance
         categorySpendingChart.apply {

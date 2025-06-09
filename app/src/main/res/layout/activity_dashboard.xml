@@ -227,6 +227,14 @@
                 android:layout_marginBottom="16dp"
                 android:background="@color/darkTeal" />
 
+            <LinearLayout
+                android:id="@+id/legendLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:gravity="center_vertical"/>
+
 
 
             <TextView
