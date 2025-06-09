@@ -251,15 +251,32 @@
 
             <Button
                 android:id="@+id/btnFilterExpenses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tvGoalsSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Min Goal: 0.00, Max Goal: 0.00"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:padding="8dp" />
+
+
+            <LinearLayout
+                android:id="@+id/legendLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Filter Expenses"
+                android:orientation="horizontal"
                 android:backgroundTint="@color/turquoise"
                 android:textColor="@android:color/white"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
                 android:paddingStart="24dp"
                 android:paddingEnd="24dp" />
+
 
             <TextView
                 android:id="@+id/tvCategoryBudgets"
