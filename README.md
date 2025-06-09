@@ -282,7 +282,12 @@ To boost user motivation and engagement, Flourish introduces a gamified budgetin
 
 -Users can analyze their spending within specific date ranges.
 
+
+**Currency Converter:**
+
 ![image](https://github.com/user-attachments/assets/999b9577-df08-4ea9-9ee4-09a792104278)
+
+- Converts an amount from one currency to another using live exchange rates from APIs
 
 
 ## Demo Video
