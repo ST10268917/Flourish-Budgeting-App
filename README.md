@@ -286,7 +286,7 @@ To boost user motivation and engagement, Flourish introduces a gamified budgetin
 -Users can analyze their spending within specific date ranges.
 
 ## Demo Video
-**Youtube Link:** https://youtu.be/wzVz7D5z9O0
+**Youtube Link:** https://youtu.be/wOyOiCm8ov0
 
 ## Github Repository
 **Github Link:** 
