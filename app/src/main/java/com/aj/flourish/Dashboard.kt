@@ -72,7 +72,6 @@ class Dashboard : BaseActivity() {
     private lateinit var tvLoginStreak: TextView
     private lateinit var currencyConverterBtn: Button
     private lateinit var tvGoalsSummary: TextView
-    private lateinit var tvCategorySpending: TextView
 
 
     private lateinit var rvCategoryBudgets: RecyclerView
@@ -115,7 +114,6 @@ class Dashboard : BaseActivity() {
         categoriesBtn = findViewById(R.id.categoriesBtn)
         tvLoginStreak = findViewById(R.id.tvLoginStreak)
         currencyConverterBtn = findViewById(R.id.currencyConverterBtn)
-        tvCategorySpending = findViewById(R.id.tvCategorySpending)
         tvGoalsSummary = findViewById(R.id.tvGoalsSummary)
 
         rvCategoryBudgets = findViewById(R.id.rvCategoryBudgets)
